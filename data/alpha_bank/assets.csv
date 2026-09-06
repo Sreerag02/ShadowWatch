@@ -1,0 +1,31 @@
+asset_id,entity_id,asset_name,asset_type,criticality,business_function,monitoring_expected
+E001-AS001,E001,Payment-Server-01,SERVER,CRITICAL,Payments,true
+E001-AS002,E001,Payment-Server-02,SERVER,CRITICAL,Payments,true
+E001-AS003,E001,Core-Banking-DB-01,DATABASE,CRITICAL,Core Banking,true
+E001-AS004,E001,Core-Banking-DB-02,DATABASE,CRITICAL,Core Banking,true
+E001-AS005,E001,Internet-Banking-Web-01,SERVER,HIGH,Internet Banking,true
+E001-AS006,E001,Internet-Banking-Web-02,SERVER,HIGH,Internet Banking,true
+E001-AS007,E001,Mobile-Banking-API-01,SERVER,HIGH,Mobile Banking,true
+E001-AS008,E001,Firewall-01,FIREWALL,CRITICAL,Network Security,true
+E001-AS009,E001,Firewall-02,FIREWALL,HIGH,Network Security,true
+E001-AS010,E001,Authentication-Server-01,SERVER,CRITICAL,Identity Access,true
+E001-AS011,E001,Authentication-Server-02,SERVER,HIGH,Identity Access,true
+E001-AS012,E001,Employee-Laptop-01,ENDPOINT,MEDIUM,Employee Operations,true
+E001-AS013,E001,Employee-Laptop-02,ENDPOINT,MEDIUM,Employee Operations,true
+E001-AS014,E001,Employee-Laptop-03,ENDPOINT,LOW,Employee Operations,true
+E001-AS015,E001,Employee-Workstation-04,ENDPOINT,MEDIUM,Employee Operations,true
+E001-AS016,E001,Email-Gateway-01,EMAIL_GATEWAY,HIGH,Email Security,true
+E001-AS017,E001,ATM-Switch-01,SERVER,CRITICAL,ATM Services,true
+E001-AS018,E001,ATM-Switch-02,SERVER,CRITICAL,ATM Services,true
+E001-AS019,E001,Backup-Server-01,SERVER,HIGH,Backup Services,true
+E001-AS020,E001,Backup-Server-02,SERVER,MEDIUM,Backup Services,true
+E001-AS021,E001,Monitoring-Server-01,SERVER,HIGH,Security Monitoring,true
+E001-AS022,E001,SIEM-Collector-01,SERVER,HIGH,Security Monitoring,true
+E001-AS023,E001,Core-Router-01,ROUTER,CRITICAL,Network Infrastructure,true
+E001-AS024,E001,Core-Switch-01,SWITCH,HIGH,Network Infrastructure,true
+E001-AS025,E001,VPN-Gateway-01,SERVER,HIGH,Remote Access,true
+E001-AS026,E001,IDS-Sensor-01,IDS,HIGH,Network Security,true
+E001-AS027,E001,HR-Application-Server-01,SERVER,MEDIUM,HR Operations,true
+E001-AS028,E001,File-Server-01,SERVER,MEDIUM,File Sharing,true
+E001-AS029,E001,Branch-Workstation-01,ENDPOINT,LOW,Branch Operations,false
+E001-AS030,E001,Print-Server-01,SERVER,LOW,Office Operations,false

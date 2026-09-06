@@ -1,0 +1,95 @@
+investigation_id,case_id,started_at,completed_at,analyst_id,analyst_notes,evidence_present,evidence_count,root_cause_identified
+E001-INV0001,E001-C0001,2026-08-01 17:15:55,2026-08-01 17:25:55,AN03,Analyzed email headers and attachment sandbox report. Confirmed phishing payload; mailbox purged and user notified.,true,4,true
+E001-INV0002,E001-C0002,2026-08-02 20:22:41,2026-08-02 20:36:41,AN02,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,5,false
+E001-INV0003,E001-C0003,2026-08-02 21:06:20,2026-08-02 23:11:20,AN08,Correlated SIEM events with firewall logs. Traffic pattern matched known scanning behaviour; source IP blocked at perimeter.,true,1,true
+E001-INV0004,E001-C0004,2026-08-03 05:55:56,2026-08-03 06:27:56,AN06,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,2,true
+E001-INV0005,E001-C0005,2026-08-03 07:01:02,2026-08-03 07:38:02,AN08,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,1,false
+E001-INV0006,E001-C0006,2026-08-03 09:43:53,2026-08-03 11:12:53,AN05,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,2,true
+E001-INV0007,E001-C0007,2026-08-03 15:28:26,2026-08-03 16:44:26,AN06,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,4,true
+E001-INV0008,E001-C0008,2026-08-04 04:26:24,2026-08-04 04:47:24,AN07,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,1,true
+E001-INV0009,E001-C0009,2026-08-04 21:38:52,2026-08-04 23:57:52,AN05,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,4,true
+E001-INV0010,E001-C0010,2026-08-05 05:46:03,2026-08-05 06:19:03,AN01,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,2,false
+E001-INV0011,E001-C0011,2026-08-05 23:01:57,2026-08-05 23:15:57,AN08,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,3,false
+E001-INV0012,E001-C0012,2026-08-06 02:44:11,2026-08-06 05:09:11,AN01,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,5,true
+E001-INV0013,E001-C0013,2026-08-06 03:13:57,2026-08-06 03:36:57,AN05,Correlated SIEM events with firewall logs. Traffic pattern matched known scanning behaviour; source IP blocked at perimeter.,true,4,true
+E001-INV0014,E001-C0014,2026-08-06 13:45:27,2026-08-06 15:09:27,AN05,Correlated SIEM events with firewall logs. Traffic pattern matched known scanning behaviour; source IP blocked at perimeter.,true,2,true
+E001-INV0015,E001-C0015,2026-08-07 07:05:57,2026-08-07 08:09:57,AN08,Analyzed email headers and attachment sandbox report. Confirmed phishing payload; mailbox purged and user notified.,true,3,true
+E001-INV0016,E001-C0016,2026-08-07 09:28:29,2026-08-07 12:08:29,AN03,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,2,true
+E001-INV0017,E001-C0017,2026-08-08 04:53:26,2026-08-08 05:11:26,AN06,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,3,false
+E001-INV0018,E001-C0018,2026-08-08 05:07:39,2026-08-08 06:19:39,AN08,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,3,true
+E001-INV0019,E001-C0019,2026-08-08 09:58:47,2026-08-08 12:18:47,AN03,Reviewed IDS packet captures. Traffic consistent with automated brute-force attempt; source blacklisted.,true,1,false
+E001-INV0020,E001-C0020,2026-08-08 22:26:17,2026-08-08 22:54:17,AN04,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,6,true
+E001-INV0021,E001-C0021,2026-08-09 03:58:20,2026-08-09 04:29:20,AN05,Reviewed backup job logs and asset configuration history. No unauthorized changes detected; alert attributed to misconfigured monitoring threshold.,true,5,true
+E001-INV0022,E001-C0022,2026-08-09 18:13:14,2026-08-09 18:28:14,AN01,Investigated authentication logs for anomalous geolocation. Account temporarily locked and password reset enforced.,true,3,false
+E001-INV0023,E001-C0023,2026-08-09 20:27:51,2026-08-09 21:50:51,AN07,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,3,true
+E001-INV0024,E001-C0024,2026-08-10 06:00:54,2026-08-10 07:13:54,AN01,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,5,true
+E001-INV0025,E001-C0025,2026-08-10 15:27:45,2026-08-10 16:24:45,AN06,Analyzed email headers and attachment sandbox report. Confirmed phishing payload; mailbox purged and user notified.,false,0,false
+E001-INV0026,E001-C0026,2026-08-10 22:18:53,2026-08-10 23:31:53,AN07,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,3,false
+E001-INV0027,E001-C0027,2026-08-11 11:10:24,2026-08-11 12:29:24,AN03,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,1,false
+E001-INV0028,E001-C0028,2026-08-11 13:30:15,2026-08-11 13:43:15,AN04,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,6,true
+E001-INV0029,E001-C0029,2026-08-12 14:15:30,2026-08-12 15:30:30,AN01,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,3,false
+E001-INV0030,E001-C0030,2026-08-13 03:47:10,2026-08-13 04:09:10,AN01,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,4,false
+E001-INV0031,E001-C0031,2026-08-13 11:28:23,2026-08-13 12:03:23,AN05,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,3,false
+E001-INV0032,E001-C0032,2026-08-13 11:13:07,2026-08-13 11:35:07,AN06,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,1,false
+E001-INV0033,E001-C0033,2026-08-14 02:49:06,2026-08-14 04:15:06,AN06,Reviewed backup job logs and asset configuration history. No unauthorized changes detected; alert attributed to misconfigured monitoring threshold.,false,0,false
+E001-INV0034,E001-C0034,2026-08-14 05:13:25,2026-08-14 06:37:25,AN05,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,6,true
+E001-INV0035,E001-C0035,2026-08-14 19:24:29,2026-08-14 20:23:29,AN02,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,6,false
+E001-INV0036,E001-C0036,2026-08-15 19:14:05,2026-08-15 20:27:05,AN01,Investigated authentication logs for anomalous geolocation. Account temporarily locked and password reset enforced.,true,4,true
+E001-INV0037,E001-C0037,2026-08-16 09:29:32,2026-08-16 11:46:32,AN01,Reviewed backup job logs and asset configuration history. No unauthorized changes detected; alert attributed to misconfigured monitoring threshold.,true,4,true
+E001-INV0038,E001-C0038,2026-08-16 21:42:51,2026-08-16 22:27:51,AN03,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,5,false
+E001-INV0039,E001-C0039,2026-08-17 00:06:09,2026-08-17 01:09:09,AN03,Reviewed IDS packet captures. Traffic consistent with automated brute-force attempt; source blacklisted.,true,6,true
+E001-INV0040,E001-C0040,2026-08-17 00:12:00,2026-08-17 01:58:00,AN04,Checked logs. No issue found.,true,3,false
+E001-INV0041,E001-C0041,2026-08-17 00:13:25,2026-08-17 00:41:25,AN06,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,4,false
+E001-INV0042,E001-C0042,2026-08-17 04:55:23,2026-08-17 06:38:23,AN03,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,6,true
+E001-INV0043,E001-C0043,2026-08-17 07:15:39,2026-08-17 08:54:39,AN05,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,5,true
+E001-INV0044,E001-C0044,2026-08-17 16:42:54,2026-08-17 17:54:54,AN04,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,6,false
+E001-INV0045,E001-C0045,2026-08-17 18:48:14,2026-08-17 20:09:14,AN03,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,3,true
+E001-INV0046,E001-C0046,2026-08-17 20:03:47,2026-08-17 20:27:47,AN02,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,2,false
+E001-INV0047,E001-C0047,2026-08-17 21:46:04,2026-08-17 22:56:04,AN03,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,3,true
+E001-INV0048,E001-C0048,2026-08-18 16:19:07,2026-08-18 17:15:07,AN02,Analyzed email headers and attachment sandbox report. Confirmed phishing payload; mailbox purged and user notified.,true,5,false
+E001-INV0049,E001-C0049,2026-08-19 17:27:33,2026-08-19 18:29:33,AN04,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,3,false
+E001-INV0050,E001-C0050,2026-08-19 18:32:59,2026-08-19 19:43:59,AN04,Checked logs. No issue found.,true,1,true
+E001-INV0051,E001-C0051,2026-08-19 21:36:02,2026-08-19 21:46:02,AN08,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,3,true
+E001-INV0052,E001-C0052,2026-08-20 09:17:00,2026-08-20 10:07:00,AN01,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,3,false
+E001-INV0053,E001-C0053,2026-08-20 09:30:00,2026-08-20 10:18:00,AN05,Reviewed backup job logs and asset configuration history. No unauthorized changes detected; alert attributed to misconfigured monitoring threshold.,true,2,false
+E001-INV0054,E001-C0054,2026-08-20 10:21:00,2026-08-20 11:08:00,AN08,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,1,true
+E001-INV0055,E001-C0055,2026-08-20 10:34:00,2026-08-20 11:58:00,AN02,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,2,true
+E001-INV0056,E001-C0056,2026-08-20 13:32:04,2026-08-20 14:13:04,AN04,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,1,false
+E001-INV0058,E001-C0058,2026-08-20 17:36:27,2026-08-20 18:01:27,AN04,Correlated SIEM events with firewall logs. Traffic pattern matched known scanning behaviour; source IP blocked at perimeter.,true,5,true
+E001-INV0059,E001-C0059,2026-08-20 23:42:23,2026-08-21 00:18:23,AN08,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,6,false
+E001-INV0060,E001-C0060,2026-08-21 09:42:22,2026-08-21 10:16:22,AN07,Analyzed email headers and attachment sandbox report. Confirmed phishing payload; mailbox purged and user notified.,true,5,false
+E001-INV0061,E001-C0061,2026-08-21 10:13:46,2026-08-21 11:41:46,AN06,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,2,true
+E001-INV0062,E001-C0062,2026-08-21 18:03:28,2026-08-21 19:17:28,AN08,Analyzed email headers and attachment sandbox report. Confirmed phishing payload; mailbox purged and user notified.,true,2,true
+E001-INV0063,E001-C0063,2026-08-21 18:06:07,2026-08-21 18:28:07,AN02,Reviewed backup job logs and asset configuration history. No unauthorized changes detected; alert attributed to misconfigured monitoring threshold.,true,5,true
+E001-INV0064,E001-C0064,2026-08-21 19:21:29,2026-08-21 19:33:29,AN01,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,2,false
+E001-INV0065,E001-C0065,2026-08-22 08:51:12,2026-08-22 10:42:12,AN04,Analyzed email headers and attachment sandbox report. Confirmed phishing payload; mailbox purged and user notified.,true,3,true
+E001-INV0066,E001-C0066,2026-08-22 16:53:32,2026-08-22 17:35:32,AN05,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,4,false
+E001-INV0067,E001-C0067,2026-08-22 17:50:07,2026-08-22 18:19:07,AN07,Investigated authentication logs for anomalous geolocation. Account temporarily locked and password reset enforced.,true,4,true
+E001-INV0069,E001-C0069,2026-08-22 20:15:29,2026-08-22 22:40:29,AN04,Reviewed EDR telemetry and authentication logs. Suspicious process identified and terminated. Endpoint isolated pending reimage.,true,6,true
+E001-INV0070,E001-C0070,2026-08-22 22:32:55,2026-08-22 23:16:55,AN01,Checked logs. No issue found.,true,6,false
+E001-INV0071,E001-C0071,2026-08-23 00:25:40,2026-08-23 01:12:40,AN05,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,false,0,false
+E001-INV0072,E001-C0072,2026-08-23 04:16:10,2026-08-23 05:01:10,AN04,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,4,false
+E001-INV0073,E001-C0073,2026-08-23 08:52:53,2026-08-23 09:12:53,AN05,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,4,true
+E001-INV0074,E001-C0074,2026-08-24 02:30:23,2026-08-24 03:11:23,AN06,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,2,false
+E001-INV0075,E001-C0075,2026-08-24 07:12:08,2026-08-24 07:57:08,AN07,Checked privilege change logs against change management records. No approved change found; access revoked pending review.,true,2,true
+E001-INV0076,E001-C0076,2026-08-24 18:49:47,2026-08-24 19:54:47,AN08,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,4,true
+E001-INV0077,E001-C0077,2026-08-24 19:46:55,2026-08-24 22:01:55,AN01,Checked logs. No issue found.,true,1,false
+E001-INV0078,E001-C0078,2026-08-24 21:08:47,2026-08-24 21:48:47,AN08,Performed memory analysis on affected host. Indicators consistent with commodity malware family; host reimaged.,true,5,false
+E001-INV0079,E001-C0079,2026-08-24 22:48:00,2026-08-25 00:16:00,AN01,Analyzed email headers and attachment sandbox report. Confirmed phishing payload; mailbox purged and user notified.,true,6,true
+E001-INV0080,E001-C0080,2026-08-25 00:18:50,2026-08-25 01:45:50,AN03,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,4,false
+E001-INV0081,E001-C0081,2026-08-25 03:01:05,2026-08-25 03:01:30,AN04,Correlated SIEM events with firewall logs. Traffic pattern matched known scanning behaviour; source IP blocked at perimeter.,false,0,false
+E001-INV0082,E001-C0082,2026-08-25 11:03:58,2026-08-25 11:30:58,AN07,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,1,true
+E001-INV0083,E001-C0083,2026-08-25 16:02:47,2026-08-25 16:22:47,AN01,Reviewed IDS packet captures. Traffic consistent with automated brute-force attempt; source blacklisted.,true,6,true
+E001-INV0084,E001-C0084,2026-08-25 21:04:25,2026-08-25 21:15:25,AN01,Correlated SIEM events with firewall logs. Traffic pattern matched known scanning behaviour; source IP blocked at perimeter.,true,4,false
+E001-INV0085,E001-C0085,2026-08-25 21:52:31,2026-08-25 23:21:31,AN04,Correlated SIEM events with firewall logs. Traffic pattern matched known scanning behaviour; source IP blocked at perimeter.,true,2,true
+E001-INV0086,E001-C0086,2026-08-26 13:57:44,2026-08-26 15:12:44,AN06,Reviewed backup job logs and asset configuration history. No unauthorized changes detected; alert attributed to misconfigured monitoring threshold.,true,5,false
+E001-INV0087,E001-C0087,2026-08-27 07:19:07,2026-08-27 08:36:07,AN06,Reviewed backup job logs and asset configuration history. No unauthorized changes detected; alert attributed to misconfigured monitoring threshold.,true,4,true
+E001-INV0089,E001-C0089,2026-08-27 16:45:40,2026-08-27 17:18:40,AN07,Reviewed IDS packet captures. Traffic consistent with automated brute-force attempt; source blacklisted.,true,4,true
+E001-INV0090,E001-C0090,2026-08-28 01:32:26,2026-08-28 02:17:26,AN03,Correlated SIEM events with firewall logs. Traffic pattern matched known scanning behaviour; source IP blocked at perimeter.,true,1,false
+E001-INV0091,E001-C0091,2026-08-28 14:15:20,2026-08-28 14:45:20,AN02,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,4,true
+E001-INV0092,E001-C0092,2026-08-29 06:13:25,2026-08-29 06:54:25,AN04,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,3,true
+E001-INV0093,E001-C0093,2026-08-29 06:58:50,2026-08-29 07:27:50,AN07,Investigated authentication logs for anomalous geolocation. Account temporarily locked and password reset enforced.,true,3,false
+E001-INV0094,E001-C0094,2026-08-29 15:35:31,2026-08-29 15:46:31,AN08,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,1,true
+E001-INV0095,E001-C0095,2026-08-29 20:56:39,,AN07,Reviewed backup job logs and asset configuration history. No unauthorized changes detected; alert attributed to misconfigured monitoring threshold.,true,5,false
+E001-INV0096,E001-C0096,2026-08-30 05:36:41,,AN03,Reviewed outbound data transfer logs and DLP alerts. Volume within acceptable range after cross-checking business context.,true,5,false
+E001-INV0097,E001-C0097,2026-08-30 17:26:55,,AN07,Interviewed asset owner and reviewed endpoint EDR timeline. Activity attributed to approved administrative script.,true,6,false

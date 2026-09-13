@@ -4,12 +4,11 @@ E005-INV0002,E005-C0002,2026-08-01 12:38:00,2026-08-01 14:52:00,AN01,Analyzed fi
 E005-INV0003,E005-C0003,2026-08-01 15:03:00,2026-08-01 15:37:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,3,True
 E005-INV0004,E005-C0004,2026-08-01 16:25:00,2026-08-01 17:36:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,5,True
 E005-INV0005,E005-C0005,2026-08-01 18:50:00,2026-08-01 20:39:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,5,True
-E005-INV0006,E005-C0006,2026-08-01 20:34:00,2026-08-01 22:20:00,AN01,Inspected ICS endpoint baseline. Process execution authorized.,True,2,True
 E005-INV0007,E005-C0007,2026-08-01 22:50:00,2026-08-02 01:20:00,AN01,Inspected ICS endpoint baseline. Process execution authorized.,True,5,True
 E005-INV0008,E005-C0008,2026-08-02 00:48:00,2026-08-02 03:29:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,5,True
 E005-INV0009,E005-C0009,2026-08-02 02:36:00,2026-08-02 03:17:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,4,True
 E005-INV0010,E005-C0010,2026-08-02 04:41:00,2026-08-02 06:39:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,1,True
-E005-INV0011,E005-C0011,2026-08-02 06:55:00,2026-08-02 07:34:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,4,True
+E005-INV0011,E005-C0011,2026-08-02 06:55:00,2026-08-02 07:34:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,False,0,True
 E005-INV0012,E005-C0012,2026-08-02 08:47:00,2026-08-02 11:04:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,3,True
 E005-INV0013,E005-C0013,2026-08-02 10:33:00,2026-08-02 11:56:00,AN01,Reviewed SCADA traffic logs. No anomalies detected.,True,3,True
 E005-INV0014,E005-C0014,2026-08-02 12:27:00,2026-08-02 14:25:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,4,True
@@ -29,9 +28,9 @@ E005-INV0027,E005-C0027,2026-08-03 14:34:00,2026-08-03 16:18:00,AN01,Verified au
 E005-INV0028,E005-C0028,2026-08-03 16:55:00,2026-08-03 19:28:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,3,True
 E005-INV0029,E005-C0029,2026-08-03 18:52:00,2026-08-03 21:03:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,5,True
 E005-INV0030,E005-C0030,2026-08-03 20:38:00,2026-08-03 23:08:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,4,True
-E005-INV0031,E005-C0031,2026-08-03 22:45:00,2026-08-03 23:04:00,AN01,Reviewed SCADA traffic logs. No anomalies detected.,True,2,True
-E005-INV0032,E005-C0032,2026-08-04 00:15:00,2026-08-04 01:21:00,AN01,Inspected ICS endpoint baseline. Process execution authorized.,True,5,True
-E005-INV0033,E005-C0033,2026-08-04 02:17:00,2026-08-04 03:48:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,2,True
+E005-INV0031,E005-C0031,2026-08-03 22:45:00,2026-08-03 23:04:00,AN01,Checked logs. No issue found.,True,2,True
+E005-INV0032,E005-C0032,2026-08-04 00:15:00,2026-08-04 01:21:00,AN01,Checked logs. No issue found.,True,5,True
+E005-INV0033,E005-C0033,2026-08-04 02:17:00,2026-08-04 03:48:00,AN01,Checked logs. No issue found.,True,2,True
 E005-INV0034,E005-C0034,2026-08-04 04:56:00,2026-08-04 07:09:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,1,True
 E005-INV0035,E005-C0035,2026-08-04 06:50:00,2026-08-04 08:04:00,AN01,Reviewed SCADA traffic logs. No anomalies detected.,True,4,True
 E005-INV0036,E005-C0036,2026-08-04 08:23:00,2026-08-04 10:29:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,3,True
@@ -39,7 +38,7 @@ E005-INV0037,E005-C0037,2026-08-04 10:40:00,2026-08-04 12:01:00,AN01,Verified au
 E005-INV0038,E005-C0038,2026-08-04 12:12:00,2026-08-04 12:59:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,2,True
 E005-INV0039,E005-C0039,2026-08-04 14:45:00,2026-08-04 17:29:00,AN01,Reviewed SCADA traffic logs. No anomalies detected.,True,1,True
 E005-INV0040,E005-C0040,2026-08-04 16:40:00,2026-08-04 19:04:00,AN01,Inspected ICS endpoint baseline. Process execution authorized.,True,1,True
-E005-INV0041,E005-C0041,2026-08-04 18:28:00,2026-08-04 19:34:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,3,True
+E005-INV0041,E005-C0041,2026-08-04 18:28:00,2026-08-04 19:34:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,False,0,True
 E005-INV0042,E005-C0042,2026-08-04 20:21:00,2026-08-04 21:36:00,AN01,Reviewed SCADA traffic logs. No anomalies detected.,True,4,True
 E005-INV0043,E005-C0043,2026-08-04 22:40:00,2026-08-05 01:13:00,AN01,Inspected ICS endpoint baseline. Process execution authorized.,True,2,True
 E005-INV0044,E005-C0044,2026-08-05 01:09:00,2026-08-05 03:25:00,AN01,Analyzed firewall denied connections. Routine port scanning dropped.,True,5,True

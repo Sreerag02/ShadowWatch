@@ -3,7 +3,7 @@ import random
 from datetime import datetime, timedelta
 import os
 
-OUT_DIR = "data/member_5"
+OUT_DIR = "data/powergrid_utility"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # 1. Entities

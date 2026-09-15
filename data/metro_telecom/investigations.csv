@@ -1,0 +1,96 @@
+investigation_id,case_id,started_at,completed_at,analyst_id,analyst_notes,evidence_present,evidence_count,root_cause_identified
+E004-INV0001,E004-C0004,2026-08-02 18:22:54,2026-08-02 18:32:54,AN01,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,6,True
+E004-INV0002,E004-C0005,2026-08-03 07:54:06,2026-08-03 08:22:06,AN03,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,2,True
+E004-INV0003,E004-C0008,2026-08-04 11:48:17,2026-08-04 13:04:17,AN04,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,False,0,True
+E004-INV0004,E004-C0009,2026-08-04 14:08:50,2026-08-04 14:49:50,AN06,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,False,0,True
+E004-INV0005,E004-C0010,2026-08-05 23:44:32,2026-08-05 23:55:32,AN07,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,6,True
+E004-INV0006,E004-C0011,2026-08-05 23:52:34,2026-08-06 00:28:34,AN06,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",False,0,True
+E004-INV0007,E004-C0012,2026-08-06 01:20:46,2026-08-06 01:27:46,AN03,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,4,True
+E004-INV0008,E004-C0013,2026-08-06 03:50:22,2026-08-06 04:40:22,AN08,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,False,0,True
+E004-INV0009,E004-C0014,2026-08-06 13:14:36,2026-08-06 13:41:36,AN06,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,False,0,True
+E004-INV0010,E004-C0015,2026-08-06 19:34:42,2026-08-06 19:35:42,AN08,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,False,0,False
+E004-INV0011,E004-C0016,2026-08-06 22:57:46,2026-08-06 23:17:46,AN04,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,2,True
+E004-INV0012,E004-C0017,2026-08-07 01:09:47,2026-08-07 01:10:47,AN01,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",False,0,False
+E004-INV0013,E004-C0018,2026-08-07 03:18:36,2026-08-07 04:37:36,AN04,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",False,0,False
+E004-INV0014,E004-C0019,2026-08-07 08:29:33,2026-08-07 08:30:33,AN05,Checked logs. No issue found. Checked logs. No issue found. Checked logs. No issue found.,True,3,True
+E004-INV0015,E004-C0020,2026-08-07 10:43:24,2026-08-07 11:05:24,AN08,Checked logs. No issue found. Checked logs. No issue found. Checked logs. No issue found.,True,5,True
+E004-INV0016,E004-C0021,2026-08-07 21:09:08,2026-08-07 21:25:08,AN03,Checked logs. No issue found. Checked logs. No issue found. Checked logs. No issue found.,True,3,False
+E004-INV0017,E004-C0022,2026-08-08 05:15:35,2026-08-08 05:51:35,AN08,Checked logs. No issue found. Checked logs. No issue found. Checked logs. No issue found.,True,4,False
+E004-INV0018,E004-C0023,2026-08-08 06:35:22,2026-08-08 06:52:22,AN02,Checked logs. No issue found. Checked logs. No issue found. Checked logs. No issue found.,True,5,False
+E004-INV0019,E004-C0024,2026-08-08 13:17:41,2026-08-08 15:20:41,AN03,Checked logs. No issue found. Checked logs. No issue found. Checked logs. No issue found.,True,6,True
+E004-INV0020,E004-C0025,2026-08-09 00:18:56,2026-08-09 01:18:56,AN07,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,5,True
+E004-INV0021,E004-C0026,2026-08-09 04:11:07,2026-08-09 07:09:07,AN06,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,4,False
+E004-INV0022,E004-C0027,2026-08-09 07:50:30,2026-08-09 08:24:30,AN03,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,5,True
+E004-INV0023,E004-C0028,2026-08-09 13:44:35,2026-08-09 13:58:35,AN03,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,4,True
+E004-INV0024,E004-C0029,2026-08-09 16:09:59,2026-08-09 17:09:59,AN01,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,1,True
+E004-INV0025,E004-C0030,2026-08-09 17:32:54,2026-08-09 17:52:54,AN08,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,6,False
+E004-INV0026,E004-C0031,2026-08-10 00:11:59,2026-08-10 01:05:59,AN05,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,6,False
+E004-INV0027,E004-C0032,2026-08-10 07:47:57,2026-08-10 08:40:57,AN05,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,4,True
+E004-INV0028,E004-C0033,2026-08-10 08:21:33,2026-08-10 09:03:33,AN08,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,4,True
+E004-INV0029,E004-C0034,2026-08-10 10:24:34,2026-08-10 11:47:34,AN07,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,2,True
+E004-INV0030,E004-C0035,2026-08-10 12:11:19,2026-08-10 13:58:19,AN04,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,5,True
+E004-INV0031,E004-C0036,2026-08-10 22:37:22,2026-08-10 23:48:22,AN02,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,2,True
+E004-INV0032,E004-C0037,2026-08-10 22:41:39,2026-08-10 22:49:39,AN03,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,6,False
+E004-INV0033,E004-C0038,2026-08-11 06:21:21,2026-08-11 06:35:21,AN05,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,1,False
+E004-INV0034,E004-C0039,2026-08-11 13:54:47,2026-08-11 14:01:47,AN02,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,5,False
+E004-INV0035,E004-C0040,2026-08-11 14:55:51,2026-08-11 15:26:51,AN08,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,2,False
+E004-INV0036,E004-C0041,2026-08-12 06:34:05,2026-08-12 06:58:05,AN06,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,3,False
+E004-INV0037,E004-C0042,2026-08-12 07:02:10,2026-08-12 07:35:10,AN02,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,4,True
+E004-INV0038,E004-C0043,2026-08-12 08:51:40,2026-08-12 10:28:40,AN02,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,1,True
+E004-INV0039,E004-C0044,2026-08-12 21:11:38,2026-08-12 22:21:38,AN01,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,3,False
+E004-INV0040,E004-C0045,2026-08-12 23:25:49,2026-08-12 23:39:49,AN05,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,5,False
+E004-INV0041,E004-C0046,2026-08-13 04:12:22,2026-08-13 04:17:22,AN01,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,1,True
+E004-INV0042,E004-C0047,2026-08-13 10:34:44,2026-08-13 10:44:44,AN08,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,1,False
+E004-INV0043,E004-C0048,2026-08-13 12:15:53,2026-08-13 12:47:53,AN06,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,2,True
+E004-INV0044,E004-C0049,2026-08-13 12:32:56,2026-08-13 14:05:56,AN06,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,3,False
+E004-INV0045,E004-C0050,2026-08-13 14:10:54,2026-08-13 14:34:54,AN08,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,6,True
+E004-INV0046,E004-C0051,2026-08-14 21:13:27,2026-08-14 21:31:27,AN06,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,6,True
+E004-INV0047,E004-C0052,2026-08-14 22:43:07,2026-08-14 23:28:07,AN02,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,2,True
+E004-INV0048,E004-C0053,2026-08-14 23:15:59,2026-08-15 00:29:59,AN06,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,6,True
+E004-INV0049,E004-C0054,2026-08-15 07:24:55,2026-08-15 07:43:55,AN03,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,6,True
+E004-INV0050,E004-C0055,2026-08-15 12:12:57,2026-08-15 13:25:57,AN08,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,6,False
+E004-INV0051,E004-C0056,2026-08-15 12:32:04,2026-08-15 13:21:04,AN05,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,6,True
+E004-INV0052,E004-C0057,2026-08-15 17:21:46,2026-08-15 17:39:46,AN04,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,5,True
+E004-INV0053,E004-C0058,2026-08-15 19:52:43,2026-08-15 20:18:43,AN06,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,6,False
+E004-INV0054,E004-C0059,2026-08-16 18:55:58,2026-08-16 19:50:58,AN06,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,3,True
+E004-INV0055,E004-C0060,2026-08-17 01:07:20,2026-08-17 01:48:20,AN08,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,6,False
+E004-INV0056,E004-C0061,2026-08-17 03:29:24,2026-08-17 04:14:24,AN06,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,3,True
+E004-INV0057,E004-C0062,2026-08-17 18:46:36,2026-08-17 19:14:36,AN05,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,6,True
+E004-INV0058,E004-C0063,2026-08-19 09:51:35,2026-08-19 10:09:35,AN05,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,6,False
+E004-INV0059,E004-C0064,2026-08-19 21:33:59,2026-08-19 21:56:59,AN06,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,1,True
+E004-INV0060,E004-C0065,2026-08-20 07:11:26,2026-08-20 07:38:26,AN08,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,2,True
+E004-INV0061,E004-C0066,2026-08-20 10:41:52,2026-08-20 10:53:52,AN02,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,1,True
+E004-INV0062,E004-C0067,2026-08-20 11:17:10,2026-08-20 12:23:10,AN06,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,5,True
+E004-INV0063,E004-C0068,2026-08-21 02:04:59,2026-08-21 02:13:59,AN05,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,2,False
+E004-INV0064,E004-C0069,2026-08-21 21:40:56,2026-08-21 22:17:56,AN07,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,4,False
+E004-INV0065,E004-C0070,2026-08-22 02:53:54,2026-08-22 05:31:54,AN03,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,1,False
+E004-INV0066,E004-C0071,2026-08-22 04:54:52,2026-08-22 05:08:52,AN05,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,2,True
+E004-INV0067,E004-C0072,2026-08-22 21:58:40,2026-08-22 23:29:40,AN01,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,4,True
+E004-INV0068,E004-C0073,2026-08-22 23:28:59,2026-08-23 00:36:59,AN02,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,2,True
+E004-INV0069,E004-C0074,2026-08-24 00:38:13,2026-08-24 01:00:13,AN08,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,5,True
+E004-INV0070,E004-C0075,2026-08-24 01:10:18,2026-08-24 01:52:18,AN05,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,1,True
+E004-INV0071,E004-C0076,2026-08-24 11:12:01,2026-08-24 12:36:01,AN02,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,5,True
+E004-INV0072,E004-C0077,2026-08-24 21:54:28,2026-08-24 22:42:28,AN07,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,2,True
+E004-INV0073,E004-C0078,2026-08-25 09:34:59,2026-08-25 10:02:59,AN04,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,3,False
+E004-INV0074,E004-C0079,2026-08-25 12:20:41,2026-08-25 13:07:41,AN05,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,4,False
+E004-INV0075,E004-C0080,2026-08-25 21:38:17,2026-08-25 21:54:17,AN06,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,3,True
+E004-INV0076,E004-C0081,2026-08-25 23:02:34,2026-08-26 00:26:34,AN02,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,6,False
+E004-INV0077,E004-C0082,2026-08-26 00:56:10,2026-08-26 01:28:10,AN05,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,2,True
+E004-INV0078,E004-C0083,2026-08-26 09:31:42,2026-08-26 09:32:42,AN02,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,False,0,True
+E004-INV0079,E004-C0084,2026-08-26 15:37:08,2026-08-26 16:28:08,AN07,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,3,True
+E004-INV0080,E004-C0085,2026-08-26 18:45:57,2026-08-26 19:31:57,AN06,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,5,True
+E004-INV0081,E004-C0086,2026-08-27 09:29:40,2026-08-27 10:47:40,AN02,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,6,True
+E004-INV0082,E004-C0087,2026-08-28 01:59:23,2026-08-28 02:43:23,AN03,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,3,False
+E004-INV0083,E004-C0088,2026-08-28 10:40:19,2026-08-28 11:49:19,AN04,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,6,False
+E004-INV0084,E004-C0089,2026-08-29 01:34:43,2026-08-29 01:44:43,AN06,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,1,True
+E004-INV0085,E004-C0090,2026-08-29 08:12:00,2026-08-29 08:13:00,AN03,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",False,0,True
+E004-INV0086,E004-C0091,2026-08-29 10:38:31,2026-08-29 11:24:31,AN08,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,3,True
+E004-INV0087,E004-C0092,2026-08-29 18:27:32,2026-08-29 19:25:32,AN07,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,2,True
+E004-INV0088,E004-C0093,2026-08-29 22:37:06,2026-08-29 22:38:06,AN05,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,False,0,False
+E004-INV0089,E004-C0094,2026-08-29 23:09:24,2026-08-29 23:10:24,AN08,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",False,0,True
+E004-INV0090,E004-C0095,2026-08-30 09:23:12,2026-08-30 10:18:12,AN04,Reviewed SIEM and network telemetry. Correlated authentication events and documented the observed activity.,True,5,True
+E004-INV0091,E004-C0096,2026-08-30 21:01:15,2026-08-30 22:04:15,AN03,Correlated SIEM records with network sensor data. Reviewed affected asset activity and documented containment actions.,True,4,True
+E004-INV0092,E004-C0097,2026-08-30 22:19:35,2026-08-30 22:46:35,AN07,Reviewed network flow records and security alerts. Validated the activity against recent asset behaviour.,True,4,True
+E004-INV0093,E004-C0098,2026-08-31 04:04:42,2026-08-31 05:32:42,AN04,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,6,True
+E004-INV0094,E004-C0099,2026-08-31 04:46:21,2026-08-31 05:25:21,AN07,"Checked IAM events, system logs and recent configuration changes. No additional related indicators were observed.",True,5,True
+E004-INV0095,E004-C0100,2026-08-31 07:39:47,2026-08-31 07:44:47,AN05,Reviewed firewall logs and endpoint telemetry. Investigated the alert timeline and checked related authentication events.,True,1,False

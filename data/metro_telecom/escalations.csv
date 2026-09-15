@@ -1,0 +1,101 @@
+escalation_id,case_id,escalated,escalation_level,escalated_at,escalated_to,reason
+E004-ESC0001,E004-C0001,true,L2,2026-08-01 17:34:23,SOC_L2,HIGH severity requires additional review
+E004-ESC0002,E004-C0002,true,L3,2026-08-02 00:25:54,SOC_L3,HIGH severity requires additional review
+E004-ESC0003,E004-C0003,false,,,,
+E004-ESC0004,E004-C0004,false,,,,
+E004-ESC0005,E004-C0005,true,L2,2026-08-03 08:11:06,SOC_L2,MEDIUM severity requires additional review
+E004-ESC0006,E004-C0006,false,,,,
+E004-ESC0007,E004-C0007,false,,,,
+E004-ESC0008,E004-C0008,true,L2,2026-08-04 11:47:17,SOC_L2,HIGH severity requires additional review
+E004-ESC0009,E004-C0009,true,L2,2026-08-04 14:38:50,SOC_L2,HIGH severity requires additional review
+E004-ESC0010,E004-C0010,true,L2,2026-08-06 00:08:32,SOC_L2,LOW severity requires additional review
+E004-ESC0011,E004-C0011,true,L2,2026-08-05 23:51:34,SOC_L2,HIGH severity requires additional review
+E004-ESC0012,E004-C0012,false,,,,
+E004-ESC0013,E004-C0013,true,L2,2026-08-06 03:57:22,SOC_L2,HIGH severity requires additional review
+E004-ESC0014,E004-C0014,true,L1,2026-08-06 13:38:36,SOC_L1,HIGH severity requires additional review
+E004-ESC0015,E004-C0015,false,,,,
+E004-ESC0016,E004-C0016,true,L2,2026-08-06 23:16:46,SOC_L2,MEDIUM severity requires additional review
+E004-ESC0017,E004-C0017,false,,,,
+E004-ESC0018,E004-C0018,true,L1,2026-08-07 03:37:36,SOC_L1,HIGH severity requires additional review
+E004-ESC0019,E004-C0019,false,,,,
+E004-ESC0020,E004-C0020,true,L2,2026-08-07 11:18:24,SOC_L2,MEDIUM severity requires additional review
+E004-ESC0021,E004-C0021,true,L3,2026-08-07 21:18:08,SOC_L3,MEDIUM severity requires additional review
+E004-ESC0022,E004-C0022,true,L2,2026-08-08 05:43:35,SOC_L2,MEDIUM severity requires additional review
+E004-ESC0023,E004-C0023,true,L2,2026-08-08 06:30:22,SOC_L2,MEDIUM severity requires additional review
+E004-ESC0024,E004-C0024,true,L2,2026-08-08 13:58:41,SOC_L2,CRITICAL severity requires additional review
+E004-ESC0025,E004-C0025,true,L3,2026-08-09 00:14:56,SOC_L3,HIGH severity requires additional review
+E004-ESC0026,E004-C0026,true,L1,2026-08-09 04:23:07,SOC_L1,CRITICAL severity requires additional review
+E004-ESC0027,E004-C0027,true,L3,2026-08-09 08:27:30,SOC_L3,HIGH severity requires additional review
+E004-ESC0028,E004-C0028,false,,,,
+E004-ESC0029,E004-C0029,false,,,,
+E004-ESC0030,E004-C0030,true,L3,2026-08-09 17:38:54,SOC_L3,MEDIUM severity requires additional review
+E004-ESC0031,E004-C0031,false,,,,
+E004-ESC0032,E004-C0032,false,,,,
+E004-ESC0033,E004-C0033,false,,,,
+E004-ESC0034,E004-C0034,false,,,,
+E004-ESC0035,E004-C0035,false,,,,
+E004-ESC0036,E004-C0036,false,,,,
+E004-ESC0037,E004-C0037,true,L3,2026-08-10 22:42:39,SOC_L3,LOW severity requires additional review
+E004-ESC0038,E004-C0038,true,L1,2026-08-11 06:43:21,SOC_L1,LOW severity requires additional review
+E004-ESC0039,E004-C0039,true,L3,2026-08-11 14:25:47,SOC_L3,LOW severity requires additional review
+E004-ESC0040,E004-C0040,false,,,,
+E004-ESC0041,E004-C0041,false,,,,
+E004-ESC0042,E004-C0042,false,,,,
+E004-ESC0043,E004-C0043,false,,,,
+E004-ESC0044,E004-C0044,true,L1,2026-08-12 21:08:38,SOC_L1,HIGH severity requires additional review
+E004-ESC0045,E004-C0045,true,L3,2026-08-13 00:06:49,SOC_L3,LOW severity requires additional review
+E004-ESC0046,E004-C0046,true,L2,2026-08-13 04:19:22,SOC_L2,LOW severity requires additional review
+E004-ESC0047,E004-C0047,true,L3,2026-08-13 10:31:44,SOC_L3,LOW severity requires additional review
+E004-ESC0048,E004-C0048,true,L2,2026-08-13 12:12:53,SOC_L2,HIGH severity requires additional review
+E004-ESC0049,E004-C0049,true,L2,2026-08-13 13:08:56,SOC_L2,CRITICAL severity requires additional review
+E004-ESC0050,E004-C0050,true,L3,2026-08-13 14:26:54,SOC_L3,MEDIUM severity requires additional review
+E004-ESC0051,E004-C0051,false,,,,
+E004-ESC0052,E004-C0052,false,,,,
+E004-ESC0053,E004-C0053,false,,,,
+E004-ESC0054,E004-C0054,true,L2,2026-08-15 07:36:55,SOC_L2,LOW severity requires additional review
+E004-ESC0055,E004-C0055,true,L2,2026-08-15 12:18:57,SOC_L2,HIGH severity requires additional review
+E004-ESC0056,E004-C0056,false,,,,
+E004-ESC0057,E004-C0057,true,L3,2026-08-15 17:26:46,SOC_L3,LOW severity requires additional review
+E004-ESC0058,E004-C0058,true,L1,2026-08-15 20:16:43,SOC_L1,HIGH severity requires additional review
+E004-ESC0059,E004-C0059,false,,,,
+E004-ESC0060,E004-C0060,true,L2,2026-08-17 01:16:20,SOC_L2,MEDIUM severity requires additional review
+E004-ESC0061,E004-C0061,true,L2,2026-08-17 03:21:24,SOC_L2,HIGH severity requires additional review
+E004-ESC0062,E004-C0062,true,L3,2026-08-17 19:09:36,SOC_L3,HIGH severity requires additional review
+E004-ESC0063,E004-C0063,false,,,,
+E004-ESC0064,E004-C0064,true,L2,2026-08-19 21:34:59,SOC_L2,HIGH severity requires additional review
+E004-ESC0065,E004-C0065,true,L3,2026-08-20 07:09:26,SOC_L3,MEDIUM severity requires additional review
+E004-ESC0066,E004-C0066,true,L2,2026-08-20 11:05:52,SOC_L2,LOW severity requires additional review
+E004-ESC0067,E004-C0067,true,L1,2026-08-20 11:45:10,SOC_L1,HIGH severity requires additional review
+E004-ESC0068,E004-C0068,true,L2,2026-08-21 02:28:59,SOC_L2,LOW severity requires additional review
+E004-ESC0069,E004-C0069,true,L3,2026-08-21 21:33:56,SOC_L3,HIGH severity requires additional review
+E004-ESC0070,E004-C0070,true,L2,2026-08-22 03:04:54,SOC_L2,CRITICAL severity requires additional review
+E004-ESC0071,E004-C0071,true,L2,2026-08-22 05:03:52,SOC_L2,LOW severity requires additional review
+E004-ESC0072,E004-C0072,true,L2,2026-08-22 22:11:40,SOC_L2,CRITICAL severity requires additional review
+E004-ESC0073,E004-C0073,true,L2,2026-08-23 00:01:59,SOC_L2,HIGH severity requires additional review
+E004-ESC0074,E004-C0074,false,,,,
+E004-ESC0075,E004-C0075,true,L1,2026-08-24 01:43:18,SOC_L1,MEDIUM severity requires additional review
+E004-ESC0076,E004-C0076,true,L1,2026-08-24 11:08:01,SOC_L1,CRITICAL severity requires additional review
+E004-ESC0077,E004-C0077,false,,,,
+E004-ESC0078,E004-C0078,true,L3,2026-08-25 09:53:59,SOC_L3,HIGH severity requires additional review
+E004-ESC0079,E004-C0079,true,L2,2026-08-25 12:25:41,SOC_L2,HIGH severity requires additional review
+E004-ESC0080,E004-C0080,true,L2,2026-08-25 21:34:17,SOC_L2,LOW severity requires additional review
+E004-ESC0081,E004-C0081,true,L2,2026-08-25 23:07:34,SOC_L2,CRITICAL severity requires additional review
+E004-ESC0082,E004-C0082,false,,,,
+E004-ESC0083,E004-C0083,false,,,,
+E004-ESC0084,E004-C0084,false,,,,
+E004-ESC0085,E004-C0085,true,L1,2026-08-26 19:18:57,SOC_L1,HIGH severity requires additional review
+E004-ESC0086,E004-C0086,true,L3,2026-08-27 10:02:40,SOC_L3,HIGH severity requires additional review
+E004-ESC0087,E004-C0087,true,L3,2026-08-28 02:27:23,SOC_L3,HIGH severity requires additional review
+E004-ESC0088,E004-C0088,true,L2,2026-08-28 10:56:19,SOC_L2,HIGH severity requires additional review
+E004-ESC0089,E004-C0089,true,L2,2026-08-29 01:39:43,SOC_L2,LOW severity requires additional review
+E004-ESC0090,E004-C0090,false,,,,
+E004-ESC0091,E004-C0091,true,L3,2026-08-29 11:10:31,SOC_L3,HIGH severity requires additional review
+E004-ESC0092,E004-C0092,false,,,,
+E004-ESC0093,E004-C0093,false,,,,
+E004-ESC0094,E004-C0094,false,,,,
+E004-ESC0095,E004-C0095,true,L2,2026-08-30 09:35:12,SOC_L2,HIGH severity requires additional review
+E004-ESC0096,E004-C0096,true,L2,2026-08-30 21:21:15,SOC_L2,HIGH severity requires additional review
+E004-ESC0097,E004-C0097,true,L2,2026-08-30 22:34:35,SOC_L2,MEDIUM severity requires additional review
+E004-ESC0098,E004-C0098,true,L3,2026-08-31 04:37:42,SOC_L3,HIGH severity requires additional review
+E004-ESC0099,E004-C0099,false,,,,
+E004-ESC0100,E004-C0100,true,L3,2026-08-31 08:02:47,SOC_L3,LOW severity requires additional review

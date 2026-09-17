@@ -1,0 +1,31 @@
+asset_id,entity_id,asset_name,asset_type,criticality,business_function,monitoring_expected
+E004-AS001,E004,Core-Router-01,ROUTER,CRITICAL,Core Network,True
+E004-AS002,E004,Core-Router-02,ROUTER,CRITICAL,Core Network,True
+E004-AS003,E004,Internet-Gateway-01,GATEWAY,CRITICAL,Internet Services,True
+E004-AS004,E004,Internet-Gateway-02,GATEWAY,CRITICAL,Internet Services,True
+E004-AS005,E004,DNS-Server-01,SERVER,HIGH,Network Services,True
+E004-AS006,E004,DNS-Server-02,SERVER,HIGH,Network Services,True
+E004-AS007,E004,HSS-Server-01,SERVER,CRITICAL,Subscriber Management,True
+E004-AS008,E004,HSS-Server-02,SERVER,CRITICAL,Subscriber Management,True
+E004-AS009,E004,IMS-Server-01,SERVER,HIGH,Voice Services,True
+E004-AS010,E004,IMS-Server-02,SERVER,HIGH,Voice Services,True
+E004-AS011,E004,Billing-Server-01,SERVER,CRITICAL,Billing,True
+E004-AS012,E004,Billing-DB-01,DATABASE,CRITICAL,Billing,True
+E004-AS013,E004,CRM-Server-01,SERVER,HIGH,Customer Services,True
+E004-AS014,E004,CRM-DB-01,DATABASE,HIGH,Customer Services,True
+E004-AS015,E004,API-Gateway-01,APPLICATION,HIGH,Digital Services,True
+E004-AS016,E004,API-Gateway-02,APPLICATION,HIGH,Digital Services,True
+E004-AS017,E004,Mobile-App-01,APPLICATION,HIGH,Digital Services,True
+E004-AS018,E004,Mobile-App-02,APPLICATION,HIGH,Digital Services,True
+E004-AS019,E004,VPN-Gateway-01,FIREWALL,HIGH,Remote Access,True
+E004-AS020,E004,Perimeter-FW-01,FIREWALL,CRITICAL,Network Security,True
+E004-AS021,E004,Perimeter-FW-02,FIREWALL,CRITICAL,Network Security,True
+E004-AS022,E004,SIEM-Server-01,SERVER,CRITICAL,Security Monitoring,True
+E004-AS023,E004,NOC-Monitor-01,SERVER,HIGH,Network Operations,True
+E004-AS024,E004,NOC-Monitor-02,SERVER,HIGH,Network Operations,True
+E004-AS025,E004,IAM-Server-01,AUTHENTICATION,CRITICAL,Identity Management,True
+E004-AS026,E004,Mail-Gateway-01,EMAIL_SECURITY,MEDIUM,Corporate Services,True
+E004-AS027,E004,Log-Server-01,SERVER,HIGH,Security Monitoring,True
+E004-AS028,E004,IDS-Sensor-01,IDS,HIGH,Network Security,True
+E004-AS029,E004,Backup-Server-01,SERVER,HIGH,IT Operations,True
+E004-AS030,E004,Config-Manager-01,MANAGEMENT,MEDIUM,Network Operations,True

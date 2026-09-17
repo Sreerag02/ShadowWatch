@@ -1,0 +1,476 @@
+Continue development of my existing project "ShadowWatch".
+
+IMPORTANT:
+Do not rebuild or restructure the project from scratch.
+First inspect the existing repository, understand the current code, database schema, dataset format, and coding style, then continue from the current implementation.
+
+PROJECT:
+ShadowWatch is an offline, explainable supervisory analytics platform for assessing SOC operational effectiveness.
+
+It does NOT replace a SOC or SIEM and does NOT detect cyberattacks directly.
+
+Its purpose is to analyze SOC operational evidence and identify:
+- execution gaps
+- expected-but-missing evidence ("negative space")
+- suspicious investigation behaviour
+- telemetry blind spots
+- cross-source contradictions
+- KPI gaming patterns
+- weak SOC operational practices
+
+The key concept is:
+
+EXPECTED BEHAVIOUR
+        ↓
+Compare with
+        ↓
+OBSERVED EVIDENCE
+        ↓
+Find missing/unusual behaviour
+        ↓
+Generate explainable supervisory findings
+
+==================================================
+CURRENT PROJECT STRUCTURE
+==================================================
+
+ShadowWatch/
+├── analytics/
+├── backend/
+│   ├── routes/
+│   ├── services/
+│   │   ├── data_ingestion.py
+│   │   └── rule_engine.py
+│   ├── .env
+│   ├── .env.example
+│   ├── database.py
+│   ├── import_alpha_bank.py
+│   ├── main.py
+│   ├── models.py
+│   ├── schemas.py
+│   └── test_rule_engine.py
+├── data/
+│   └── alpha_bank/
+│       ├── alerts.csv
+│       ├── assets.csv
+│       ├── cases.csv
+│       ├── entities.csv
+│       ├── escalations.csv
+│       ├── ground_truth.csv
+│       ├── investigations.csv
+│       └── telemetry.csv
+├── database/
+│   └── schema.sql
+├── frontend/
+├── docs/
+└── tests/
+    └── validate_alpha_data.py
+
+==================================================
+CURRENT STACK
+==================================================
+
+Backend:
+- Python
+- FastAPI
+- SQLAlchemy
+- PostgreSQL
+- Pandas
+
+Frontend:
+- React + Vite
+
+Database:
+PostgreSQL
+
+Local/offline architecture only.
+Do NOT introduce cloud APIs, external LLM APIs or SaaS dependencies.
+
+==================================================
+CURRENT DATASET
+==================================================
+
+Alpha Bank = E001
+
+Current imported operational data:
+
+Entities:        1
+Assets:         30
+Alerts:        204
+Cases:          97
+Investigations: 94
+Escalations:    71
+Telemetry:    2016
+
+Ground truth:
+19 injected abnormal scenarios.
+
+All dataset validation checks currently PASS.
+
+==================================================
+CURRENT RULE ENGINE
+==================================================
+
+File:
+
+backend/services/rule_engine.py
+
+The existing engine analyzes CRITICAL cases.
+
+Rules already implemented:
+
+R001
+MISSING_INVESTIGATION
+Critical alert/case has no investigation record.
+
+R002
+MISSING_EVIDENCE
+Critical investigation exists but contains no supporting evidence.
+
+R003
+MISSING_ESCALATION
+Critical case has no escalation record OR escalated=false.
+
+R004
+FAST_CRITICAL_CLOSURE
+Critical case is closed unusually quickly.
+
+For the current prototype R004 uses <10 minutes.
+Treat this as a configurable prototype threshold, NOT an industry-standard threshold.
+
+Current execution:
+
+python3 -m services.rule_engine
+
+produces:
+
+Suspicious critical cases: 5
+
+E001-C0003
+R003 - missing escalation
+closure = 159 min
+
+E001-C0025
+R002 - missing evidence
+closure = 100 min
+
+E001-C0069
+R003 - missing escalation
+closure = 207 min
+
+E001-C0074
+R003 - missing escalation
+closure = 96 min
+
+E001-C0081
+R002 + R003 + R004
+missing evidence
+missing escalation
+closure = 1.3 min
+
+Therefore DO NOT modify R001-R004 in a way that breaks these existing detections.
+
+==================================================
+NEXT DEVELOPMENT SECTION
+NEGATIVE-SPACE ENGINE
+==================================================
+
+Now implement the first real negative-space detector:
+
+R005 - TELEMETRY_BLIND_SPOT
+
+Concept:
+
+ShadowWatch should detect situations where telemetry normally exists for an asset but suddenly disappears or falls abnormally close to zero.
+
+This is important because:
+
+"No alert" does NOT necessarily mean "no attack".
+
+If monitoring/logging disappeared, the SOC may simply have lost visibility.
+
+Example:
+
+Normal telemetry:
+
+10:00 -> 130 events
+11:00 -> 145 events
+12:00 -> 137 events
+13:00 -> 0 events
+14:00 -> 0 events
+15:00 -> 2 events
+
+This should be considered a possible monitoring blind spot.
+
+==================================================
+YOUR FIRST TASK - INSPECT BEFORE CODING
+==================================================
+
+Before implementing anything:
+
+1. Inspect:
+   database/schema.sql
+
+2. Inspect:
+   data/alpha_bank/telemetry.csv
+
+3. Inspect:
+   data/alpha_bank/ground_truth.csv
+
+4. Inspect:
+   backend/services/rule_engine.py
+
+5. Inspect the SQLAlchemy/database setup.
+
+Determine the ACTUAL telemetry columns and ground-truth structure.
+
+DO NOT invent column names.
+
+Tell me briefly what telemetry fields currently exist and how R005 should work using those actual fields.
+
+Then implement it.
+
+==================================================
+R005 DESIGN REQUIREMENTS
+==================================================
+
+Create a separate service:
+
+backend/services/negative_space_engine.py
+
+Do NOT dump all analytics into rule_engine.py.
+
+Implement a function such as:
+
+detect_telemetry_blind_spots()
+
+but adapt the exact implementation to the existing repository.
+
+The detector should analyze telemetry separately for each:
+
+entity_id + asset_id
+
+and sort observations chronologically.
+
+Use a historical baseline from earlier telemetry observations for that asset.
+
+The detector should identify a significant unexpected telemetry drop.
+
+Prefer a defensible approach such as:
+
+baseline = rolling median / recent historical median
+
+then compare current telemetry activity against the baseline.
+
+Conceptually:
+
+drop_ratio =
+current_activity / baseline_activity
+
+A candidate blind spot exists when:
+
+baseline indicates that the asset normally produces meaningful telemetry
+
+AND
+
+current telemetry becomes zero or extremely low compared with that baseline
+
+AND preferably the condition persists across multiple consecutive observations.
+
+Do NOT hard-code a rule that simply says:
+
+event_count == 0 -> anomaly
+
+because naturally quiet assets may legitimately produce zero events.
+
+Use historical behaviour.
+
+==================================================
+CONFIGURATION
+==================================================
+
+Keep prototype thresholds easy to modify.
+
+For example, define configuration constants near the top of the module rather than scattering magic numbers throughout the code.
+
+Possible configurable concepts:
+
+MIN_BASELINE_POINTS
+BASELINE_WINDOW
+LOW_ACTIVITY_RATIO
+CONSECUTIVE_LOW_POINTS
+
+Choose sensible prototype values based on the actual synthetic dataset.
+
+Clearly comment that these are prototype/synthetic-dataset thresholds and should eventually be replaced or calibrated using peer/entity baselines.
+
+==================================================
+EXPLAINABILITY
+==================================================
+
+Every R005 finding must be explainable.
+
+Return structured findings similar to:
+
+{
+    "rule_id": "R005",
+    "problem_type": "TELEMETRY_BLIND_SPOT",
+    "entity_id": "...",
+    "asset_id": "...",
+    "start_time": "...",
+    "end_time": "...",
+    "baseline_activity": ...,
+    "observed_activity": ...,
+    "drop_percentage": ...,
+    "reason": "..."
+}
+
+Adapt fields to the actual telemetry schema.
+
+The reason should be human readable, for example:
+
+"Asset E001-AS014 normally generated approximately 120 telemetry events per interval, but activity dropped to 2 events for 3 consecutive intervals."
+
+Do not output only "anomaly score = 0.92".
+
+A human supervisor must understand WHY it was flagged.
+
+==================================================
+GROUND-TRUTH VALIDATION
+==================================================
+
+After R005 works, compare its results with:
+
+data/alpha_bank/ground_truth.csv
+
+Specifically evaluate:
+
+TELEMETRY_BLIND_SPOT
+
+Create/update a validation script that calculates:
+
+TP
+FP
+FN
+Precision
+Recall
+F1
+
+Do NOT use ground_truth.csv as an input to detection.
+
+Ground truth is ONLY for evaluation after detection.
+
+This separation is critical:
+
+Operational telemetry
+        ↓
+R005 detector
+        ↓
+ShadowWatch findings
+
+SEPARATELY:
+
+ground_truth.csv
+        ↓
+evaluation only
+
+==================================================
+TESTING
+==================================================
+
+Add a simple executable test script, for example:
+
+backend/test_negative_space.py
+
+I should be able to run:
+
+python3 test_negative_space.py
+
+and receive readable output like:
+
+======================================
+ SHADOWWATCH NEGATIVE-SPACE ENGINE
+======================================
+
+Telemetry blind spots detected: X
+
+--------------------------------------
+Rule: R005
+Entity: E001
+Asset: E001-ASxxx
+Start: ...
+End: ...
+Baseline: ...
+Observed: ...
+Drop: ...%
+
+Reason:
+...
+
+======================================
+ ANALYSIS COMPLETE
+======================================
+
+Also provide the exact command I should run.
+
+==================================================
+IMPORTANT ENGINEERING RULES
+==================================================
+
+1. Preserve all existing working functionality.
+
+2. Do not delete R001-R004.
+
+3. Do not unnecessarily modify the database schema.
+
+4. Do not introduce fake telemetry columns.
+
+5. Do not use ground truth during detection.
+
+6. Keep detection deterministic and explainable.
+
+7. Keep the system completely offline.
+
+8. Prefer simple statistics over unnecessarily complicated ML.
+
+9. Handle:
+   - NULL values
+   - zero baselines
+   - insufficient historical observations
+   - duplicate timestamps
+   - different assets independently
+
+10. Avoid divide-by-zero errors.
+
+11. Use clear Python functions rather than one huge function.
+
+12. Follow the existing project's imports and database connection style.
+
+13. Do not change unrelated frontend/backend files.
+
+14. If you find a mismatch between the dataset and this requested design, STOP and explain the mismatch instead of silently changing the dataset.
+
+==================================================
+EXPECTED OUTPUT FROM YOU
+==================================================
+
+Work incrementally.
+
+First tell me:
+
+A. What you found in telemetry.csv/schema.
+B. How you will detect a blind spot.
+C. Which files you will create/change.
+
+Then implement R005.
+
+After implementation, show:
+
+- files changed
+- important code decisions
+- exact terminal command to run
+- expected output format
+
+Do not move on to R006 yet.
+
+We will verify R005 first before implementing the next ShadowWatch module.

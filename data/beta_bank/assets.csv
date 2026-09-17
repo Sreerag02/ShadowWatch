@@ -1,0 +1,33 @@
+asset_id,entity_id,asset_name,asset_type,criticality,business_function,monitoring_expected
+E002-AS001,E002,Core-Banking-DB-01,DATABASE,CRITICAL,Core Banking,true
+E002-AS002,E002,Core-Banking-App-01,SERVER,CRITICAL,Core Banking,true
+E002-AS003,E002,Payment-Switch-01,SERVER,CRITICAL,Payments,true
+E002-AS004,E002,UPI-Gateway-01,SERVER,CRITICAL,Digital Payments,true
+E002-AS005,E002,Internet-Banking-Web-01,SERVER,HIGH,Internet Banking,true
+E002-AS006,E002,Mobile-Banking-API-01,SERVER,CRITICAL,Mobile Banking,true
+E002-AS007,E002,ATM-Switch-01,SERVER,CRITICAL,ATM Services,true
+E002-AS008,E002,Card-Authorization-01,SERVER,CRITICAL,Card Services,true
+E002-AS009,E002,Treasury-Server-01,SERVER,HIGH,Treasury,true
+E002-AS010,E002,Loan-Processing-01,SERVER,HIGH,Loans,true
+E002-AS011,E002,CRM-Server-01,SERVER,MEDIUM,Customer Service,true
+E002-AS012,E002,Email-Gateway-01,EMAIL_GATEWAY,HIGH,Corporate Email,true
+E002-AS013,E002,IAM-Primary-01,AUTH_SYSTEM,CRITICAL,Identity & Access,true
+E002-AS014,E002,IAM-Secondary-01,AUTH_SYSTEM,HIGH,Identity & Access,true
+E002-AS015,E002,VPN-Gateway-01,VPN_GATEWAY,HIGH,Remote Access,true
+E002-AS016,E002,Perimeter-Firewall-01,FIREWALL,CRITICAL,Network Security,true
+E002-AS017,E002,Perimeter-Firewall-02,FIREWALL,HIGH,Network Security,true
+E002-AS018,E002,IDS-Sensor-01,IDS,HIGH,Network Monitoring,true
+E002-AS019,E002,SOC-SIEM-Collector-01,SIEM,CRITICAL,Security Monitoring,true
+E002-AS020,E002,Branch-AD-01,AUTH_SYSTEM,HIGH,Branch Authentication,true
+E002-AS021,E002,Finance-Endpoint-01,ENDPOINT,HIGH,Finance,true
+E002-AS022,E002,Finance-Endpoint-02,ENDPOINT,MEDIUM,Finance,true
+E002-AS023,E002,HR-Endpoint-01,ENDPOINT,MEDIUM,Human Resources,true
+E002-AS024,E002,HR-Endpoint-02,ENDPOINT,MEDIUM,Human Resources,true
+E002-AS025,E002,Admin-Workstation-01,ENDPOINT,CRITICAL,IT Administration,true
+E002-AS026,E002,Admin-Workstation-02,ENDPOINT,HIGH,IT Administration,true
+E002-AS027,E002,Backup-Server-01,SERVER,CRITICAL,Backup & Recovery,true
+E002-AS028,E002,File-Server-01,SERVER,HIGH,Enterprise Files,true
+E002-AS029,E002,DNS-Server-01,SERVER,HIGH,Infrastructure,true
+E002-AS030,E002,Proxy-Server-01,SERVER,MEDIUM,Internet Access,true
+E002-AS031,E002,Branch-Router-01,NETWORK_DEVICE,MEDIUM,Branch Network,true
+E002-AS032,E002,Monitoring-Collector-01,SERVER,HIGH,Operational Monitoring,true

@@ -1,0 +1,441 @@
+Continue my existing ShadowWatch project.
+
+PROJECT ROOT:
+~/Desktop/Project/ShadowWatch
+
+IMPORTANT:
+Inspect the actual repository before changing anything.
+
+Current project already contains:
+- PostgreSQL database integration
+- FastAPI backend
+- Existing Alpha Bank import
+- R001-R004 Rule Engine
+- R005 Negative-Space Engine
+- Expected-vs-Observed Workflow Auditor
+- Cross-Source Contradiction Engine
+- Multiple organization datasets under data/
+
+DO NOT rewrite working analytics modules.
+
+==================================================
+GOAL
+==================================================
+
+I now have multiple ShadowWatch organization datasets.
+
+I need to:
+
+1. Validate every organization dataset separately.
+2. Validate cross-organization ID uniqueness.
+3. Safely import all operational CSVs into PostgreSQL.
+4. Never import ground_truth.csv into PostgreSQL.
+5. Verify record counts by entity.
+6. Make sure all analytics can work with multiple entity IDs,
+   not only E001.
+7. Prepare clean terminal commands for validation and import.
+
+==================================================
+STEP 1 - INSPECT THE REPOSITORY
+==================================================
+
+Inspect:
+
+data/
+
+and identify all organization folders.
+
+Expected folders may include:
+
+data/alpha_bank
+data/beta_bank
+data/gamma_bank
+data/metro_telecom
+data/powergrid_utility
+
+But use the actual folder names found in the repository.
+
+Also inspect:
+
+database/schema.sql
+backend/database.py
+backend/services/data_ingestion.py
+backend/import_alpha_bank.py
+backend/models.py
+backend/schemas.py
+
+Inspect existing validation scripts under:
+
+tests/
+backend/
+
+Do not assume column names.
+Read actual CSV headers.
+
+==================================================
+STEP 2 - CREATE MULTI-DATASET VALIDATOR
+==================================================
+
+Create:
+
+tests/validate_all_datasets.py
+
+The script must automatically discover organization folders under:
+
+data/
+
+For each organization validate:
+
+REQUIRED FILES:
+
+entities.csv
+assets.csv
+alerts.csv
+cases.csv
+investigations.csv
+escalations.csv
+telemetry.csv
+ground_truth.csv
+
+Validate:
+
+1. Required files exist.
+
+2. CSV headers match the project's expected schema.
+
+3. Every primary ID is unique inside its table.
+
+4. IDs remain unique across organizations.
+
+5. assets.entity_id references entities.entity_id.
+
+6. alerts.entity_id references a valid entity.
+
+7. alerts.asset_id references an asset from the same entity.
+
+8. cases.alert_id references a valid alert.
+
+9. cases.entity_id matches the alert's entity.
+
+10. investigations.case_id references a valid case.
+
+11. escalations.case_id references a valid case.
+
+12. telemetry.entity_id references a valid entity.
+
+13. telemetry.asset_id belongs to the same entity.
+
+14. Ground-truth case IDs reference valid cases when case_id is present.
+
+15. Ground-truth asset IDs reference valid assets when asset_id is present.
+
+16. Severity values must use:
+
+LOW
+MEDIUM
+HIGH
+CRITICAL
+
+17. Case status must use supported normalized values from the dataset/schema.
+
+18. Confidence must be between 0 and 1.
+
+19. Boolean fields must be valid.
+
+20. Normal timestamps must follow logical ordering:
+
+alert.timestamp <= case.opened_at
+
+For investigations:
+
+case.opened_at <= investigation.started_at
+investigation.started_at <= investigation.completed_at
+investigation.completed_at <= case.closed_at
+
+For true escalations:
+
+case.opened_at <= escalated_at <= case.closed_at
+
+BUT:
+
+If the dataset contains an intentionally injected contradiction
+scenario documented in ground_truth.csv, do not blindly fail it.
+
+Report intentional abnormal chronology separately if supported by
+ground truth.
+
+21. No cross-entity relationships.
+
+22. No accidental pandas index column like:
+
+Unnamed: 0
+
+23. CSV files must load successfully.
+
+==================================================
+VALIDATION OUTPUT
+==================================================
+
+Running:
+
+python3 tests/validate_all_datasets.py
+
+should print something similar:
+
+========================================
+ SHADOWWATCH MULTI-DATASET VALIDATION
+========================================
+
+ALPHA BANK / E001
+Entities: ...
+Assets: ...
+Alerts: ...
+Cases: ...
+Investigations: ...
+Escalations: ...
+Telemetry: ...
+Ground Truth: ...
+
+Relationships: PASS
+IDs: PASS
+Timestamps: PASS
+Ground Truth: PASS
+
+----------------------------------------
+
+BETA BANK / E002
+...
+
+----------------------------------------
+
+OVERALL
+Organizations: 5
+
+Cross-entity ID uniqueness: PASS
+Cross-entity contamination: PASS
+
+FINAL RESULT: PASS
+
+========================================
+
+If anything fails, print:
+- file
+- row/ID
+- reason
+
+Do not silently fix bad data.
+
+==================================================
+STEP 3 - CREATE SAFE MULTI-ENTITY IMPORTER
+==================================================
+
+Create:
+
+backend/import_all_entities.py
+
+This script must import ONLY:
+
+entities.csv
+assets.csv
+alerts.csv
+cases.csv
+investigations.csv
+escalations.csv
+telemetry.csv
+
+NEVER import:
+
+ground_truth.csv
+
+Import order:
+
+entities
+assets
+alerts
+cases
+investigations
+escalations
+telemetry
+
+Use the existing SQLAlchemy/PostgreSQL setup.
+
+==================================================
+IMPORT SAFETY
+==================================================
+
+VERY IMPORTANT:
+
+My database may already contain Alpha Bank E001.
+
+Do NOT automatically delete or overwrite existing entities.
+
+Default behavior:
+
+- Before importing an organization, check whether entity_id already
+  exists in PostgreSQL.
+
+- If it already exists:
+  print:
+
+  SKIPPED E001 - entity already exists
+
+- If it does not exist:
+  import that organization's operational files.
+
+The default importer must be non-destructive.
+
+Use one database transaction per organization where practical.
+
+If one table import fails:
+rollback that organization's import.
+
+Do not leave half-imported organizations.
+
+Do not import ground truth.
+
+==================================================
+OPTIONAL FLAG
+==================================================
+
+If useful, add an OPTIONAL explicit replacement flag like:
+
+python3 import_all_entities.py --replace E002
+
+But ONLY if it can be implemented safely.
+
+Replacement must delete child records in correct foreign-key order.
+
+Do NOT make replacement the default behavior.
+
+==================================================
+IMPORT OUTPUT
+==================================================
+
+Running:
+
+cd backend
+python3 import_all_entities.py
+
+should print something like:
+
+========================================
+ SHADOWWATCH MULTI-ENTITY IMPORT
+========================================
+
+E001 Alpha Bank
+SKIPPED - already exists
+
+E002 Beta Bank
+entities: 1
+assets: 32
+alerts: 210
+cases: 104
+investigations: 102
+escalations: 62
+telemetry: 2304
+IMPORT SUCCESS
+
+E003 Gamma Bank
+...
+
+========================================
+ IMPORT COMPLETE
+========================================
+
+==================================================
+STEP 4 - MULTI-ENTITY DATABASE VERIFICATION
+==================================================
+
+Create either:
+
+backend/verify_multi_entity_db.py
+
+or add verification to the importer.
+
+Verify PostgreSQL contains:
+
+- organization count
+- asset count by entity
+- alert count by entity
+- case count by entity
+- investigation count by entity
+- escalation count by entity
+- telemetry count by entity
+
+Also verify:
+
+no alerts reference another organization's assets
+
+no cases reference another organization's alerts
+
+no investigations/escalations reference cases from another entity
+
+==================================================
+STEP 5 - CHECK ANALYTICS FOR HARD-CODED E001
+==================================================
+
+Inspect:
+
+backend/services/rule_engine.py
+backend/services/negative_space_engine.py
+backend/services/workflow_auditor.py
+backend/services/contradiction_engine.py
+
+Search for hard-coded:
+
+E001
+alpha_bank
+
+Do NOT redesign the engines.
+
+If hard-coded entity filtering exists, refactor minimally so functions
+can either:
+
+- analyze all entities
+or
+- accept entity_id as an optional parameter
+
+Example:
+
+analyze_critical_cases(entity_id=None)
+
+detect_telemetry_blind_spots(entity_id=None)
+
+Do not break existing test behavior.
+
+==================================================
+IMPORTANT
+==================================================
+
+Do NOT:
+
+- import ground_truth.csv
+- use ground truth as an analytics input
+- delete existing E001 automatically
+- change valid datasets silently
+- rewrite working analytics
+- add cloud dependencies
+- change database schema unless absolutely required
+- implement frontend
+- implement new detection rules
+
+==================================================
+AFTER IMPLEMENTATION
+==================================================
+
+Run all relevant existing tests.
+
+Show me:
+
+1. Organization folders discovered.
+2. Files created.
+3. Files modified.
+4. Validation result per organization.
+5. Cross-organization validation result.
+6. Exact import behavior.
+7. PostgreSQL counts by entity.
+8. Any hard-coded E001 references found and fixed.
+9. Existing tests that were run.
+10. Exact terminal commands I should execute.
+
+STOP after multi-entity validation/import integration is complete.

@@ -1,0 +1,63 @@
+escalation_id,case_id,escalated,escalation_level,escalated_at,escalated_to,reason
+E002-ESC0001,E002-C0001,true,L2,2026-08-18 00:36:36,SOC_MANAGER,Serious alert required senior review
+E002-ESC0002,E002-C0002,true,L3,2026-08-18 01:04:00,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0003,E002-C0003,false,,,,
+E002-ESC0004,E002-C0005,true,L2,2026-08-18 01:23:10,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0005,E002-C0008,true,L2,2026-08-18 02:23:08,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0006,E002-C0010,true,L2,2026-08-18 05:13:53,SOC_L2,Serious alert required senior review
+E002-ESC0007,E002-C0012,false,,,,
+E002-ESC0008,E002-C0013,true,L3,2026-08-18 05:46:14,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0009,E002-C0014,true,L3,2026-08-18 06:34:33,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0010,E002-C0015,true,L3,2026-08-20 08:09:00,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0011,E002-C0016,true,L2,2026-08-18 07:56:16,SOC_L2,Serious alert required senior review
+E002-ESC0012,E002-C0018,true,L2,2026-08-18 08:01:30,SOC_L2,Serious alert required senior review
+E002-ESC0013,E002-C0019,true,L2,2026-08-18 08:26:15,SOC_MANAGER,Serious alert required senior review
+E002-ESC0014,E002-C0020,false,,,,
+E002-ESC0015,E002-C0022,false,,,,
+E002-ESC0016,E002-C0025,true,L3,2026-08-18 13:30:57,SOC_MANAGER,Serious alert required senior review
+E002-ESC0017,E002-C0030,true,L3,2026-08-18 17:42:20,SOC_L2,Serious alert required senior review
+E002-ESC0018,E002-C0031,true,L2,2026-08-18 18:50:04,SOC_L2,Serious alert required senior review
+E002-ESC0019,E002-C0032,true,L3,2026-08-20 11:10:00,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0020,E002-C0033,true,L2,2026-08-18 19:55:43,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0021,E002-C0036,true,L2,2026-08-18 22:50:12,SOC_L2,Serious alert required senior review
+E002-ESC0022,E002-C0037,false,,,,
+E002-ESC0023,E002-C0038,true,L2,2026-08-19 01:56:36,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0024,E002-C0039,false,,,,
+E002-ESC0025,E002-C0042,true,L2,2026-08-19 02:28:32,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0026,E002-C0043,true,L3,2026-08-19 03:28:39,SOC_L2,Serious alert required senior review
+E002-ESC0027,E002-C0046,true,L2,2026-08-19 04:20:17,SOC_L2,Serious alert required senior review
+E002-ESC0028,E002-C0047,false,,,,
+E002-ESC0029,E002-C0049,true,L3,2026-08-19 06:48:17,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0030,E002-C0051,false,,,,
+E002-ESC0031,E002-C0053,false,,,,
+E002-ESC0032,E002-C0055,true,L3,2026-08-19 08:53:58,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0033,E002-C0057,true,L2,2026-08-19 09:43:50,SOC_MANAGER,Serious alert required senior review
+E002-ESC0034,E002-C0059,true,L2,2026-08-19 10:41:29,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0035,E002-C0060,true,L2,2026-08-19 10:25:15,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0036,E002-C0062,true,L3,2026-08-19 12:46:53,SOC_L2,Serious alert required senior review
+E002-ESC0037,E002-C0063,true,L2,2026-08-19 12:24:21,SOC_L2,Serious alert required senior review
+E002-ESC0038,E002-C0064,false,,,,
+E002-ESC0039,E002-C0065,true,L3,2026-08-19 15:44:57,SOC_MANAGER,Serious alert required senior review
+E002-ESC0040,E002-C0066,true,L3,2026-08-19 16:04:12,SOC_MANAGER,Serious alert required senior review
+E002-ESC0041,E002-C0067,false,,,,
+E002-ESC0042,E002-C0068,true,L2,2026-08-19 16:37:28,SOC_L2,Serious alert required senior review
+E002-ESC0043,E002-C0071,true,L2,2026-08-19 18:11:32,SOC_MANAGER,Serious alert required senior review
+E002-ESC0044,E002-C0073,true,L2,2026-08-19 19:32:06,SOC_L2,Serious alert required senior review
+E002-ESC0045,E002-C0075,false,,,,
+E002-ESC0046,E002-C0076,false,,,,
+E002-ESC0047,E002-C0077,false,,,,
+E002-ESC0048,E002-C0078,true,L2,2026-08-20 01:01:03,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0049,E002-C0079,true,L2,2026-08-20 02:14:30,SOC_L2,Serious alert required senior review
+E002-ESC0050,E002-C0080,true,L3,2026-08-20 06:17:09,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0051,E002-C0082,true,L3,2026-08-20 07:08:02,SOC_MANAGER,Serious alert required senior review
+E002-ESC0052,E002-C0084,true,L3,2026-08-20 17:12:00,SOC_L2,Serious alert required senior review
+E002-ESC0053,E002-C0085,true,L3,2026-08-20 10:23:16,SOC_MANAGER,Serious alert required senior review
+E002-ESC0054,E002-C0087,true,L3,2026-08-20 11:44:49,SOC_L2,Serious alert required senior review
+E002-ESC0055,E002-C0088,true,L3,2026-08-20 12:03:22,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0056,E002-C0092,false,,,,
+E002-ESC0057,E002-C0093,true,L2,2026-08-20 15:50:22,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0058,E002-C0097,true,L3,2026-08-20 18:22:29,SOC_MANAGER,Serious alert required senior review
+E002-ESC0059,E002-C0099,false,,,,
+E002-ESC0060,E002-C0100,true,L3,2026-08-20 19:39:07,INCIDENT_RESPONSE,Serious alert required senior review
+E002-ESC0061,E002-C0101,false,,,,
+E002-ESC0062,E002-C0104,true,L2,2026-08-20 22:25:23,SOC_L2,Serious alert required senior review

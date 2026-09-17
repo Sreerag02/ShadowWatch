@@ -62,6 +62,8 @@ class FindingSummary(BaseModel):
     rule_id: str
     problem_type: str
     severity: str
+    reason: Optional[str] = None
+    evidence: Optional[str] = None
 
 # ==========================================
 # Main Case Response

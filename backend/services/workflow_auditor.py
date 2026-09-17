@@ -102,11 +102,30 @@ def assess_case_workflow(rows):
         'closure': True if closed else (False if row.get('case_status') == 'OPEN' else None),
     }
     gaps = {}
+    data_issues = {}
+    triggered_rules = set()
+
+    def uncertain(stage, source_id, reason, rule_id=None):
+        data_issues[(stage, source_id or '', reason)] = dict(
+            stage=stage, source_id=source_id, rule_id=rule_id, reason=reason)
+
     for record in rows:
+        if in_scope and record['investigation_id'] is not None and _evidence(record) is None:
+            uncertain('EVIDENCE', record['investigation_id'],
+                      'Evidence cannot be verified: the evidence flag or count is missing or invalid.',
+                      'R002' if critical and record['evidence_count'] is None else None)
+        if critical and record['escalation_id'] is not None and record['escalated'] is None:
+            uncertain('ESCALATION', record['escalation_id'],
+                      'An escalation record exists, but its escalated flag is unknown.')
         if critical:
             finding = evaluate_critical_case(record)
             if finding:
                 for rule, reason in zip(finding['rules'], finding['reasons']):
+                    triggered_rules.add(rule)
+                    if rule == 'R002' and _evidence(record) is None:
+                        continue
+                    if rule == 'R004' and duration is not None and duration < 0:
+                        continue
                     gaps[(rule, reason)] = dict(stage=RULE_STAGES[rule], rule_id=rule, reason=reason)
         elif severity == 'HIGH':
             # HIGH expectations are auditor prototype policy, not new R rules.
@@ -116,6 +135,14 @@ def assess_case_workflow(rows):
                 reason = (f'HIGH prototype expectation: {stage.lower()} is missing '
                           'from the recorded workflow.')
                 gaps[(stage, reason)] = dict(stage=stage, rule_id=None, reason=reason)
+    if critical:
+        if duration is not None and duration < 0:
+            uncertain('CLOSURE', row['case_id'],
+                      'Closure precedes opening; invalid timestamps cannot establish fast closure.', 'R004')
+        elif duration is None and not (closed is None and row.get('case_status') in ('OPEN', 'IN_PROGRESS')):
+            uncertain('CLOSURE', row['case_id'],
+                      'Closure timing cannot be assessed because an opening or closure timestamp is missing.')
+    data_issues = [data_issues[key] for key in sorted(data_issues)]
     gaps = list(gaps.values())
     gaps.sort(key=lambda gap: (gap['rule_id'] or '', gap['stage']))
     limitations = [
@@ -135,7 +162,8 @@ def assess_case_workflow(rows):
         limitations.append('Closure precedes opening: duration is invalid; the legacy R004 result is retained.')
     if any(r['investigation_id'] is not None and r['evidence_count'] is None for r in rows) and critical:
         limitations.append('R002 treats a NULL evidence count as missing supporting evidence; actual evidence presence may be unknown.')
-    assessment = 'EXECUTION_GAP' if gaps else 'NO_GAP'
+    assessment = ('NOT_ASSESSED' if not in_scope else 'EXECUTION_GAP' if gaps else
+                  'INSUFFICIENT_DATA' if data_issues else 'NO_GAP')
     labels = {True: 'Present', False: 'Absent', None: 'Unknown/mixed'}
     explanation = [
         f"Case {row['case_id']} is associated with a {severity or 'unknown-severity'} "
@@ -147,7 +175,9 @@ def assess_case_workflow(rows):
             f'{stage.capitalize()}: {labels[value]}' for stage, value in observed.items()
         ),
         f'Closure time: {duration:.1f} minutes.' if duration is not None else 'Closure time: unknown.',
-        'Execution gaps: ' + ('; '.join(g['reason'] for g in gaps) or 'None detected within evaluated expectations.'),
+        'Confirmed execution gaps: ' + ('; '.join(g['reason'] for g in gaps) or 'None established from available records.'),
+        'Insufficient data: ' + ('; '.join(item['reason'] for item in data_issues) or 'No unresolved required checks.'),
+        f'Assessment: {assessment}.',
         'Prioritize for supervisory review.' if gaps else 'Review limitations before interpreting this result.',
     ]
     if critical:
@@ -162,7 +192,11 @@ def assess_case_workflow(rows):
         'closure_minutes': duration,
         'closure_policy': {'minimum_minutes': FAST_CRITICAL_CLOSURE_MINUTES,
                            'scope': 'CRITICAL only; prototype'} if critical else None,
-        'triggered_rules': sorted({g['rule_id'] for g in gaps if g['rule_id']}),
+        # Preserve legacy triggers even when the auditor cannot confirm a gap.
+        'triggered_rules': sorted(triggered_rules),
+        'confirmed_rules': sorted({g['rule_id'] for g in gaps if g['rule_id']}),
+        'data_issues': data_issues,
+        'assessment_complete': in_scope and not data_issues,
         'assessment': assessment, 'assessment_in_scope': in_scope,
         'limitations': limitations, 'explanation': '\n'.join(explanation),
         'records': {

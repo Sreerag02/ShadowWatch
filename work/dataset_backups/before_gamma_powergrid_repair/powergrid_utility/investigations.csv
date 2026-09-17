@@ -18,7 +18,7 @@ E005-INV0017,E005-C0017,2026-08-02 18:56:00,2026-08-02 19:11:00,AN02,Analyzed fi
 E005-INV0018,E005-C0018,2026-08-02 20:43:00,2026-08-02 22:13:00,AN05,"Reviewed EDR telemetry, process execution blocked.",True,12,True
 E005-INV0019,E005-C0019,2026-08-02 22:54:00,2026-08-03 00:41:00,AN03,Inspected ICS endpoint baseline.,True,1,True
 E005-INV0020,E005-C0020,2026-08-03 00:52:00,2026-08-03 01:31:00,AN05,Isolated host and dumped memory for analysis.,True,4,True
-E005-INV0021,E005-C0021,2026-08-03 02:10:40,2026-08-03 02:11:20,AN03,Inspected ICS endpoint baseline.,True,3,True
+E005-INV0021,E005-C0021,2026-08-03 02:30:00,2026-08-03 03:32:00,AN03,Inspected ICS endpoint baseline.,True,3,True
 E005-INV0022,E005-C0022,2026-08-03 04:55:00,2026-08-03 06:50:00,AN03,"Reviewed EDR telemetry, process execution blocked.",True,12,True
 E005-INV0023,E005-C0023,2026-08-03 06:57:00,2026-08-03 08:16:00,AN02,"Reviewed EDR telemetry, process execution blocked.",True,4,True
 E005-INV0024,E005-C0024,2026-08-03 08:45:00,2026-08-03 10:27:00,AN05,Verified authentication logs. Legitimate admin login confirmed.,True,8,True
@@ -38,7 +38,7 @@ E005-INV0037,E005-C0037,2026-08-04 10:41:00,2026-08-04 12:10:00,AN04,Reviewed SC
 E005-INV0038,E005-C0038,2026-08-04 12:39:00,2026-08-04 14:34:00,AN03,Verified authentication logs. Legitimate admin login confirmed.,True,3,False
 E005-INV0039,E005-C0039,2026-08-04 14:52:00,2026-08-04 17:31:00,AN03,Reviewed SCADA traffic logs. No anomalies detected.,True,9,False
 E005-INV0040,E005-C0040,2026-08-04 16:42:00,2026-08-04 19:15:00,AN01,"Reviewed EDR telemetry, process execution blocked.",True,11,False
-E005-INV0041,E005-C0041,2026-08-04 18:29:20,2026-08-04 18:29:40,AN04,Reviewed SCADA traffic logs. No anomalies detected.,False,0,True
+E005-INV0041,E005-C0041,2026-08-04 18:36:00,2026-08-04 20:36:00,AN04,Reviewed SCADA traffic logs. No anomalies detected.,False,0,True
 E005-INV0042,E005-C0042,2026-08-04 20:17:00,2026-08-04 21:14:00,AN01,Isolated host and dumped memory for analysis.,True,10,True
 E005-INV0043,E005-C0043,2026-08-04 22:28:00,2026-08-05 00:03:00,AN04,Verified authentication logs. Legitimate admin login confirmed.,True,2,False
 E005-INV0044,E005-C0044,2026-08-05 00:53:00,2026-08-05 02:20:00,AN03,Analyzed firewall denied connections.,True,10,False

@@ -10,7 +10,7 @@ from sqlalchemy import create_engine, event, text
 
 from import_all_entities import import_organization
 from verify_multi_entity_db import verify_database
-from services.dataset_validation import HEADERS, ROOT, convert, validate_all, validate_folder
+from services.dataset_validation import HEADERS, ROOT, adapt_gamma, convert, validate_all, validate_folder
 
 
 def fixture():
@@ -123,9 +123,8 @@ class MultiEntityTests(unittest.TestCase):
             with self.subTest(row=row), self.assertRaises(ValueError):
                 convert(row)
 
-    def test_gamma_adapter_does_not_fabricate_missing_fields(self):
-        report = validate_folder(ROOT / 'data/gamma_bank', gamma_adapter=True,
-                                 allow_chronology=['E003'], allow_source_conflicts=['E003'])
+    def test_repaired_gamma_preserves_unknown_fields(self):
+        report = validate_folder(ROOT / 'data/gamma_bank')
         self.assertFalse(report['errors'])
         investigation = report['tables']['investigations'][0]
         self.assertIsNone(investigation['started_at'])
@@ -133,6 +132,31 @@ class MultiEntityTests(unittest.TestCase):
         self.assertIsNone(investigation['evidence_count'])
         self.assertTrue(investigation['evidence_present'])
         self.assertIsNone(report['tables']['escalations'][0]['escalated'])
+
+    def test_legacy_gamma_adapter_preserves_unknown_measurements(self):
+        row = adapt_gamma('investigations', dict(investigation_id='I', case_id='C',
+                          analyst='A', investigation_notes='Notes',
+                          evidence_status='Complete evidence package', duration_minutes='99'))
+        self.assertIsNone(row['evidence_count'])
+        self.assertIsNone(row['started_at'])
+        self.assertIsNone(row['completed_at'])
+        self.assertEqual(row['evidence_present'], 'true')
+
+    def test_all_repaired_datasets_pass_without_exceptions(self):
+        reports = validate_all()
+        self.assertEqual(len(reports), 5)
+        self.assertFalse([error for report in reports for error in report['errors']])
+        for name in ('gamma_bank', 'powergrid_utility'):
+            report = next(r for r in reports if r['folder'] == name)
+            alerts = {r['alert_id']: r for r in report['tables']['alerts']}
+            if name == 'gamma_bank':
+                ids = {'CASE-E003-011', 'CASE-E003-026', 'CASE-E003-045', 'CASE-E003-062', 'CASE-E003-083'}
+            else:
+                ids = {'E005-C0021'}
+            for case in report['tables']['cases']:
+                if case['case_id'] in ids:
+                    self.assertEqual(alerts[case['alert_id']]['severity'], 'CRITICAL')
+                    self.assertLess((case['closed_at'] - case['opened_at']).total_seconds(), 600)
 
     def test_verifier_detects_wrong_child_link(self):
         report = fixture()

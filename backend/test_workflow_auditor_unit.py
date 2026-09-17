@@ -63,12 +63,17 @@ class WorkflowAuditorTests(unittest.TestCase):
         self.assertIsNone(result['observed']['escalation'])
         self.assertEqual(result['triggered_rules'], [])
         self.assertTrue(any('unknown' in item for item in result['limitations']))
+        self.assertEqual(result['assessment'], 'INSUFFICIENT_DATA')
 
     def test_null_count_retains_legacy_r002(self):
         result = assess_case_workflow([case_row(evidence_count=None)])
         self.assertEqual(result['triggered_rules'], ['R002'])
         self.assertIsNone(result['observed']['evidence'])
         self.assertTrue(any('NULL evidence count' in item for item in result['limitations']))
+        self.assertEqual(result['assessment'], 'INSUFFICIENT_DATA')
+        self.assertEqual(result['gaps'], [])
+        self.assertEqual(result['confirmed_rules'], [])
+        self.assertFalse(result['assessment_complete'])
 
     def test_closure_boundary_and_invalid_duration(self):
         result = assess_case_workflow([case_row(closed_at=datetime(2026, 8, 12, 12, 10))])
@@ -76,6 +81,8 @@ class WorkflowAuditorTests(unittest.TestCase):
         result = assess_case_workflow([case_row(closed_at=datetime(2026, 8, 12, 11))])
         self.assertEqual(result['triggered_rules'], ['R004'])
         self.assertTrue(any('invalid' in item for item in result['limitations']))
+        self.assertEqual(result['assessment'], 'INSUFFICIENT_DATA')
+        self.assertEqual(result['gaps'], [])
 
     def test_high_policy_does_not_extend_critical_rules(self):
         result = assess_case_workflow([case_row(severity='HIGH', evidence_present=False,
@@ -94,6 +101,46 @@ class WorkflowAuditorTests(unittest.TestCase):
         self.assertEqual(result['triggered_rules'], [])
         self.assertFalse(result['assessment_in_scope'])
         self.assertIsNone(result['expected']['investigation'])
+        self.assertEqual(result['assessment'], 'NOT_ASSESSED')
+
+    def test_high_unknown_evidence_is_not_no_gap(self):
+        result = assess_case_workflow([case_row(severity='HIGH', evidence_count=None)])
+        self.assertEqual(result['assessment'], 'INSUFFICIENT_DATA')
+        self.assertEqual(result['triggered_rules'], [])
+        self.assertEqual(result['data_issues'][0]['stage'], 'EVIDENCE')
+
+    def test_confirmed_gap_and_unknown_are_both_retained(self):
+        result = assess_case_workflow([case_row(evidence_count=None, escalated=False)])
+        self.assertEqual(result['assessment'], 'EXECUTION_GAP')
+        self.assertEqual(result['triggered_rules'], ['R002', 'R003'])
+        self.assertEqual(result['confirmed_rules'], ['R003'])
+        self.assertEqual(len(result['data_issues']), 1)
+        self.assertFalse(result['assessment_complete'])
+
+    def test_explicit_absence_is_confirmed_despite_null_count(self):
+        result = assess_case_workflow([case_row(evidence_present=False, evidence_count=None)])
+        self.assertEqual(result['assessment'], 'EXECUTION_GAP')
+        self.assertEqual(result['confirmed_rules'], ['R002'])
+        self.assertEqual(result['data_issues'], [])
+
+    def test_unknown_escalation_only_blocks_required_policy(self):
+        for severity, expected in [('CRITICAL', 'INSUFFICIENT_DATA'), ('HIGH', 'NO_GAP')]:
+            result = assess_case_workflow([case_row(severity=severity, escalated=None)])
+            self.assertEqual(result['assessment'], expected)
+
+    def test_missing_closure_timestamp_vs_open_case(self):
+        result = assess_case_workflow([case_row(closed_at=None)])
+        self.assertEqual(result['assessment'], 'INSUFFICIENT_DATA')
+        result = assess_case_workflow([case_row(closed_at=None, case_status='OPEN')])
+        self.assertEqual(result['assessment'], 'NO_GAP')
+
+    def test_multiple_unknown_records_deduplicate_without_hiding_confirmed_gap(self):
+        unknown = case_row(evidence_count=None)
+        missing = case_row(investigation_id='I2', evidence_present=False)
+        result = assess_case_workflow([unknown, missing, unknown])
+        self.assertEqual(len(result['gaps']), 1)
+        self.assertEqual(len(result['data_issues']), 1)
+        self.assertEqual(result, assess_case_workflow([missing, unknown]))
 
     def test_multiple_records_are_preserved_and_gaps_deduplicated(self):
         good = case_row()

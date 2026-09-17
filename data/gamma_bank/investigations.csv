@@ -1,95 +1,95 @@
-investigation_id,entity_id,case_id,analyst,investigation_notes,evidence_status,duration_minutes
-INV-E003-001,E003,CASE-E003-001,Analyst-1,Validated affected asset and analyst observations.,Complete evidence package,99
-INV-E003-002,E003,CASE-E003-002,Analyst-2,Checked related events and documented root cause.,Complete evidence package,193
-INV-E003-003,E003,CASE-E003-003,Analyst-3,Validated affected asset and analyst observations.,Complete evidence package,733
-INV-E003-004,E003,CASE-E003-004,Analyst-4,Checked related events and documented root cause.,Complete evidence package,450
-INV-E003-005,E003,CASE-E003-005,Analyst-5,Correlated alert with firewall and identity logs.,Complete evidence package,159
-INV-E003-006,E003,CASE-E003-006,Analyst-6,Validated affected asset and analyst observations.,Complete evidence package,439
-INV-E003-007,E003,CASE-E003-007,Analyst-7,Reviewed authentication and endpoint telemetry.,Complete evidence package,925
-INV-E003-008,E003,CASE-E003-008,Analyst-8,Validated affected asset and analyst observations.,Complete evidence package,482
-INV-E003-009,E003,CASE-E003-009,Analyst-1,Validated affected asset and analyst observations.,Complete evidence package,1023
-INV-E003-010,E003,CASE-E003-010,Analyst-2,Validated affected asset and analyst observations.,Complete evidence package,676
-INV-E003-011,E003,CASE-E003-011,Analyst-3,Reviewed authentication and endpoint telemetry.,Missing evidence,1
-INV-E003-012,E003,CASE-E003-012,Analyst-4,Reviewed authentication and endpoint telemetry.,Complete evidence package,117
-INV-E003-013,E003,CASE-E003-013,Analyst-5,Checked related events and documented root cause.,Complete evidence package,866
-INV-E003-014,E003,CASE-E003-014,Analyst-6,Reviewed authentication and endpoint telemetry.,Complete evidence package,189
-INV-E003-015,E003,CASE-E003-015,Analyst-7,Reviewed authentication and endpoint telemetry.,Complete evidence package,440
-INV-E003-016,E003,CASE-E003-017,Analyst-1,Reviewed authentication and endpoint telemetry.,Complete evidence package,831
-INV-E003-017,E003,CASE-E003-018,Analyst-2,Reviewed authentication and endpoint telemetry.,Complete evidence package,1048
-INV-E003-018,E003,CASE-E003-019,Analyst-3,Reviewed authentication and endpoint telemetry.,Complete evidence package,999
-INV-E003-019,E003,CASE-E003-020,Analyst-4,Reviewed authentication and endpoint telemetry.,Complete evidence package,169
-INV-E003-020,E003,CASE-E003-021,Analyst-5,Correlated alert with firewall and identity logs.,Complete evidence package,1130
-INV-E003-021,E003,CASE-E003-022,Analyst-6,Reviewed authentication and endpoint telemetry.,Complete evidence package,894
-INV-E003-022,E003,CASE-E003-023,Analyst-7,Checked related events and documented root cause.,Complete evidence package,456
-INV-E003-023,E003,CASE-E003-024,Analyst-8,Reviewed authentication and endpoint telemetry.,Complete evidence package,1359
-INV-E003-024,E003,CASE-E003-025,Analyst-1,Correlated alert with firewall and identity logs.,Complete evidence package,1031
-INV-E003-025,E003,CASE-E003-026,Analyst-2,Validated affected asset and analyst observations.,Complete evidence package,4
-INV-E003-026,E003,CASE-E003-027,Analyst-3,Correlated alert with firewall and identity logs.,Complete evidence package,77
-INV-E003-027,E003,CASE-E003-028,Analyst-4,Checked related events and documented root cause.,Complete evidence package,981
-INV-E003-028,E003,CASE-E003-029,Analyst-5,Validated affected asset and analyst observations.,Complete evidence package,967
-INV-E003-029,E003,CASE-E003-030,Analyst-6,Checked related events and documented root cause.,Complete evidence package,852
-INV-E003-030,E003,CASE-E003-031,Analyst-7,Validated affected asset and analyst observations.,Complete evidence package,927
-INV-E003-031,E003,CASE-E003-032,Analyst-8,Reviewed authentication and endpoint telemetry.,Complete evidence package,399
-INV-E003-032,E003,CASE-E003-033,Analyst-1,Checked related events and documented root cause.,Complete evidence package,962
-INV-E003-033,E003,CASE-E003-034,Analyst-2,Validated affected asset and analyst observations.,Complete evidence package,106
-INV-E003-034,E003,CASE-E003-035,Analyst-3,Checked related events and documented root cause.,Complete evidence package,555
-INV-E003-035,E003,CASE-E003-037,Analyst-5,Reviewed authentication and endpoint telemetry.,Complete evidence package,789
-INV-E003-036,E003,CASE-E003-038,Analyst-6,Validated affected asset and analyst observations.,Complete evidence package,946
-INV-E003-037,E003,CASE-E003-039,Analyst-7,Correlated alert with firewall and identity logs.,Complete evidence package,1114
-INV-E003-038,E003,CASE-E003-040,Analyst-8,Checked related events and documented root cause.,Complete evidence package,770
-INV-E003-039,E003,CASE-E003-041,Analyst-1,Reviewed authentication and endpoint telemetry.,Complete evidence package,1251
-INV-E003-040,E003,CASE-E003-042,Analyst-2,Checked related events and documented root cause.,Complete evidence package,852
-INV-E003-041,E003,CASE-E003-043,Analyst-3,Validated affected asset and analyst observations.,Complete evidence package,488
-INV-E003-042,E003,CASE-E003-044,Analyst-4,Checked related events and documented root cause.,Complete evidence package,35
-INV-E003-043,E003,CASE-E003-045,Analyst-5,Correlated alert with firewall and identity logs.,Complete evidence package,6
-INV-E003-044,E003,CASE-E003-046,Analyst-6,Checked related events and documented root cause.,Complete evidence package,559
-INV-E003-045,E003,CASE-E003-047,Analyst-7,Validated affected asset and analyst observations.,Complete evidence package,787
-INV-E003-046,E003,CASE-E003-048,Analyst-8,Correlated alert with firewall and identity logs.,Complete evidence package,323
-INV-E003-047,E003,CASE-E003-049,Analyst-1,Validated affected asset and analyst observations.,Complete evidence package,972
-INV-E003-048,E003,CASE-E003-050,Analyst-2,Checked related events and documented root cause.,Complete evidence package,1123
-INV-E003-049,E003,CASE-E003-051,Analyst-3,Checked related events and documented root cause.,Complete evidence package,429
-INV-E003-050,E003,CASE-E003-052,Analyst-4,Correlated alert with firewall and identity logs.,Complete evidence package,355
-INV-E003-051,E003,CASE-E003-053,Analyst-5,Checked related events and documented root cause.,Complete evidence package,458
-INV-E003-052,E003,CASE-E003-054,Analyst-6,Checked related events and documented root cause.,Complete evidence package,75
-INV-E003-053,E003,CASE-E003-055,Analyst-7,Validated affected asset and analyst observations.,Complete evidence package,379
-INV-E003-054,E003,CASE-E003-056,Analyst-8,Validated affected asset and analyst observations.,Complete evidence package,1227
-INV-E003-055,E003,CASE-E003-057,Analyst-1,Correlated alert with firewall and identity logs.,Complete evidence package,856
-INV-E003-056,E003,CASE-E003-058,Analyst-2,Checked related events and documented root cause.,Complete evidence package,1061
-INV-E003-057,E003,CASE-E003-059,Analyst-3,Checked related events and documented root cause.,Complete evidence package,374
-INV-E003-058,E003,CASE-E003-060,Analyst-4,Reviewed authentication and endpoint telemetry.,Complete evidence package,1333
-INV-E003-059,E003,CASE-E003-061,Analyst-5,Correlated alert with firewall and identity logs.,Complete evidence package,86
-INV-E003-060,E003,CASE-E003-062,Analyst-6,Correlated alert with firewall and identity logs.,Complete evidence package,2
-INV-E003-061,E003,CASE-E003-063,Analyst-7,Reviewed authentication and endpoint telemetry.,Complete evidence package,255
-INV-E003-062,E003,CASE-E003-064,Analyst-8,Checked related events and documented root cause.,Complete evidence package,1276
-INV-E003-063,E003,CASE-E003-065,Analyst-1,Reviewed authentication and endpoint telemetry.,Complete evidence package,374
-INV-E003-064,E003,CASE-E003-066,Analyst-2,Reviewed authentication and endpoint telemetry.,Complete evidence package,936
-INV-E003-065,E003,CASE-E003-067,Analyst-3,Validated affected asset and analyst observations.,Complete evidence package,1034
-INV-E003-066,E003,CASE-E003-068,Analyst-4,Correlated alert with firewall and identity logs.,Complete evidence package,408
-INV-E003-067,E003,CASE-E003-069,Analyst-5,Reviewed authentication and endpoint telemetry.,Complete evidence package,152
-INV-E003-068,E003,CASE-E003-070,Analyst-6,Reviewed authentication and endpoint telemetry.,Complete evidence package,75
-INV-E003-069,E003,CASE-E003-072,Analyst-8,Checked related events and documented root cause.,Complete evidence package,947
-INV-E003-070,E003,CASE-E003-073,Analyst-1,Checked related events and documented root cause.,Complete evidence package,680
-INV-E003-071,E003,CASE-E003-074,Analyst-2,Validated affected asset and analyst observations.,Complete evidence package,865
-INV-E003-072,E003,CASE-E003-075,Analyst-3,Validated affected asset and analyst observations.,Complete evidence package,97
-INV-E003-073,E003,CASE-E003-076,Analyst-4,Reviewed authentication and endpoint telemetry.,Complete evidence package,134
-INV-E003-074,E003,CASE-E003-077,Analyst-5,Reviewed authentication and endpoint telemetry.,Complete evidence package,519
-INV-E003-075,E003,CASE-E003-078,Analyst-6,Correlated alert with firewall and identity logs.,Complete evidence package,855
-INV-E003-076,E003,CASE-E003-079,Analyst-7,Checked related events and documented root cause.,Complete evidence package,110
-INV-E003-077,E003,CASE-E003-080,Analyst-8,Reviewed authentication and endpoint telemetry.,Complete evidence package,842
-INV-E003-078,E003,CASE-E003-081,Analyst-1,Validated affected asset and analyst observations.,Complete evidence package,1040
-INV-E003-079,E003,CASE-E003-082,Analyst-2,Validated affected asset and analyst observations.,Complete evidence package,84
-INV-E003-080,E003,CASE-E003-083,Analyst-3,Reviewed authentication and endpoint telemetry.,Complete evidence package,3
-INV-E003-081,E003,CASE-E003-084,Analyst-4,Checked related events and documented root cause.,Complete evidence package,524
-INV-E003-082,E003,CASE-E003-085,Analyst-5,Reviewed authentication and endpoint telemetry.,Complete evidence package,223
-INV-E003-083,E003,CASE-E003-086,Analyst-6,Correlated alert with firewall and identity logs.,Complete evidence package,826
-INV-E003-084,E003,CASE-E003-087,Analyst-7,Correlated alert with firewall and identity logs.,Complete evidence package,1001
-INV-E003-085,E003,CASE-E003-088,Analyst-8,Reviewed authentication and endpoint telemetry.,Complete evidence package,420
-INV-E003-086,E003,CASE-E003-089,Analyst-1,Correlated alert with firewall and identity logs.,Complete evidence package,367
-INV-E003-087,E003,CASE-E003-090,Analyst-2,Correlated alert with firewall and identity logs.,Complete evidence package,711
-INV-E003-088,E003,CASE-E003-091,Analyst-3,Reviewed authentication and endpoint telemetry.,Complete evidence package,1304
-INV-E003-089,E003,CASE-E003-092,Analyst-4,Reviewed authentication and endpoint telemetry.,Complete evidence package,267
-INV-E003-090,E003,CASE-E003-093,Analyst-5,Correlated alert with firewall and identity logs.,Complete evidence package,739
-INV-E003-091,E003,CASE-E003-094,Analyst-6,Validated affected asset and analyst observations.,Complete evidence package,283
-INV-E003-092,E003,CASE-E003-095,Analyst-7,Correlated alert with firewall and identity logs.,Complete evidence package,1247
-INV-E003-093,E003,CASE-E003-096,Analyst-8,Correlated alert with firewall and identity logs.,Complete evidence package,136
-INV-E003-094,E003,CASE-E003-097,Analyst-1,Checked related events and documented root cause.,Complete evidence package,625
+investigation_id,case_id,started_at,completed_at,analyst_id,analyst_notes,evidence_present,evidence_count,root_cause_identified
+INV-E003-001,CASE-E003-001,,,Analyst-1,Validated affected asset and analyst observations.,true,,
+INV-E003-002,CASE-E003-002,,,Analyst-2,Checked related events and documented root cause.,true,,
+INV-E003-003,CASE-E003-003,,,Analyst-3,Validated affected asset and analyst observations.,true,,
+INV-E003-004,CASE-E003-004,,,Analyst-4,Checked related events and documented root cause.,true,,
+INV-E003-005,CASE-E003-005,,,Analyst-5,Correlated alert with firewall and identity logs.,true,,
+INV-E003-006,CASE-E003-006,,,Analyst-6,Validated affected asset and analyst observations.,true,,
+INV-E003-007,CASE-E003-007,,,Analyst-7,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-008,CASE-E003-008,,,Analyst-8,Validated affected asset and analyst observations.,true,,
+INV-E003-009,CASE-E003-009,,,Analyst-1,Validated affected asset and analyst observations.,true,,
+INV-E003-010,CASE-E003-010,,,Analyst-2,Validated affected asset and analyst observations.,true,,
+INV-E003-011,CASE-E003-011,,,Analyst-3,Reviewed authentication and endpoint telemetry.,false,,
+INV-E003-012,CASE-E003-012,,,Analyst-4,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-013,CASE-E003-013,,,Analyst-5,Checked related events and documented root cause.,true,,
+INV-E003-014,CASE-E003-014,,,Analyst-6,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-015,CASE-E003-015,,,Analyst-7,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-016,CASE-E003-017,,,Analyst-1,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-017,CASE-E003-018,,,Analyst-2,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-018,CASE-E003-019,,,Analyst-3,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-019,CASE-E003-020,,,Analyst-4,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-020,CASE-E003-021,,,Analyst-5,Correlated alert with firewall and identity logs.,true,,
+INV-E003-021,CASE-E003-022,,,Analyst-6,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-022,CASE-E003-023,,,Analyst-7,Checked related events and documented root cause.,true,,
+INV-E003-023,CASE-E003-024,,,Analyst-8,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-024,CASE-E003-025,,,Analyst-1,Correlated alert with firewall and identity logs.,true,,
+INV-E003-025,CASE-E003-026,,,Analyst-2,Validated affected asset and analyst observations.,true,,
+INV-E003-026,CASE-E003-027,,,Analyst-3,Correlated alert with firewall and identity logs.,true,,
+INV-E003-027,CASE-E003-028,,,Analyst-4,Checked related events and documented root cause.,true,,
+INV-E003-028,CASE-E003-029,,,Analyst-5,Validated affected asset and analyst observations.,true,,
+INV-E003-029,CASE-E003-030,,,Analyst-6,Checked related events and documented root cause.,true,,
+INV-E003-030,CASE-E003-031,,,Analyst-7,Validated affected asset and analyst observations.,true,,
+INV-E003-031,CASE-E003-032,,,Analyst-8,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-032,CASE-E003-033,,,Analyst-1,Checked related events and documented root cause.,true,,
+INV-E003-033,CASE-E003-034,,,Analyst-2,Validated affected asset and analyst observations.,true,,
+INV-E003-034,CASE-E003-035,,,Analyst-3,Checked related events and documented root cause.,true,,
+INV-E003-035,CASE-E003-037,,,Analyst-5,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-036,CASE-E003-038,,,Analyst-6,Validated affected asset and analyst observations.,true,,
+INV-E003-037,CASE-E003-039,,,Analyst-7,Correlated alert with firewall and identity logs.,true,,
+INV-E003-038,CASE-E003-040,,,Analyst-8,Checked related events and documented root cause.,true,,
+INV-E003-039,CASE-E003-041,,,Analyst-1,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-040,CASE-E003-042,,,Analyst-2,Checked related events and documented root cause.,true,,
+INV-E003-041,CASE-E003-043,,,Analyst-3,Validated affected asset and analyst observations.,true,,
+INV-E003-042,CASE-E003-044,,,Analyst-4,Checked related events and documented root cause.,true,,
+INV-E003-043,CASE-E003-045,,,Analyst-5,Correlated alert with firewall and identity logs.,true,,
+INV-E003-044,CASE-E003-046,,,Analyst-6,Checked related events and documented root cause.,true,,
+INV-E003-045,CASE-E003-047,,,Analyst-7,Validated affected asset and analyst observations.,true,,
+INV-E003-046,CASE-E003-048,,,Analyst-8,Correlated alert with firewall and identity logs.,true,,
+INV-E003-047,CASE-E003-049,,,Analyst-1,Validated affected asset and analyst observations.,true,,
+INV-E003-048,CASE-E003-050,,,Analyst-2,Checked related events and documented root cause.,true,,
+INV-E003-049,CASE-E003-051,,,Analyst-3,Checked related events and documented root cause.,true,,
+INV-E003-050,CASE-E003-052,,,Analyst-4,Correlated alert with firewall and identity logs.,true,,
+INV-E003-051,CASE-E003-053,,,Analyst-5,Checked related events and documented root cause.,true,,
+INV-E003-052,CASE-E003-054,,,Analyst-6,Checked related events and documented root cause.,true,,
+INV-E003-053,CASE-E003-055,,,Analyst-7,Validated affected asset and analyst observations.,true,,
+INV-E003-054,CASE-E003-056,,,Analyst-8,Validated affected asset and analyst observations.,true,,
+INV-E003-055,CASE-E003-057,,,Analyst-1,Correlated alert with firewall and identity logs.,true,,
+INV-E003-056,CASE-E003-058,,,Analyst-2,Checked related events and documented root cause.,true,,
+INV-E003-057,CASE-E003-059,,,Analyst-3,Checked related events and documented root cause.,true,,
+INV-E003-058,CASE-E003-060,,,Analyst-4,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-059,CASE-E003-061,,,Analyst-5,Correlated alert with firewall and identity logs.,true,,
+INV-E003-060,CASE-E003-062,,,Analyst-6,Correlated alert with firewall and identity logs.,true,,
+INV-E003-061,CASE-E003-063,,,Analyst-7,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-062,CASE-E003-064,,,Analyst-8,Checked related events and documented root cause.,true,,
+INV-E003-063,CASE-E003-065,,,Analyst-1,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-064,CASE-E003-066,,,Analyst-2,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-065,CASE-E003-067,,,Analyst-3,Validated affected asset and analyst observations.,true,,
+INV-E003-066,CASE-E003-068,,,Analyst-4,Correlated alert with firewall and identity logs.,true,,
+INV-E003-067,CASE-E003-069,,,Analyst-5,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-068,CASE-E003-070,,,Analyst-6,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-069,CASE-E003-072,,,Analyst-8,Checked related events and documented root cause.,true,,
+INV-E003-070,CASE-E003-073,,,Analyst-1,Checked related events and documented root cause.,true,,
+INV-E003-071,CASE-E003-074,,,Analyst-2,Validated affected asset and analyst observations.,true,,
+INV-E003-072,CASE-E003-075,,,Analyst-3,Validated affected asset and analyst observations.,true,,
+INV-E003-073,CASE-E003-076,,,Analyst-4,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-074,CASE-E003-077,,,Analyst-5,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-075,CASE-E003-078,,,Analyst-6,Correlated alert with firewall and identity logs.,true,,
+INV-E003-076,CASE-E003-079,,,Analyst-7,Checked related events and documented root cause.,true,,
+INV-E003-077,CASE-E003-080,,,Analyst-8,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-078,CASE-E003-081,,,Analyst-1,Validated affected asset and analyst observations.,true,,
+INV-E003-079,CASE-E003-082,,,Analyst-2,Validated affected asset and analyst observations.,true,,
+INV-E003-080,CASE-E003-083,,,Analyst-3,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-081,CASE-E003-084,,,Analyst-4,Checked related events and documented root cause.,true,,
+INV-E003-082,CASE-E003-085,,,Analyst-5,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-083,CASE-E003-086,,,Analyst-6,Correlated alert with firewall and identity logs.,true,,
+INV-E003-084,CASE-E003-087,,,Analyst-7,Correlated alert with firewall and identity logs.,true,,
+INV-E003-085,CASE-E003-088,,,Analyst-8,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-086,CASE-E003-089,,,Analyst-1,Correlated alert with firewall and identity logs.,true,,
+INV-E003-087,CASE-E003-090,,,Analyst-2,Correlated alert with firewall and identity logs.,true,,
+INV-E003-088,CASE-E003-091,,,Analyst-3,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-089,CASE-E003-092,,,Analyst-4,Reviewed authentication and endpoint telemetry.,true,,
+INV-E003-090,CASE-E003-093,,,Analyst-5,Correlated alert with firewall and identity logs.,true,,
+INV-E003-091,CASE-E003-094,,,Analyst-6,Validated affected asset and analyst observations.,true,,
+INV-E003-092,CASE-E003-095,,,Analyst-7,Correlated alert with firewall and identity logs.,true,,
+INV-E003-093,CASE-E003-096,,,Analyst-8,Correlated alert with firewall and identity logs.,true,,
+INV-E003-094,CASE-E003-097,,,Analyst-1,Checked related events and documented root cause.,true,,

@@ -18,7 +18,7 @@ E005-ESC0017,E005-C0017,True,L2,2026-08-02 18:57:00,SOC_L2,Requires deeper foren
 E005-ESC0018,E005-C0018,True,L3,2026-08-02 20:57:00,SOC_L3,Requires deeper forensic analysis
 E005-ESC0019,E005-C0019,True,L3,2026-08-02 23:09:00,SOC_L3,Critical asset involved
 E005-ESC0020,E005-C0020,True,L2,2026-08-03 01:08:00,SOC_L2,Requires deeper forensic analysis
-E005-ESC0021,E005-C0021,True,L3,2026-08-03 02:11:40,SOC_L3,Requires deeper forensic analysis
+E005-ESC0021,E005-C0021,True,L3,2026-08-03 02:40:00,SOC_L3,Requires deeper forensic analysis
 E005-ESC0022,E005-C0022,True,L2,2026-08-03 04:45:00,SOC_L2,Cross-team verification needed
 E005-ESC0023,E005-C0023,True,L2,2026-08-03 07:09:00,SOC_L2,Critical asset involved
 E005-ESC0024,E005-C0024,True,L2,2026-08-03 08:36:00,SOC_L2,Requires deeper forensic analysis
@@ -38,7 +38,7 @@ E005-ESC0037,E005-C0037,True,L3,2026-08-04 10:59:00,SOC_L3,Requires deeper foren
 E005-ESC0038,E005-C0038,True,L2,2026-08-04 12:47:00,SOC_L2,Requires deeper forensic analysis
 E005-ESC0039,E005-C0039,True,L2,2026-08-04 14:50:00,SOC_L2,Cross-team verification needed
 E005-ESC0040,E005-C0040,True,L3,2026-08-04 17:01:00,SOC_L3,Critical asset involved
-E005-ESC0041,E005-C0041,True,L3,2026-08-04 18:29:50,SOC_L3,Critical asset involved
+E005-ESC0041,E005-C0041,True,L3,2026-08-04 18:56:00,SOC_L3,Critical asset involved
 E005-ESC0042,E005-C0042,True,L2,2026-08-04 20:42:00,SOC_L2,Critical asset involved
 E005-ESC0043,E005-C0043,True,L2,2026-08-04 22:21:00,SOC_L2,Critical asset involved
 E005-ESC0044,E005-C0044,True,L2,2026-08-05 00:52:00,SOC_L2,Cross-team verification needed

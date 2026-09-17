@@ -1,0 +1,455 @@
+Continue my existing ShadowWatch project.
+
+CURRENT COMPLETED CORE WORK
+===========================
+
+R001 - MISSING_INVESTIGATION
+R002 - MISSING_EVIDENCE
+R003 - MISSING_ESCALATION
+R004 - FAST_CRITICAL_CLOSURE
+R005 - TELEMETRY_BLIND_SPOT
+
+Also completed:
+- Expected-vs-Observed Workflow Auditor
+- R005 ground-truth validation
+- R005 unit tests
+
+All completed work has been committed and pushed.
+
+DO NOT modify working R001-R005 or the Workflow Auditor unless
+required for a genuine integration bug.
+
+DO NOT implement:
+- R006-R009 Behaviour Analytics (Devenanda)
+- Risk scoring / peer benchmarking (Rajeesh)
+- Backend/API infrastructure owned by Deepa
+- Frontend owned by Adarsh
+
+==================================================
+NEXT MODULE
+CROSS-SOURCE CONTRADICTION ENGINE
+==================================================
+
+ShadowWatch currently detects missing evidence.
+
+Now it must also detect cases where DIFFERENT SOC records disagree
+with each other.
+
+This is important because supervisory assessment should not trust
+one table/record in isolation.
+
+Example concept:
+
+CASE RECORD:
+Status = CLOSED
+
+INVESTIGATION RECORD:
+Investigation not completed
+
+These records contradict each other.
+
+Another example:
+
+CASE:
+Closed at 10:05
+
+INVESTIGATION:
+Completed at 10:30
+
+The investigation apparently finished AFTER the case was already
+closed.
+
+This should be surfaced for supervisory review.
+
+==================================================
+STEP 1 - INSPECT ACTUAL DATA
+==================================================
+
+Before writing code inspect:
+
+database/schema.sql
+backend/models.py
+backend/schemas.py
+
+data/alpha_bank/alerts.csv
+data/alpha_bank/cases.csv
+data/alpha_bank/investigations.csv
+data/alpha_bank/escalations.csv
+data/alpha_bank/telemetry.csv
+
+Also inspect existing services:
+
+backend/services/rule_engine.py
+backend/services/negative_space_engine.py
+backend/services/workflow_auditor.py
+
+DO NOT invent columns.
+
+First determine which contradictions are actually detectable using
+the existing schema.
+
+Print/explain the available cross-source relationships before
+implementing rules.
+
+==================================================
+CONTRADICTION CATEGORIES
+==================================================
+
+Implement only contradictions supported by the real data.
+
+Potential examples:
+
+C001 - CASE_CLOSED_BEFORE_INVESTIGATION_COMPLETED
+
+Condition:
+
+case.closed_at < investigation.completed_at
+
+Meaning:
+
+The case record says the case was closed before its investigation
+was completed.
+
+--------------------------------------------------
+
+C002 - INVESTIGATION_BEFORE_CASE_OPENED
+
+Condition:
+
+investigation.started_at < case.opened_at
+
+Meaning:
+
+Investigation timestamps indicate activity before the associated
+case existed.
+
+--------------------------------------------------
+
+C003 - ESCALATION_AFTER_CASE_CLOSED
+
+If supported:
+
+escalation.escalated_at > case.closed_at
+
+Meaning:
+
+The escalation was recorded after the case was already closed.
+
+--------------------------------------------------
+
+C004 - ALERT_AFTER_CASE_OPENED
+
+If supported:
+
+alert.timestamp > case.opened_at
+
+Meaning:
+
+The case appears to have been opened before the alert that created
+it.
+
+--------------------------------------------------
+
+C005 - CLOSED_CASE_WITH_INCOMPLETE_INVESTIGATION
+
+ONLY implement this if the schema contains a reliable investigation
+completion/status field.
+
+Do not infer unsupported status values.
+
+==================================================
+IMPORTANT
+==================================================
+
+Do NOT force all C001-C005 to exist.
+
+Inspect the actual schema.
+
+If only C001-C004 are supported, implement only those.
+
+If a rule cannot be evaluated reliably, document:
+
+SKIPPED - insufficient source evidence
+
+instead of inventing data.
+
+==================================================
+NEW SERVICE
+==================================================
+
+Create:
+
+backend/services/contradiction_engine.py
+
+Main function conceptually:
+
+detect_cross_source_contradictions()
+
+Prefer smaller helper functions where appropriate.
+
+The engine should compare linked:
+
+alerts
+  ↓
+cases
+  ↓
+investigations
+  ↓
+escalations
+
+Use PostgreSQL / existing project database layer.
+
+Do not read ground_truth.csv during detection.
+
+==================================================
+FINDING FORMAT
+==================================================
+
+Use a structure compatible with the rest of ShadowWatch.
+
+Example:
+
+{
+    "rule_id": "C001",
+    "problem_type": "CROSS_SOURCE_CONTRADICTION",
+    "contradiction_type":
+        "CASE_CLOSED_BEFORE_INVESTIGATION_COMPLETED",
+
+    "entity_id": "E001",
+    "case_id": "E001-C0042",
+    "alert_id": "E001-A0091",
+
+    "severity": "HIGH",
+
+    "reason":
+        "Case E001-C0042 was closed at 10:05, but its linked
+         investigation completed at 10:30.",
+
+    "evidence": {
+        "case_closed_at": "...",
+        "investigation_completed_at": "..."
+    }
+}
+
+Use actual fields available in the repository.
+
+==================================================
+EXPLAINABILITY
+==================================================
+
+Every contradiction MUST answer:
+
+1. Which two records disagree?
+2. Which fields caused the contradiction?
+3. What were the actual values?
+4. Why should a supervisor inspect it?
+
+Do not return:
+
+"Anomaly score = 0.94"
+
+without evidence.
+
+This engine should be deterministic and explainable.
+
+==================================================
+SEVERITY
+==================================================
+
+Do NOT implement Rajeesh's risk score.
+
+For finding severity, use simple configurable prototype mappings.
+
+For example:
+
+C001 HIGH
+C002 HIGH
+C003 HIGH
+C004 HIGH
+
+But inspect existing project conventions first.
+
+Keep mappings in one place so they can be changed later.
+
+==================================================
+TEST SCRIPT
+==================================================
+
+Create:
+
+backend/test_contradiction_engine.py
+
+Running:
+
+python3 test_contradiction_engine.py
+
+should print something like:
+
+========================================
+ SHADOWWATCH CONTRADICTION ENGINE
+========================================
+
+Cross-source contradictions detected: X
+
+----------------------------------------
+
+Rule: C001
+Entity: E001
+Case: E001-Cxxxx
+
+Contradiction:
+CASE_CLOSED_BEFORE_INVESTIGATION_COMPLETED
+
+Evidence:
+
+Case closed:
+2026-08-12 10:05:00
+
+Investigation completed:
+2026-08-12 10:30:00
+
+Reason:
+The case was marked closed before its linked investigation
+was completed.
+
+----------------------------------------
+
+========================================
+ ANALYSIS COMPLETE
+========================================
+
+==================================================
+UNIT TESTS
+==================================================
+
+Create appropriate unit tests.
+
+Test at minimum:
+
+1. Valid chronological workflow → no contradiction.
+
+2. Case closed before investigation completed → C001.
+
+3. Investigation started before case opened → C002.
+
+4. Escalation after case closure → C003 if supported.
+
+5. Case opened before alert timestamp → C004 if supported.
+
+6. Multiple contradictions in one case.
+
+7. NULL closed_at.
+
+8. NULL investigation timestamps.
+
+9. Missing escalation.
+
+10. Unknown/missing optional records.
+
+11. Boundary condition where timestamps are equal.
+
+The engine must not crash on incomplete LEFT JOIN data.
+
+==================================================
+IMPORTANT DATASET ISSUE
+==================================================
+
+Our Alpha Bank generator was originally validated for chronological
+consistency.
+
+Therefore the current dataset may contain ZERO contradiction cases.
+
+ZERO detections is NOT automatically a bug.
+
+Do not weaken rules just to produce demo findings.
+
+Do not modify operational records automatically.
+
+If Alpha Bank contains no contradictions:
+
+1. Report that clearly.
+2. Prove the engine works using unit tests with synthetic in-memory
+   test cases/fixtures.
+3. Tell me what type of contradiction scenarios should later be
+   added through the separate scenario injector.
+4. Do NOT manually corrupt the production dataset.
+
+==================================================
+GROUND TRUTH
+==================================================
+
+Check ground_truth.csv only AFTER detection logic is complete.
+
+Determine whether contradiction scenarios currently exist.
+
+If no contradiction ground-truth labels exist, say:
+
+"Ground-truth validation for cross-source contradictions is not
+currently possible because the dataset contains no labelled
+contradiction scenarios."
+
+Do NOT fabricate Precision/Recall/F1.
+
+Later the dataset generator/scenario injector can be extended with
+specific contradiction scenarios.
+
+==================================================
+INTEGRATION
+==================================================
+
+The architecture should become:
+
+Operational Records
+       ↓
+ ┌─────┼──────────────┐
+ ↓     ↓              ↓
+R001-4 R005       Contradictions
+ ↓     ↓              ↓
+Workflow Auditor      │
+ └─────┴──────┬───────┘
+              ↓
+       Common Findings
+              ↓
+       Risk Intelligence
+              ↓
+      Supervisor Application
+
+The contradiction engine should therefore return findings compatible
+with the common findings architecture.
+
+==================================================
+DO NOT
+==================================================
+
+- Do not modify R001-R005 unnecessarily.
+- Do not modify Workflow Auditor unnecessarily.
+- Do not implement behavioural analytics.
+- Do not implement final risk scoring.
+- Do not build frontend.
+- Do not use an LLM.
+- Do not use cloud APIs.
+- Do not fabricate contradiction records.
+- Do not use ground truth during detection.
+- Do not invent schema fields.
+- Do not change database schema unless absolutely required and
+  explicitly explain why first.
+
+==================================================
+WHEN FINISHED
+==================================================
+
+Show me:
+
+1. Files inspected.
+2. Supported contradiction rules discovered from the actual schema.
+3. Unsupported rules and why.
+4. Files created.
+5. Files modified.
+6. Detection results on Alpha Bank.
+7. Unit-test results.
+8. Whether contradiction ground truth currently exists.
+9. Exact terminal commands to reproduce everything.
+
+STOP after this module.
+
+Do not automatically implement another ShadowWatch feature.

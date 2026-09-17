@@ -1,48 +1,6 @@
+"""Compatibility command using the validated organization importer."""
 from pathlib import Path
-from services.data_ingestion import import_csv
+from import_data import main
 
-
-# ============================================================
-# METRO TELECOM DATA IMPORTER
-# ============================================================
-
-DATA_DIR = Path("../data/metro_telecom")
-
-FILES = [
-    ("entities.csv", "entities"),
-    ("assets.csv", "assets"),
-    ("alerts.csv", "alerts"),
-    ("cases.csv", "cases"),
-    ("investigations.csv", "investigations"),
-    ("escalations.csv", "escalations"),
-    ("telemetry.csv", "telemetry"),
-]
-
-
-print("\n" + "=" * 60)
-print("        METRO TELECOM DATA INGESTION")
-print("=" * 60)
-
-total = 0
-
-for filename, table in FILES:
-
-    path = DATA_DIR / filename
-
-    if not path.exists():
-        print(f"\nERROR: File not found -> {path}")
-        continue
-
-    try:
-        count = import_csv(path, table)
-        total += count
-
-    except Exception as e:
-        print(f"\nERROR importing {filename}")
-        print(f"Reason: {e}")
-
-
-print("\n" + "=" * 60)
-print(f"TOTAL METRO TELECOM ROWS IMPORTED: {total}")
-print("=" * 60)
-print("\nMetro Telecom ingestion complete.")
+if __name__ == '__main__':
+    raise SystemExit(main([str(Path(__file__).resolve().parents[1] / 'data/metro_telecom')]))

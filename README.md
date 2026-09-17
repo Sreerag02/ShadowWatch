@@ -17,13 +17,16 @@ ShadowWatch is an offline supervisory analytics platform for SOC assessment.
 cd backend
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r ../requirements.txt
 
 Create .env from .env.example.
 
 Run:
 
 uvicorn main:app --reload
+
+API contracts, import commands and tests: [Backend handoff](docs/backend_api.md).
+Workplan verification: [Deepa backend checklist](docs/deepa_backend_verification.md).
 
 ### Frontend
 

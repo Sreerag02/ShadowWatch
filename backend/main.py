@@ -1,51 +1,17 @@
-'''
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from sqlalchemy.exc import SQLAlchemyError
+from routes import cases, entities, telemetry, findings, system
 
-from database import SessionLocal
-from models import Entity
+app = FastAPI(title='ShadowWatch API')
 
-
-app = FastAPI(title="ShadowWatch API")
-
-
-# Database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-@app.get("/")
+@app.get('/')
 def root():
-    return {
-        "message": "ShadowWatch backend is running"
-    }
+    return {'message': 'ShadowWatch backend is running'}
 
+@app.exception_handler(SQLAlchemyError)
+async def database_error(request: Request, exc: SQLAlchemyError):
+    return JSONResponse(status_code=503, content={'detail': 'Database operation unavailable'})
 
-@app.get("/entities")
-def get_entities(db: Session = Depends(get_db)):
-    entities = db.query(Entity).all()
-
-    return entities
-    '''
-
-# re written by Deepa
-
-from fastapi import FastAPI
-from routes import cases, entities, telemetry
-
-app = FastAPI(title="ShadowWatch API")
-
-@app.get("/")
-def root():
-    return {
-        "message": "ShadowWatch backend is running"
-    }
-
-# Register the modular endpoints
-app.include_router(entities.router)
-app.include_router(cases.router)
-app.include_router(telemetry.router)
+for router in (entities.router, cases.router, telemetry.router, findings.router, system.router):
+    app.include_router(router)

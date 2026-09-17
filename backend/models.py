@@ -40,7 +40,7 @@ class Alert(Base):
     status = Column(String(30))
     description = Column(Text)
     
-    case = relationship("Case", back_populates="alert", uselist=False)
+    cases = relationship("Case", back_populates="alert")
 
 class Case(Base):
     __tablename__ = "cases"
@@ -55,9 +55,9 @@ class Case(Base):
     closure_reason = Column(Text)
     
     entity = relationship("Entity", back_populates="cases")
-    alert = relationship("Alert", back_populates="case")
-    investigation = relationship("Investigation", back_populates="case", uselist=False)
-    escalation = relationship("Escalation", back_populates="case", uselist=False)
+    alert = relationship("Alert", back_populates="cases")
+    investigations = relationship("Investigation", back_populates="case", order_by="Investigation.investigation_id")
+    escalations = relationship("Escalation", back_populates="case", order_by="Escalation.escalation_id")
 
 class Investigation(Base):
     __tablename__ = "investigations"
@@ -71,7 +71,7 @@ class Investigation(Base):
     evidence_count = Column(Integer, default=0)
     root_cause_identified = Column(Boolean, default=False)
     
-    case = relationship("Case", back_populates="investigation")
+    case = relationship("Case", back_populates="investigations")
 
 class Escalation(Base):
     __tablename__ = "escalations"
@@ -83,7 +83,7 @@ class Escalation(Base):
     escalated_to = Column(String(100))
     reason = Column(Text)
     
-    case = relationship("Case", back_populates="escalation")
+    case = relationship("Case", back_populates="escalations")
 
 class Telemetry(Base):
     __tablename__ = "telemetry"

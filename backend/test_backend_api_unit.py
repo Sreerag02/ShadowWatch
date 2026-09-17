@@ -146,6 +146,31 @@ class BackendContractTests(unittest.TestCase):
         self.assertEqual(code,503)
         self.assertNotIn('secret',str(body))
 
+    def test_behaviour_rules_in_shared_and_case_feeds(self):
+        from models import Alert, Case, Investigation
+        start = datetime(2026, 2, 1)
+        note = 'Reviewed authentication records and confirmed unusual access from external networks'
+        with self.engine.begin() as conn:
+            for i in range(7):
+                when = start + timedelta(days=i)
+                conn.execute(Alert.__table__.insert().values(alert_id=f'BA{i}', entity_id='E9',
+                    asset_id='AS9', timestamp=when, severity='HIGH', category='ACCESS'))
+                conn.execute(Case.__table__.insert().values(case_id=f'BC{i}', alert_id=f'BA{i}',
+                    entity_id='E9', opened_at=when, status='OPEN'))
+                conn.execute(Investigation.__table__.insert().values(investigation_id=f'BI{i}',
+                    case_id=f'BC{i}', started_at=when,
+                    completed_at=when + timedelta(minutes=1 if i == 0 else 60), analyst_notes=note))
+        code, findings = self.request('/findings')
+        self.assertEqual(code, 200)
+        self.assertEqual(findings, self.request('/entities/E9/findings')[1])
+        affected = [f for f in findings if f['case_id'] == 'BC0']
+        self.assertEqual(affected, self.request('/cases/BC0')[1]['findings'])
+        behaviour = [f for f in affected if f['source'] == 'behaviour_analytics']
+        self.assertEqual({f['rule_id'] for f in behaviour}, {'R006','R007','R008','R009'})
+        self.assertTrue(all(f['assessment'] == 'REVIEW_REQUIRED' and f['evidence'] for f in behaviour))
+        self.assertEqual(len({f['finding_id'] for f in findings}), len(findings))
+        self.assertEqual(findings, self.request('/findings')[1])
+
     def test_bad_imports_rejected_before_writes(self):
         for mode in ('missing','severity','confidence','cross_entity','empty','duplicate'):
             report=fixture()

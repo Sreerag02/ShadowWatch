@@ -92,4 +92,6 @@ def get_findings(db, entity_id=None, case_id=None):
             severity=raw['severity'], source='contradiction_engine', assessment='REVIEW_REQUIRED',
             reason=raw['reason'], evidence={**raw['evidence'], 'source_records': raw['source_records'],
                                          'contradiction_type': raw['contradiction_type']})))
+    from services.behaviour_finding_service import get_behaviour_findings
+    findings.extend(_finish(f) for f in get_behaviour_findings(case_id=case_id, db=db, entity_id=entity_id))
     return sorted(findings, key=lambda f: (f['entity_id'], f.get('case_id') or '', f['rule_id'], f['finding_id']))

@@ -53,7 +53,14 @@ linked to that case; asset-level R005 findings belong in entity/global feeds.
 - `CONFIRMED_GAP`: a supported missing stage or valid fast closure.
 - `INSUFFICIENT_DATA`: a raw rule trigger that cannot establish a confirmed gap,
   for example R002 caused only by a NULL count.
-- `REVIEW_REQUIRED`: telemetry blind spots and timestamp contradictions.
+- `REVIEW_REQUIRED`: telemetry blind spots, timestamp contradictions, and R006–R009 behaviour indicators.
+
+Behaviour findings share the request database session and the same deterministic
+finding format. Investigation IDs and similarity/duration details are in
+`evidence`; R008 returns one finding per affected case with the complete window
+as evidence. Case requests retain the organization's full comparison baseline.
+See [behaviour analytics](behaviour_analytics.md) for prototype thresholds and
+[verification](devenanda_behaviour_verification.md) for accuracy limitations.
 
 Counts represent individual findings, not unique affected cases or a risk score.
 The feed retains rule-engine triggers, including unknown-data triggers. Workflow
@@ -93,7 +100,7 @@ source venv/bin/activate
 python3 import_data.py ../data/beta_bank
 python3 import_all_entities.py
 python3 verify_multi_entity_db.py
-python3 -m unittest test_backend_api_unit test_multi_entity_unit test_contradiction_engine_unit test_workflow_auditor_unit test_negative_space_unit
+python3 -m unittest test_behaviour_unit test_backend_api_unit test_multi_entity_unit test_contradiction_engine_unit test_workflow_auditor_unit test_negative_space_unit
 python3 test_backend_integration.py
 python3 test_multi_entity_analytics.py
 ```

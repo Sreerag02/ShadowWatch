@@ -1,196 +1,80 @@
-import pandas as pd
+"""Behaviour evaluation only; labels are loaded AFTER operational detection."""
+import argparse
+import json
 from pathlib import Path
+import pandas as pd
+from services.behaviour_analytics import analyze_behaviour
 
-from services.behaviour_analytics import (
-    detect_repetitive_investigations
-)
+DATA_DIR=Path(__file__).resolve().parents[1]/'data'
+LABELS={'R006':{'REPETITIVE_INVESTIGATION'},'R007':{'INVESTIGATION_DURATION_ANOMALY'},
+        'R008':{'REPEAT_INCIDENT','REPEAT_INCIDENT_PATTERN'},
+        'R009':{'COMBINED_SUSPICIOUS_INVESTIGATION_BEHAVIOUR'}}
 
+def metrics(expected,predicted):
+    tp,fp,fn=len(expected&predicted),len(predicted-expected),len(expected-predicted)
+    precision=tp/(tp+fp) if tp+fp else 0.0
+    recall=tp/(tp+fn) if tp+fn else 0.0
+    return dict(TP=tp,FP=fp,FN=fn,precision=precision,recall=recall,
+                f1=2*precision*recall/(precision+recall) if precision+recall else 0.0,
+                false_positives=sorted(predicted-expected),false_negatives=sorted(expected-predicted))
 
-# ============================================================
-# FILE PATHS
-# ============================================================
+def evaluate_rule(rule,findings,truth,cases,alerts):
+    rows=truth[truth['problem_type'].isin(LABELS[rule])]
+    positive=rows[rows['expected_detection'].astype(str).str.lower()=='true']
+    if positive.empty:
+        return dict(status='NOT_LABELLED',findings=len(findings),reason='No positive labels for this rule; precision/recall/F1 unavailable.')
+    case_asset={r.case_id:r.asset_id for r in cases[['case_id','alert_id']].merge(alerts[['alert_id','asset_id']],on='alert_id').itertuples()}
+    expected=set()
+    for row in positive.to_dict('records'):
+        if pd.notna(row.get('case_id')):
+            expected.add(('case',str(row['case_id'])))
+        elif pd.notna(row.get('asset_id')):
+            expected.add(('asset',str(row['asset_id'])))
+    units={key[0] for key in expected}
+    predicted=set()
+    for row in findings.to_dict('records'):
+        ids=[row['case_id']] if row.get('case_id') else row['case_ids'].split(', ')
+        if 'case' in units:
+            predicted.update(('case',case) for case in ids)
+        if 'asset' in units:
+            assets={row['asset_id']} if row.get('asset_id') else {case_asset.get(case) for case in ids}
+            predicted.update(('asset',asset) for asset in assets if asset)
+    if not expected:
+        return dict(status='UNMATCHABLE_LABELS',findings=len(findings))
+    return dict(status='EVALUATED',units=sorted(units),findings=len(findings),**metrics(expected,predicted))
 
-DATA_DIR = Path("../data/metro_telecom")
+def evaluate_folder(folder):
+    investigations=pd.read_csv(folder/'investigations.csv')
+    cases=pd.read_csv(folder/'cases.csv')
+    alerts=pd.read_csv(folder/'alerts.csv')
+    findings=analyze_behaviour(investigations,cases,alerts)
+    truth=pd.read_csv(folder/'ground_truth.csv')
+    return {rule:evaluate_rule(rule,frame,truth,cases,alerts) for rule,frame in findings.items()}
 
-INVESTIGATIONS_FILE = DATA_DIR / "investigations.csv"
-GROUND_TRUTH_FILE = DATA_DIR / "ground_truth.csv"
+def main(argv=None):
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--dataset',choices=sorted(p.name for p in DATA_DIR.iterdir() if p.is_dir()))
+    parser.add_argument('--rule',choices=sorted(LABELS))
+    parser.add_argument('--json',action='store_true')
+    args=parser.parse_args(argv)
+    folders=[DATA_DIR/args.dataset] if args.dataset else sorted(p for p in DATA_DIR.iterdir() if p.is_dir())
+    report={p.name:{r:v for r,v in evaluate_folder(p).items() if not args.rule or r==args.rule} for p in folders}
+    evaluated=[v for rules in report.values() for v in rules.values() if v['status']=='EVALUATED']
+    tp,fp,fn=(sum(r[k] for r in evaluated) for k in ('TP','FP','FN'))
+    precision=tp/(tp+fp) if tp+fp else 0.0
+    recall=tp/(tp+fn) if tp+fn else 0.0
+    overall=dict(TP=tp,FP=fp,FN=fn,precision=precision,recall=recall,
+                 f1=2*precision*recall/(precision+recall) if precision+recall else 0.0,
+                 scope='Micro-average of labelled entity/rule units only; unlabelled rules excluded.') if evaluated else None
+    if args.json:
+        print(json.dumps(dict(organizations=report,overall=overall),indent=2))
+    else:
+        print('SHADOWWATCH BEHAVIOUR VALIDATION\nUnlabelled detections count as FP only in evaluated entity/rule strata; labels may be incomplete.')
+        for organization,rules in report.items():
+            print('\n'+organization)
+            for rule,result in rules.items():
+                print(rule,json.dumps(result))
+        print('\nOVERALL',json.dumps(overall))
+        print('R004 FAST_CRITICAL_CLOSURE and KPI_GAMING_PATTERN are not R007/R009 labels.')
 
-
-print("\n" + "=" * 70)
-print("        SHADOWWATCH - R006 GROUND-TRUTH VALIDATION")
-print("=" * 70)
-
-
-# ============================================================
-# 1. LOAD DATA
-# ============================================================
-
-investigations = pd.read_csv(
-    INVESTIGATIONS_FILE
-)
-
-ground_truth = pd.read_csv(
-    GROUND_TRUTH_FILE
-)
-
-print(
-    f"\nInvestigation records: {len(investigations)}"
-)
-
-print(
-    f"Ground-truth records: {len(ground_truth)}"
-)
-
-
-# ============================================================
-# 2. RUN R006 DETECTOR
-# ============================================================
-
-predicted_findings = detect_repetitive_investigations(
-    investigations,
-    similarity_threshold=0.90
-)
-
-
-# ============================================================
-# 3. EXTRACT PREDICTED CASE IDs
-# ============================================================
-
-predicted_cases = set()
-
-if not predicted_findings.empty:
-
-    for case_list in predicted_findings["case_ids"]:
-
-        cases = [
-            case.strip()
-            for case in case_list.split(",")
-        ]
-
-        predicted_cases.update(cases)
-
-
-# ============================================================
-# 4. EXTRACT R006 GROUND TRUTH
-# ============================================================
-
-r006_truth = ground_truth[
-    ground_truth["problem_type"]
-    == "REPETITIVE_INVESTIGATION"
-].copy()
-
-
-# Only records expected to be detected
-expected_cases = set(
-    r006_truth[
-        r006_truth["expected_detection"] == True
-    ]["case_id"]
-)
-
-
-# ============================================================
-# 5. CALCULATE TP / FP / FN
-# ============================================================
-
-true_positives = predicted_cases & expected_cases
-
-false_positives = predicted_cases - expected_cases
-
-false_negatives = expected_cases - predicted_cases
-
-
-TP = len(true_positives)
-FP = len(false_positives)
-FN = len(false_negatives)
-
-
-# ============================================================
-# 6. CALCULATE METRICS
-# ============================================================
-
-if TP + FP > 0:
-    precision = TP / (TP + FP)
-else:
-    precision = 0.0
-
-
-if TP + FN > 0:
-    recall = TP / (TP + FN)
-else:
-    recall = 0.0
-
-
-if precision + recall > 0:
-    f1 = (
-        2 * precision * recall
-        / (precision + recall)
-    )
-else:
-    f1 = 0.0
-
-
-# ============================================================
-# 7. DISPLAY RESULTS
-# ============================================================
-
-print("\n" + "-" * 70)
-print("R006 VALIDATION RESULTS")
-print("-" * 70)
-
-print(f"\nExpected R006 cases : {len(expected_cases)}")
-print(f"Predicted cases     : {len(predicted_cases)}")
-
-print(f"\nTrue Positives (TP) : {TP}")
-print(f"False Positives (FP): {FP}")
-print(f"False Negatives (FN): {FN}")
-
-print(
-    f"\nPrecision           : {precision:.4f}"
-)
-
-print(
-    f"Recall              : {recall:.4f}"
-)
-
-print(
-    f"F1 Score            : {f1:.4f}"
-)
-
-
-# ============================================================
-# 8. SHOW CASE DETAILS
-# ============================================================
-
-print("\n" + "-" * 70)
-print("TRUE POSITIVES")
-print("-" * 70)
-
-for case_id in sorted(true_positives):
-    print(case_id)
-
-
-print("\n" + "-" * 70)
-print("FALSE POSITIVES")
-print("-" * 70)
-
-if false_positives:
-    for case_id in sorted(false_positives):
-        print(case_id)
-else:
-    print("None")
-
-
-print("\n" + "-" * 70)
-print("FALSE NEGATIVES")
-print("-" * 70)
-
-if false_negatives:
-    for case_id in sorted(false_negatives):
-        print(case_id)
-else:
-    print("None")
-
-
-print("\n" + "=" * 70)
-print("R006 VALIDATION COMPLETE")
-print("=" * 70)
+if __name__=='__main__':main()

@@ -476,3 +476,217 @@ def detect_duration_anomalies(
             })
 
     return pd.DataFrame(findings)
+
+def detect_repeat_incidents(
+    alerts_df,
+    cases_df,
+    recurrence_window_days=10,
+    minimum_incidents=4
+):
+    """
+    R008 - Detect repeat incident patterns.
+
+    A repeat incident pattern is identified when at least
+    `minimum_incidents` investigated cases involving the same
+    entity, asset, and category occur within the recurrence
+    window.
+
+    Only alerts associated with a case are considered.
+    """
+
+    required_alert_columns = [
+        "alert_id",
+        "entity_id",
+        "asset_id",
+        "timestamp",
+        "severity",
+        "category"
+    ]
+
+    required_case_columns = [
+        "case_id",
+        "alert_id"
+    ]
+
+    missing_alert_columns = [
+        column
+        for column in required_alert_columns
+        if column not in alerts_df.columns
+    ]
+
+    missing_case_columns = [
+        column
+        for column in required_case_columns
+        if column not in cases_df.columns
+    ]
+
+    if missing_alert_columns:
+        raise ValueError(
+            f"Missing alert columns: {missing_alert_columns}"
+        )
+
+    if missing_case_columns:
+        raise ValueError(
+            f"Missing case columns: {missing_case_columns}"
+        )
+
+    alerts = alerts_df.copy()
+    cases = cases_df.copy()
+
+    alerts["timestamp"] = pd.to_datetime(
+        alerts["timestamp"],
+        errors="coerce"
+    )
+
+    alerts = alerts[
+        alerts["timestamp"].notna()
+    ].copy()
+
+    if alerts.empty:
+        return pd.DataFrame()
+
+    # Join alerts with cases
+    incident_df = alerts.merge(
+        cases[
+            [
+                "case_id",
+                "alert_id"
+            ]
+        ],
+        on="alert_id",
+        how="inner"
+    )
+
+    if incident_df.empty:
+        return pd.DataFrame()
+
+    # One record per case
+    incident_df = incident_df.drop_duplicates(
+        subset=["case_id"]
+    )
+
+    # Sort chronologically
+    incident_df = incident_df.sort_values(
+        [
+            "entity_id",
+            "asset_id",
+            "category",
+            "timestamp"
+        ]
+    ).reset_index(drop=True)
+
+    findings = []
+
+    grouped = incident_df.groupby(
+        [
+            "entity_id",
+            "asset_id",
+            "category"
+        ]
+    )
+
+    for (
+        entity_id,
+        asset_id,
+        category
+    ), group in grouped:
+
+        group = group.sort_values(
+            "timestamp"
+        ).reset_index(drop=True)
+
+        if len(group) < minimum_incidents:
+            continue
+
+        # ---------------------------------------------
+        # Search for a qualifying recurrence window
+        # ---------------------------------------------
+
+        for start_index in range(
+            len(group) - minimum_incidents + 1
+        ):
+
+            first_time = group.iloc[
+                start_index
+            ]["timestamp"]
+
+            # Find the latest incident that is still
+            # inside the recurrence window.
+            window_end = first_time + pd.Timedelta(
+                days=recurrence_window_days
+            )
+
+            window = group[
+                (group["timestamp"] >= first_time)
+                &
+                (group["timestamp"] <= window_end)
+            ].iloc[:minimum_incidents]
+
+            if len(window) < minimum_incidents:
+                continue
+
+            # -----------------------------------------
+            # Qualifying recurrence pattern found
+            # -----------------------------------------
+
+            last_time = window.iloc[-1]["timestamp"]
+
+            time_span_days = (
+                last_time - first_time
+            ).total_seconds() / 86400
+
+            findings.append({
+                "finding_type":
+                    "REPEAT_INCIDENT_PATTERN",
+
+                "entity_id":
+                    entity_id,
+
+                "asset_id":
+                    asset_id,
+
+                "category":
+                    category,
+
+                "case_ids":
+                    ", ".join(
+                        window["case_id"]
+                        .astype(str)
+                        .tolist()
+                    ),
+
+                "alert_ids":
+                    ", ".join(
+                        window["alert_id"]
+                        .astype(str)
+                        .tolist()
+                    ),
+
+                "incident_count":
+                    len(window),
+
+                "first_timestamp":
+                    first_time,
+
+                "last_timestamp":
+                    last_time,
+
+                "time_span_days":
+                    round(
+                        float(time_span_days),
+                        2
+                    ),
+
+                "reason":
+                    (
+                        f"{len(window)} investigated incidents "
+                        f"with category '{category}' occurred "
+                        f"on asset '{asset_id}' within "
+                        f"{time_span_days:.2f} days."
+                    )
+            })
+
+            # Only one finding per qualifying group
+            break
+
+    return pd.DataFrame(findings)

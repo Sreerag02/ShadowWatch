@@ -1,0 +1,100 @@
+investigation_id,case_id,started_at,completed_at,analyst_id,analyst_notes,evidence_present,evidence_count,root_cause_identified
+E005-INV0001,E005-C0001,2026-08-01 10:31:00,2026-08-01 12:40:00,AN01,"Reviewed EDR telemetry, process execution blocked.",True,4,True
+E005-INV0002,E005-C0002,2026-08-01 12:28:00,2026-08-01 12:57:00,AN03,Isolated host and dumped memory for analysis.,True,7,False
+E005-INV0003,E005-C0003,2026-08-01 14:31:00,2026-08-01 16:57:00,AN02,"Reviewed EDR telemetry, process execution blocked.",True,8,True
+E005-INV0004,E005-C0004,2026-08-01 16:52:00,2026-08-01 18:23:00,AN04,Analyzed firewall denied connections.,True,9,True
+E005-INV0005,E005-C0005,2026-08-01 18:35:00,2026-08-01 20:48:00,AN02,Isolated host and dumped memory for analysis.,True,10,True
+E005-INV0007,E005-C0007,2026-08-01 22:45:00,2026-08-02 00:29:00,AN02,"Reviewed EDR telemetry, process execution blocked.",True,4,False
+E005-INV0008,E005-C0008,2026-08-02 00:12:00,2026-08-02 01:12:00,AN01,Inspected ICS endpoint baseline.,True,2,True
+E005-INV0009,E005-C0009,2026-08-02 02:31:00,2026-08-02 04:01:00,AN05,"Reviewed EDR telemetry, process execution blocked.",True,4,False
+E005-INV0010,E005-C0010,2026-08-02 04:29:00,2026-08-02 07:06:00,AN05,Inspected ICS endpoint baseline.,True,3,True
+E005-INV0011,E005-C0011,2026-08-02 06:44:00,2026-08-02 07:57:00,AN04,"Reviewed EDR telemetry, process execution blocked.",False,0,True
+E005-INV0012,E005-C0012,2026-08-02 08:33:00,2026-08-02 09:24:00,AN04,Verified authentication logs. Legitimate admin login confirmed.,True,6,False
+E005-INV0013,E005-C0013,2026-08-02 10:36:00,2026-08-02 12:58:00,AN01,Reviewed SCADA traffic logs. No anomalies detected.,True,5,False
+E005-INV0014,E005-C0014,2026-08-02 12:20:00,2026-08-02 14:32:00,AN04,Analyzed firewall denied connections.,True,9,True
+E005-INV0015,E005-C0015,2026-08-02 14:39:00,2026-08-02 16:59:00,AN05,Verified authentication logs. Legitimate admin login confirmed.,True,10,True
+E005-INV0016,E005-C0016,2026-08-02 16:44:00,2026-08-02 18:38:00,AN04,"Reviewed EDR telemetry, process execution blocked.",True,2,True
+E005-INV0017,E005-C0017,2026-08-02 18:56:00,2026-08-02 19:11:00,AN02,Analyzed firewall denied connections.,True,9,False
+E005-INV0018,E005-C0018,2026-08-02 20:43:00,2026-08-02 22:13:00,AN05,"Reviewed EDR telemetry, process execution blocked.",True,12,True
+E005-INV0019,E005-C0019,2026-08-02 22:54:00,2026-08-03 00:41:00,AN03,Inspected ICS endpoint baseline.,True,1,True
+E005-INV0020,E005-C0020,2026-08-03 00:52:00,2026-08-03 01:31:00,AN05,Isolated host and dumped memory for analysis.,True,4,True
+E005-INV0021,E005-C0021,2026-08-03 02:30:00,2026-08-03 03:32:00,AN03,Inspected ICS endpoint baseline.,True,3,True
+E005-INV0022,E005-C0022,2026-08-03 04:55:00,2026-08-03 06:50:00,AN03,"Reviewed EDR telemetry, process execution blocked.",True,12,True
+E005-INV0023,E005-C0023,2026-08-03 06:57:00,2026-08-03 08:16:00,AN02,"Reviewed EDR telemetry, process execution blocked.",True,4,True
+E005-INV0024,E005-C0024,2026-08-03 08:45:00,2026-08-03 10:27:00,AN05,Verified authentication logs. Legitimate admin login confirmed.,True,8,True
+E005-INV0025,E005-C0025,2026-08-03 10:20:00,2026-08-03 11:05:00,AN05,Verified authentication logs. Legitimate admin login confirmed.,True,3,True
+E005-INV0026,E005-C0026,2026-08-03 12:50:00,2026-08-03 14:24:00,AN04,Analyzed firewall denied connections.,True,9,True
+E005-INV0027,E005-C0027,2026-08-03 14:53:00,2026-08-03 16:50:00,AN03,Analyzed firewall denied connections.,True,7,True
+E005-INV0028,E005-C0028,2026-08-03 16:35:00,2026-08-03 17:37:00,AN03,Isolated host and dumped memory for analysis.,True,7,True
+E005-INV0029,E005-C0029,2026-08-03 18:17:00,2026-08-03 21:03:00,AN04,Verified authentication logs. Legitimate admin login confirmed.,True,3,True
+E005-INV0030,E005-C0030,2026-08-03 20:36:00,2026-08-03 22:07:00,AN03,Inspected ICS endpoint baseline.,True,9,False
+E005-INV0031,E005-C0031,2026-08-03 22:58:00,2026-08-04 00:24:00,AN03,Checked logs. No issue found.,True,4,True
+E005-INV0032,E005-C0032,2026-08-04 00:40:00,2026-08-04 02:19:00,AN03,Checked logs. No issue found.,True,10,True
+E005-INV0033,E005-C0033,2026-08-04 02:50:00,2026-08-04 03:41:00,AN04,Checked logs. No issue found.,True,3,True
+E005-INV0034,E005-C0034,2026-08-04 04:18:00,2026-08-04 07:11:00,AN02,Reviewed SCADA traffic logs. No anomalies detected.,True,5,False
+E005-INV0035,E005-C0035,2026-08-04 06:34:00,2026-08-04 07:17:00,AN01,Analyzed firewall denied connections.,True,8,True
+E005-INV0036,E005-C0036,2026-08-04 08:45:00,2026-08-04 10:24:00,AN04,Analyzed firewall denied connections.,True,6,False
+E005-INV0037,E005-C0037,2026-08-04 10:41:00,2026-08-04 12:10:00,AN04,Reviewed SCADA traffic logs. No anomalies detected.,True,3,True
+E005-INV0038,E005-C0038,2026-08-04 12:39:00,2026-08-04 14:34:00,AN03,Verified authentication logs. Legitimate admin login confirmed.,True,3,False
+E005-INV0039,E005-C0039,2026-08-04 14:52:00,2026-08-04 17:31:00,AN03,Reviewed SCADA traffic logs. No anomalies detected.,True,9,False
+E005-INV0040,E005-C0040,2026-08-04 16:42:00,2026-08-04 19:15:00,AN01,"Reviewed EDR telemetry, process execution blocked.",True,11,False
+E005-INV0041,E005-C0041,2026-08-04 18:36:00,2026-08-04 20:36:00,AN04,Reviewed SCADA traffic logs. No anomalies detected.,False,0,True
+E005-INV0042,E005-C0042,2026-08-04 20:17:00,2026-08-04 21:14:00,AN01,Isolated host and dumped memory for analysis.,True,10,True
+E005-INV0043,E005-C0043,2026-08-04 22:28:00,2026-08-05 00:03:00,AN04,Verified authentication logs. Legitimate admin login confirmed.,True,2,False
+E005-INV0044,E005-C0044,2026-08-05 00:53:00,2026-08-05 02:20:00,AN03,Analyzed firewall denied connections.,True,10,False
+E005-INV0045,E005-C0045,2026-08-05 02:54:00,2026-08-05 04:27:00,AN04,Verified authentication logs. Legitimate admin login confirmed.,True,5,False
+E005-INV0046,E005-C0046,2026-08-05 04:49:00,2026-08-05 05:34:00,AN03,Isolated host and dumped memory for analysis.,True,1,True
+E005-INV0047,E005-C0047,2026-08-05 06:30:00,2026-08-05 07:52:00,AN02,Isolated host and dumped memory for analysis.,True,10,False
+E005-INV0048,E005-C0048,2026-08-05 08:28:00,2026-08-05 10:58:00,AN02,Isolated host and dumped memory for analysis.,True,7,True
+E005-INV0049,E005-C0049,2026-08-05 10:46:00,2026-08-05 11:36:00,AN02,Inspected ICS endpoint baseline.,True,10,False
+E005-INV0050,E005-C0050,2026-08-05 12:39:00,2026-08-05 14:27:00,AN05,Analyzed firewall denied connections.,True,8,False
+E005-INV0051,E005-C0051,2026-08-05 14:47:00,2026-08-05 16:41:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,9,False
+E005-INV0052,E005-C0052,2026-08-05 16:28:00,2026-08-05 17:38:00,AN01,Reviewed SCADA traffic logs. No anomalies detected.,True,8,False
+E005-INV0053,E005-C0053,2026-08-05 18:35:00,2026-08-05 20:08:00,AN02,Verified authentication logs. Legitimate admin login confirmed.,True,12,True
+E005-INV0054,E005-C0054,2026-08-05 20:38:00,2026-08-05 22:41:00,AN01,Analyzed firewall denied connections.,True,10,False
+E005-INV0055,E005-C0055,2026-08-05 22:15:00,2026-08-06 00:55:00,AN05,Isolated host and dumped memory for analysis.,True,2,False
+E005-INV0056,E005-C0056,2026-08-06 00:13:00,2026-08-06 01:03:00,AN02,Isolated host and dumped memory for analysis.,True,9,True
+E005-INV0057,E005-C0057,2026-08-06 02:22:00,2026-08-06 03:47:00,AN04,"Reviewed EDR telemetry, process execution blocked.",True,3,True
+E005-INV0058,E005-C0058,2026-08-06 05:01:00,2026-08-06 06:50:00,AN03,Reviewed SCADA traffic logs. No anomalies detected.,True,4,False
+E005-INV0059,E005-C0059,2026-08-06 06:55:00,2026-08-06 07:56:00,AN04,Analyzed firewall denied connections.,True,11,False
+E005-INV0060,E005-C0060,2026-08-06 08:28:00,2026-08-06 09:33:00,AN02,Analyzed firewall denied connections.,True,8,True
+E005-INV0061,E005-C0061,2026-08-06 10:40:00,2026-08-06 13:04:00,AN04,Reviewed SCADA traffic logs. No anomalies detected.,True,8,True
+E005-INV0062,E005-C0062,2026-08-06 12:26:00,2026-08-06 13:50:00,AN01,Inspected ICS endpoint baseline.,True,12,False
+E005-INV0063,E005-C0063,2026-08-06 14:22:00,2026-08-06 15:21:00,AN02,Reviewed SCADA traffic logs. No anomalies detected.,True,1,False
+E005-INV0064,E005-C0064,2026-08-06 16:42:00,2026-08-06 18:01:00,AN02,Isolated host and dumped memory for analysis.,True,7,True
+E005-INV0065,E005-C0065,2026-08-06 18:22:00,2026-08-06 19:50:00,AN01,Inspected ICS endpoint baseline.,True,2,True
+E005-INV0066,E005-C0066,2026-08-06 21:05:00,2026-08-06 21:29:00,AN01,Analyzed firewall denied connections.,True,6,False
+E005-INV0067,E005-C0067,2026-08-06 22:49:00,2026-08-06 23:15:00,AN03,Verified authentication logs. Legitimate admin login confirmed.,True,2,False
+E005-INV0068,E005-C0068,2026-08-07 00:30:00,2026-08-07 02:34:00,AN02,Isolated host and dumped memory for analysis.,True,4,False
+E005-INV0069,E005-C0069,2026-08-07 02:31:00,2026-08-07 04:35:00,AN02,Analyzed firewall denied connections.,True,2,False
+E005-INV0070,E005-C0070,2026-08-07 04:42:00,2026-08-07 05:47:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,10,False
+E005-INV0071,E005-C0071,2026-08-07 06:55:00,2026-08-07 08:47:00,AN05,Reviewed SCADA traffic logs. No anomalies detected.,True,1,True
+E005-INV0072,E005-C0072,2026-08-07 08:34:00,2026-08-07 09:31:00,AN04,Isolated host and dumped memory for analysis.,True,9,True
+E005-INV0073,E005-C0073,2026-08-07 10:44:00,2026-08-07 11:20:00,AN04,Analyzed firewall denied connections.,True,10,False
+E005-INV0074,E005-C0074,2026-08-07 12:36:00,2026-08-07 12:58:00,AN02,Inspected ICS endpoint baseline.,True,12,False
+E005-INV0075,E005-C0075,2026-08-07 14:52:00,2026-08-07 17:10:00,AN02,Reviewed SCADA traffic logs. No anomalies detected.,True,3,True
+E005-INV0076,E005-C0076,2026-08-07 16:41:00,2026-08-07 16:59:00,AN01,Reviewed SCADA traffic logs. No anomalies detected.,True,10,False
+E005-INV0077,E005-C0077,2026-08-07 18:27:00,2026-08-07 20:12:00,AN02,Reviewed SCADA traffic logs. No anomalies detected.,True,1,False
+E005-INV0078,E005-C0078,2026-08-07 20:37:00,2026-08-07 21:36:00,AN04,Reviewed SCADA traffic logs. No anomalies detected.,True,11,False
+E005-INV0079,E005-C0079,2026-08-07 22:27:00,2026-08-07 23:43:00,AN01,Analyzed firewall denied connections.,True,6,True
+E005-INV0080,E005-C0080,2026-08-08 00:48:00,2026-08-08 02:19:00,AN04,Inspected ICS endpoint baseline.,True,3,False
+E005-INV0081,E005-C0081,2026-08-08 02:42:00,2026-08-08 04:31:00,AN05,Reviewed SCADA traffic logs. No anomalies detected.,True,12,True
+E005-INV0082,E005-C0082,2026-08-08 04:39:00,2026-08-08 06:13:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,4,False
+E005-INV0083,E005-C0083,2026-08-08 06:35:00,2026-08-08 09:00:00,AN01,"Reviewed EDR telemetry, process execution blocked.",True,9,False
+E005-INV0084,E005-C0084,2026-08-08 08:19:00,2026-08-08 10:28:00,AN01,Isolated host and dumped memory for analysis.,True,12,False
+E005-INV0085,E005-C0085,2026-08-08 10:15:00,2026-08-08 11:12:00,AN02,"Reviewed EDR telemetry, process execution blocked.",True,12,False
+E005-INV0086,E005-C0086,2026-08-08 12:08:00,2026-08-08 14:47:00,AN04,Verified authentication logs. Legitimate admin login confirmed.,True,2,True
+E005-INV0087,E005-C0087,2026-08-08 14:57:00,2026-08-08 17:37:00,AN04,Analyzed firewall denied connections.,True,6,True
+E005-INV0088,E005-C0088,2026-08-08 16:44:00,2026-08-08 18:09:00,AN03,Isolated host and dumped memory for analysis.,True,11,True
+E005-INV0089,E005-C0089,2026-08-08 18:46:00,2026-08-08 19:47:00,AN04,Analyzed firewall denied connections.,True,8,True
+E005-INV0090,E005-C0090,2026-08-08 20:10:00,2026-08-08 22:14:00,AN03,"Reviewed EDR telemetry, process execution blocked.",True,11,False
+E005-INV0091,E005-C0091,2026-08-08 22:54:00,2026-08-08 23:41:00,AN02,"Reviewed EDR telemetry, process execution blocked.",True,10,True
+E005-INV0092,E005-C0092,2026-08-09 00:40:00,2026-08-09 03:05:00,AN04,"Reviewed EDR telemetry, process execution blocked.",True,6,False
+E005-INV0093,E005-C0093,2026-08-09 02:38:00,2026-08-09 03:57:00,AN03,Inspected ICS endpoint baseline.,True,9,True
+E005-INV0094,E005-C0094,2026-08-09 04:34:00,2026-08-09 05:50:00,AN05,Verified authentication logs. Legitimate admin login confirmed.,True,7,False
+E005-INV0095,E005-C0095,2026-08-09 06:41:00,2026-08-09 07:37:00,AN05,"Reviewed EDR telemetry, process execution blocked.",True,6,False
+E005-INV0096,E005-C0096,2026-08-09 08:49:00,2026-08-09 11:26:00,AN05,Reviewed SCADA traffic logs. No anomalies detected.,True,5,True
+E005-INV0097,E005-C0097,2026-08-09 11:02:00,2026-08-09 12:00:00,AN02,Reviewed SCADA traffic logs. No anomalies detected.,True,6,True
+E005-INV0098,E005-C0098,2026-08-09 12:24:00,2026-08-09 14:46:00,AN03,Inspected ICS endpoint baseline.,True,12,False
+E005-INV0099,E005-C0099,2026-08-09 14:42:00,2026-08-09 16:44:00,AN01,Verified authentication logs. Legitimate admin login confirmed.,True,11,True
+E005-INV0100,E005-C0100,2026-08-09 17:01:00,2026-08-09 17:24:00,AN04,Verified authentication logs. Legitimate admin login confirmed.,True,7,False

@@ -1,0 +1,389 @@
+Continue my existing ShadowWatch project.
+
+IMPORTANT:
+Inspect the current repository before changing anything.
+Do not rebuild or restructure working modules.
+
+CURRENT COMPLETED CORE WORK:
+
+R001 - MISSING_INVESTIGATION
+R002 - MISSING_EVIDENCE
+R003 - MISSING_ESCALATION
+R004 - FAST_CRITICAL_CLOSURE
+
+R005 - TELEMETRY_BLIND_SPOT
+
+R005 is complete and verified.
+
+Current R005 result:
+
+2 telemetry blind spots detected:
+
+E001-AS001
+Baseline: 950
+Observed: 8.67
+Drop: 99.09%
+
+E001-AS017
+Baseline: 965.50
+Observed: 5.00
+Drop: 99.48%
+
+Ground-truth validation:
+
+TP = 2
+FP = 0
+FN = 0
+Precision = 100%
+Recall = 100%
+F1 = 100%
+
+Unit tests:
+
+6 tests passed.
+
+DO NOT modify R005 unless required to fix an integration bug.
+
+Also DO NOT implement R006-R009.
+Those are assigned to another team member.
+
+==================================================
+NEXT CORE MODULE
+EXPECTED-vs-OBSERVED WORKFLOW AUDITOR
+==================================================
+
+This is a central ShadowWatch feature.
+
+The purpose is to reconstruct the expected SOC handling workflow
+for a case and compare it against the actual operational evidence.
+
+Concept:
+
+SECURITY ALERT
+      ↓
+CASE CREATED
+      ↓
+INVESTIGATION
+      ↓
+EVIDENCE
+      ↓
+ESCALATION (when expected)
+      ↓
+CLOSURE
+
+ShadowWatch should answer:
+
+"What should have happened?"
+
+versus
+
+"What actually happened?"
+
+==================================================
+FIRST: INSPECT EXISTING PROJECT
+==================================================
+
+Before coding inspect:
+
+backend/services/rule_engine.py
+backend/services/negative_space_engine.py
+database/schema.sql
+backend/models.py
+backend/schemas.py
+
+Also inspect:
+
+alerts
+cases
+investigations
+escalations
+
+Determine the actual available fields.
+
+DO NOT invent database columns.
+
+Explain briefly:
+
+1. Which workflow stages can currently be reconstructed.
+2. Which stages cannot be determined from existing data.
+3. Which expectations can be evaluated reliably.
+
+Then implement only what the current data supports.
+
+==================================================
+NEW SERVICE
+==================================================
+
+Create:
+
+backend/services/workflow_auditor.py
+
+The workflow auditor should NOT duplicate the detection logic
+unnecessarily.
+
+Where practical, reuse existing rule-engine findings.
+
+Create a function such as:
+
+audit_case_workflow(case_id)
+
+and preferably:
+
+audit_entity_workflows(entity_id)
+
+==================================================
+EXPECTED WORKFLOW MODEL
+==================================================
+
+For the current prototype, focus primarily on HIGH and CRITICAL
+security cases.
+
+For each case determine expected stages based on the data/rules
+actually supported.
+
+Example:
+
+CRITICAL alert
+
+Expected:
+- case exists
+- investigation exists
+- investigation contains evidence
+- escalation exists
+- case handling duration is reasonable
+
+Observed:
+- investigation exists
+- evidence missing
+- escalation missing
+- case closed in 1.3 minutes
+
+Do NOT claim an industry-standard workflow requirement unless the
+project data/rules actually define it.
+
+Label prototype expectations clearly.
+
+==================================================
+OUTPUT FORMAT
+==================================================
+
+Return a structured object similar to:
+
+{
+    "case_id": "E001-C0081",
+    "entity_id": "E001",
+    "severity": "CRITICAL",
+    "category": "RANSOMWARE",
+
+    "expected": {
+        "investigation": true,
+        "evidence": true,
+        "escalation": true
+    },
+
+    "observed": {
+        "investigation": true,
+        "evidence": false,
+        "escalation": false
+    },
+
+    "gaps": [
+        {
+            "stage": "EVIDENCE",
+            "rule_id": "R002",
+            "reason": "Critical investigation contains no supporting evidence"
+        },
+        {
+            "stage": "ESCALATION",
+            "rule_id": "R003",
+            "reason": "Critical alert was not escalated"
+        }
+    ],
+
+    "closure_minutes": 1.3,
+
+    "triggered_rules": [
+        "R002",
+        "R003",
+        "R004"
+    ]
+}
+
+Adapt this to the actual repository.
+
+==================================================
+IMPORTANT: DO NOT CREATE AN OPAQUE SCORE YET
+==================================================
+
+Do NOT create the final organization risk score.
+
+That belongs to another team member.
+
+For now classify workflow assessment only with something simple like:
+
+COMPLIANT
+GAP_DETECTED
+
+or:
+
+NO_GAP
+EXECUTION_GAP
+
+based directly on observable missing stages.
+
+Do not invent a 0-100 risk score.
+
+==================================================
+EXPECTED-vs-OBSERVED EXPLANATION
+==================================================
+
+Generate a human-readable explanation.
+
+Example:
+
+Case E001-C0081 was associated with a CRITICAL ransomware alert.
+
+Expected workflow:
+Investigation → Evidence → Escalation → Appropriate Closure
+
+Observed workflow:
+Investigation → Missing Evidence → No Escalation → Closed in 1.3 minutes
+
+Execution gaps:
+- Supporting investigation evidence was absent.
+- No escalation was recorded.
+- The case was closed unusually quickly.
+
+This case should be prioritized for supervisory review.
+
+The explanation must be generated from actual evidence.
+
+==================================================
+TEST SCRIPT
+==================================================
+
+Create:
+
+backend/test_workflow_auditor.py
+
+Running:
+
+python3 test_workflow_auditor.py
+
+should produce readable output.
+
+Example:
+
+========================================
+ SHADOWWATCH WORKFLOW AUDITOR
+========================================
+
+Case: E001-C0081
+Severity: CRITICAL
+Category: RANSOMWARE
+
+EXPECTED VS OBSERVED
+
+Investigation     Expected ✓   Observed ✓
+Evidence          Expected ✓   Observed ✗
+Escalation        Expected ✓   Observed ✗
+
+Closure Time: 1.3 minutes
+
+Execution Gaps:
+- R002 Missing Evidence
+- R003 Missing Escalation
+- R004 Fast Critical Closure
+
+Assessment:
+EXECUTION_GAP
+
+========================================
+
+==================================================
+UNIT TESTS
+==================================================
+
+Add proper unit tests.
+
+Test at minimum:
+
+1. Fully normal critical workflow.
+2. Missing investigation.
+3. Missing evidence.
+4. Missing escalation.
+5. Fast critical closure.
+6. Multiple simultaneous gaps.
+7. Missing/null optional values.
+8. Unknown case ID.
+9. A case without triggered rules.
+
+Do not break existing tests.
+
+After implementation run:
+
+python3 -m unittest test_negative_space_unit
+
+and any existing rule-engine tests.
+
+==================================================
+ARCHITECTURE
+==================================================
+
+The desired core pipeline is now:
+
+Operational Records
+        ↓
+Rule Engine R001-R004
+        │
+        ├──────────────┐
+        ↓              ↓
+Workflow Auditor     R005 Negative Space
+        │              │
+        └──────┬───────┘
+               ↓
+        Common Findings
+               ↓
+       Risk Intelligence
+               ↓
+      Supervisor Dashboard
+
+The workflow auditor should therefore produce structured data
+that can later be returned through FastAPI and consumed by React.
+
+==================================================
+ENGINEERING RULES
+==================================================
+
+- Preserve R001-R005.
+- Do not implement R006-R009.
+- Do not implement Rajeesh's final risk scoring.
+- Do not implement frontend.
+- Do not use ground truth during detection.
+- Do not introduce cloud APIs.
+- Do not invent schema fields.
+- Keep everything offline.
+- Keep rules deterministic and explainable.
+- Avoid unnecessary database/schema changes.
+- Handle NULL values safely.
+- Reuse existing services where sensible.
+- Do not create circular imports.
+- Keep functions testable.
+
+==================================================
+WHEN FINISHED
+==================================================
+
+Show me:
+
+1. What existing files you inspected.
+2. What files you created.
+3. What files you modified.
+4. The Expected-vs-Observed logic.
+5. Exact terminal commands to run.
+6. Test results.
+7. One example using E001-C0081.
+
+STOP after the Workflow Auditor is complete.
+
+Do not automatically move to another module.

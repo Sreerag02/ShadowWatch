@@ -1,9 +1,6 @@
-from sqlalchemy import text
-
-from database import engine
-
-
 def analyze_critical_cases():
+    from sqlalchemy import text
+    from database import engine
 
     query = text("""
         SELECT
@@ -48,103 +45,116 @@ def analyze_critical_cases():
 
         for row in result.mappings():
 
-            case_id = row["case_id"]
-
-            reasons = []
-            triggered_rules = []
-
-            # ------------------------------------
-            # Calculate closure time
-            # ------------------------------------
-
-            opened_at = row["opened_at"]
-            closed_at = row["closed_at"]
-
-            closure_minutes = None
-
-            if opened_at and closed_at:
-                closure_minutes = (
-                    closed_at - opened_at
-                ).total_seconds() / 60
-
-            # ------------------------------------
-            # R001 - Missing investigation
-            # ------------------------------------
-
-            if row["investigation_id"] is None:
-
-                triggered_rules.append("R001")
-
-                reasons.append(
-                    "Critical alert has no investigation record"
-                )
-
-            # ------------------------------------
-            # R002 - Missing evidence
-            # ------------------------------------
-
-            elif (
-                row["evidence_present"] is False
-                or row["evidence_count"] is None
-                or row["evidence_count"] == 0
-            ):
-
-                triggered_rules.append("R002")
-
-                reasons.append(
-                    "Critical investigation contains no supporting evidence"
-                )
-
-            # ------------------------------------
-            # R003 - Missing escalation
-            # ------------------------------------
-
-            if (
-                row["escalation_id"] is None
-                or row["escalated"] is False
-            ):
-
-                triggered_rules.append("R003")
-
-                reasons.append(
-                    "Critical alert was not escalated"
-                )
-
-            # ------------------------------------
-            # R004 - Fast critical closure
-            # ------------------------------------
-
-            if (
-                closure_minutes is not None
-                and closure_minutes < 10
-            ):
-
-                triggered_rules.append("R004")
-
-                reasons.append(
-                    f"Critical case was closed unusually quickly "
-                    f"({closure_minutes:.1f} minutes)"
-                )
-
-            # ------------------------------------
-            # Save only suspicious cases
-            # ------------------------------------
-
-            if reasons:
-
-                findings.append({
-                    "case_id": case_id,
-                    "entity_id": row["entity_id"],
-                    "alert_id": row["alert_id"],
-                    "asset_id": row["asset_id"],
-                    "severity": row["severity"],
-                    "category": row["category"],
-                    "closure_minutes": closure_minutes,
-                    "rules": triggered_rules,
-                    "reasons": reasons
-                })
+            finding = evaluate_critical_case(row)
+            if finding is not None:
+                findings.append(finding)
 
     return findings
+
+
+# Configurable prototype threshold, not an industry standard.
+FAST_CRITICAL_CLOSURE_MINUTES = 10
+
+
+def evaluate_critical_case(row):
+    """Evaluate one joined CRITICAL case row without database access."""
+    case_id = row["case_id"]
+
+    reasons = []
+    triggered_rules = []
+
+    # ------------------------------------
+    # Calculate closure time
+    # ------------------------------------
+
+    opened_at = row["opened_at"]
+    closed_at = row["closed_at"]
+
+    closure_minutes = None
+
+    if opened_at and closed_at:
+        closure_minutes = (
+            closed_at - opened_at
+        ).total_seconds() / 60
+
+    # ------------------------------------
+    # R001 - Missing investigation
+    # ------------------------------------
+
+    if row["investigation_id"] is None:
+
+        triggered_rules.append("R001")
+
+        reasons.append(
+            "Critical alert has no investigation record"
+        )
+
+    # ------------------------------------
+    # R002 - Missing evidence
+    # ------------------------------------
+
+    elif (
+        row["evidence_present"] is False
+        or row["evidence_count"] is None
+        or row["evidence_count"] == 0
+    ):
+
+        triggered_rules.append("R002")
+
+        reasons.append(
+            "Critical investigation contains no supporting evidence"
+        )
+
+    # ------------------------------------
+    # R003 - Missing escalation
+    # ------------------------------------
+
+    if (
+        row["escalation_id"] is None
+        or row["escalated"] is False
+    ):
+
+        triggered_rules.append("R003")
+
+        reasons.append(
+            "Critical alert was not escalated"
+        )
+
+    # ------------------------------------
+    # R004 - Fast critical closure
+    # ------------------------------------
+
+    if (
+        closure_minutes is not None
+        and closure_minutes < FAST_CRITICAL_CLOSURE_MINUTES
+    ):
+
+        triggered_rules.append("R004")
+
+        reasons.append(
+            f"Critical case was closed unusually quickly "
+            f"({closure_minutes:.1f} minutes)"
+        )
+
+    # ------------------------------------
+    # Save only suspicious cases
+    # ------------------------------------
+
+    if reasons:
+
+        return {
+            "case_id": case_id,
+            "entity_id": row["entity_id"],
+            "alert_id": row["alert_id"],
+            "asset_id": row["asset_id"],
+            "severity": row["severity"],
+            "category": row["category"],
+            "closure_minutes": closure_minutes,
+            "rules": triggered_rules,
+            "reasons": reasons
+        }
+
+    return None
 
 
 if __name__ == "__main__":

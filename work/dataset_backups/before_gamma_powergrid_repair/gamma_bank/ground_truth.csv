@@ -1,0 +1,20 @@
+scenario_id,scenario_type,case_id,expected_rule
+GT-E003-001,Missing investigation,CASE-E003-016,R001
+GT-E003-002,Missing investigation,CASE-E003-036,R001
+GT-E003-003,Missing investigation,CASE-E003-071,R001
+GT-E003-004,Missing investigation evidence,CASE-E003-011,R002
+GT-E003-005,Missing escalation,CASE-E003-011,R003
+GT-E003-006,Missing escalation,CASE-E003-016,R003
+GT-E003-007,Missing escalation,CASE-E003-026,R003
+GT-E003-008,Fast critical closure,CASE-E003-011,R004
+GT-E003-009,Fast critical closure,CASE-E003-026,R004
+GT-E003-010,Fast critical closure,CASE-E003-045,R004
+GT-E003-011,Fast critical closure,CASE-E003-062,R004
+GT-E003-012,Fast critical closure,CASE-E003-083,R004
+GT-E003-013,Normal workflow,CASE-E003-002,NONE
+GT-E003-014,Normal workflow,CASE-E003-003,NONE
+GT-E003-015,Normal workflow,CASE-E003-004,NONE
+GT-E003-016,Normal workflow,CASE-E003-005,NONE
+GT-E003-017,Normal workflow,CASE-E003-006,NONE
+GT-E003-018,Normal workflow,CASE-E003-007,NONE
+GT-E003-019,Normal workflow,CASE-E003-008,NONE

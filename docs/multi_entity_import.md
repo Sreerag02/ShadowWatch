@@ -1,102 +1,102 @@
 # Multi-organization validation and PostgreSQL import
 
-Discovered datasets: `alpha_bank` (E001), `beta_bank` (E002), `gamma_bank`
-(E003), `metro_telecom` (E004), and `powergrid_utility` (E005).
+All five datasets now pass strict validation and are present in PostgreSQL:
+Alpha Bank (E001), Beta Bank (E002), Gamma Bank (E003), Metro Telecom (E004),
+and PowerGrid Utility (E005). No exception flags are needed.
 
 ## Commands
 
-Run strict source validation from the repository root:
+From the repository root:
 
 ```bash
 python3 tests/validate_all_datasets.py
-```
-
-Strict validation reports the actual Gamma header mismatch and PowerGrid data
-issues. It does not silently fix or normalize these inputs.
-
-The explicit compatibility/exception profile is:
-
-```bash
-python3 tests/validate_all_datasets.py --gamma-adapter --allow-chronology E003 E005 --allow-source-conflicts E003 --allow-ground-truth-duplicates E005
 cd backend
 source venv/bin/activate
-python3 import_all_entities.py --gamma-adapter --allow-chronology E003 E005 --allow-source-conflicts E003 --allow-ground-truth-duplicates E005
-python3 verify_multi_entity_db.py --gamma-adapter --allow-chronology E003 E005 --allow-source-conflicts E003 --allow-ground-truth-duplicates E005
+python3 import_all_entities.py
+python3 verify_multi_entity_db.py
 python3 -m unittest test_multi_entity_unit test_contradiction_engine_unit test_workflow_auditor_unit test_negative_space_unit
 python3 test_multi_entity_analytics.py
 ```
 
-Use exception flags only when accepting the reported source issues. Reports
-continue to show each issue as a warning. The flags do not change timestamps,
-source CSVs, analytics logic, or the database schema. Remove them after correcting
-the upstream data. `--dry-run` validates without writing. `--only beta_bank
-metro_telecom` selects organizations while retaining global ID validation.
+The importer discovers folders, validates each source and cross-organization
+IDs, then inserts only entities, assets, alerts, cases, investigations,
+escalations, and telemetry. Ground truth is used for validation only; it is
+never inserted into PostgreSQL or supplied to detection engines.
 
-## Import behavior
+Existing organizations are skipped without changes. Each new organization
+uses one transaction; any insert or value-verification failure rolls back that
+organization. Every supplied value is compared before commit. The verifier
+compares IDs, counts, values and ownership against all sources. Child record
+ownership is checked through case links and compared with the source folder.
 
-Only entities, assets, alerts, cases, investigations, escalations, and telemetry
-are inserted, in that order. Ground truth is read for validation only and never
-inserted into PostgreSQL. Each new organization uses one transaction. Any insert
-or verification failure rolls back that organization's entire import. Every
-source-supplied value is checked before commit.
+`--dry-run` validates without writes. `--only gamma_bank powergrid_utility`
+selects organizations while retaining cross-organization ID validation.
+There is no deletion/replacement option. Existing partial organizations require
+separate review; they are not overwritten automatically.
 
-Existing entity IDs are skipped, never overwritten or deleted. This also means
-an existing partial organization is not silently repaired; use the verifier to
-identify incomplete or divergent records. Other organizations can still import
-if a dataset fails validation. Cross-organization duplicate IDs block both
-affected folders. There is no replacement/delete option.
+## Authorized dataset repairs
 
-The verifier compares database IDs, counts, and values against each validated
-source, checks entity ownership, and verifies child case links. Investigation
-and escalation tables have no entity column; their ownership derives from cases.
-Comparison to each organization's source detects incorrect child-case links.
+The user requested Gamma and PowerGrid fixes after validation identified their
+issues. Original files are backed up in:
 
-## Validation exceptions and Gamma mapping
+`work/dataset_backups/before_gamma_powergrid_repair/`
 
-Alpha, Beta, and Metro pass strict validation. PowerGrid has two investigation
-completions and two escalations after closure, plus repeated `S06` ground-truth
-IDs. Gamma has three late escalation timestamps and five case severity values
-that disagree with the linked alert. These are not labelled contradiction
-scenarios, so strict validation rejects them. Explicit exceptions retain the
-evidence for supervisory review rather than describing it as clean data.
+`docs/dataset_repairs.json` records field-level before/after values and reasons.
+`tests/repair_organization_datasets.py` records the one-shot repair procedure;
+it refuses to rerun while its backup exists. Do not rerun it during normal setup.
 
-Gamma has a different source schema. `--gamma-adapter` accepts exactly those
-alternate headers and produces the canonical database columns in memory:
+Gamma's eight CSVs were converted to canonical headers. Severity, criticality,
+and case status were normalized to uppercase. Five alerts were aligned with the
+explicit CRITICAL severity of their source cases, preserving their short closure
+durations. Three synthetic escalation timestamps were moved to the case closure
+boundary. These are documented synthetic corrections, not recovered event times.
 
-| Source | Database mapping |
-| --- | --- |
-| `Entity ID`, `Organization`, `Sector` | `entity_id`, `entity_name`, `sector` |
-| Alert `alert_type` | `category`, preserving the original value |
-| Severity, criticality, case status | Uppercase normalization |
-| Investigation `analyst`, `investigation_notes` | `analyst_id`, `analyst_notes` |
-| `Complete evidence package` / `Missing evidence` | `evidence_present=true` / `false` |
-| Missing target fields | Explicit NULL, not fabricated defaults |
+Gamma mappings:
 
-Source-only `Member`, case `severity`, investigation `duration_minutes` and
-telemetry `event_type`/`event_status` remain in the original CSVs; there are no
-equivalent database columns. Investigation/escalation `entity_id` is validated
-before omitting it from those tables. No timestamps are inferred from durations.
-No evidence counts are inferred from prose. No telemetry source type or logging
-status is inferred from event categories/statuses. No escalation boolean is
-inferred from the presence of an escalation record. Ground-truth columns are
-mapped for validation only; `NONE` means expected detection is false.
+- Entity ID/Organization/Sector become entity_id/entity_name/sector.
+- Alert alert_type becomes category without changing its text.
+- Investigation analyst/investigation_notes become analyst_id/analyst_notes.
+- Complete evidence package/Missing evidence become evidence_present true/false.
+- Ground-truth expected_rule becomes problem_type; NONE means expected_detection false.
+- Missing database fields remain blank (SQL NULL).
 
-Consequences for analytics: Gamma's NULL evidence counts trigger the existing
-R002 semantics, and missing investigation timestamps cannot support chronology
-checks. Gamma telemetry is irregular rather than hourly, so the current R005
-cadence assumptions limit its usefulness on that dataset. These are source
-limitations, not reasons to rewrite the working engines or invent observations.
+Source-only Member, case severity, investigation duration_minutes, and telemetry
+event_type/event_status remain available in the original backups. No timestamps,
+evidence counts, escalation flags, or telemetry source/status were invented.
 
-## Analytics and tests
+PowerGrid's two deliberately short case closure intervals were preserved. Their
+investigation start/completion and escalation timestamps were regenerated within
+those intervals at one-third, two-thirds and five-sixths of the interval,
+respectively. The LOW alert attached to the labelled FAST_CRITICAL_CLOSURE case
+E005-C0021 was corrected to CRITICAL. Two duplicate S06 ground-truth IDs became
+S06-2 and S06-3, preserving the three distinct case labels.
 
-The four services contain no hard-coded E001/alpha_bank filter. Rule and
-negative-space engines already analyze all entities. Workflow auditing takes
-an entity ID, and the contradiction engine supports an optional entity filter.
-No engine changes are needed.
+## Remaining data limitations
 
-The new tests exercise import rollback, skipping without overwrite, exclusion
-of ground truth, schema/relationship/ID checks, chronology labels, explicit
-Gamma mapping, and source-versus-database verification. The read-only analytics
-script exercises every database entity and checks the existing Alpha findings.
-The old Alpha-only evaluation scripts compare to Alpha labels; their aggregate
-metrics should not be interpreted as multi-organization evaluation.
+Schema/relationship validity does not prove measurement completeness or detection
+accuracy. Gamma has no investigation timestamps or evidence counts. The existing
+R002 rule treats NULL evidence counts as missing evidence even where the source
+says a complete evidence package exists. Its escalation flags are unknown, and
+its telemetry is irregular rather than hourly, limiting the current R005 model.
+No analytics logic was changed to hide these limitations.
+
+## Verified results
+
+| Entity | Assets | Alerts | Cases | Investigations | Escalations | Telemetry |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| E001 Alpha | 30 | 204 | 97 | 94 | 71 | 2016 |
+| E002 Beta | 32 | 210 | 104 | 102 | 62 | 2304 |
+| E003 Gamma | 30 | 204 | 97 | 94 | 66 | 2016 |
+| E004 Metro | 30 | 204 | 100 | 95 | 100 | 2016 |
+| E005 PowerGrid | 30 | 200 | 100 | 99 | 59 | 1440 |
+
+All 42 unit tests pass. Strict validation, cross-organization ID uniqueness,
+source/database comparison and ownership checks pass. All four analytics modules
+execute across the database organizations. Alpha retains its five critical-case
+findings and two R005 findings; all organizations currently have zero C001-C004
+contradictions. These are execution/regression results, not multi-entity precision
+or recall estimates.
+
+The four analytics services contain no E001/alpha_bank filters and required no
+modifications. Existing Alpha-only ground-truth evaluation scripts should not
+be interpreted as multi-organization evaluation.

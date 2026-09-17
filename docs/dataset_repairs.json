@@ -1,0 +1,142 @@
+[
+  {
+    "file": "gamma_bank/alerts.csv",
+    "id": "AL-E003-021",
+    "field": "severity",
+    "before": "Low",
+    "after": "Critical",
+    "reason": "Align with explicit source case severity; preserve fast critical closure cases."
+  },
+  {
+    "file": "gamma_bank/alerts.csv",
+    "id": "AL-E003-051",
+    "field": "severity",
+    "before": "High",
+    "after": "Critical",
+    "reason": "Align with explicit source case severity; preserve fast critical closure cases."
+  },
+  {
+    "file": "gamma_bank/alerts.csv",
+    "id": "AL-E003-089",
+    "field": "severity",
+    "before": "Low",
+    "after": "Critical",
+    "reason": "Align with explicit source case severity; preserve fast critical closure cases."
+  },
+  {
+    "file": "gamma_bank/alerts.csv",
+    "id": "AL-E003-123",
+    "field": "severity",
+    "before": "Medium",
+    "after": "Critical",
+    "reason": "Align with explicit source case severity; preserve fast critical closure cases."
+  },
+  {
+    "file": "gamma_bank/alerts.csv",
+    "id": "AL-E003-165",
+    "field": "severity",
+    "before": "Medium",
+    "after": "Critical",
+    "reason": "Align with explicit source case severity; preserve fast critical closure cases."
+  },
+  {
+    "file": "gamma_bank/escalations.csv",
+    "id": "ESC-E003-001",
+    "field": "escalated_at",
+    "before": "2026-08-29T22:24:00",
+    "after": "2026-08-29T22:07:00",
+    "reason": "Synthetic correction: place escalation at case closure boundary."
+  },
+  {
+    "file": "gamma_bank/escalations.csv",
+    "id": "ESC-E003-016",
+    "field": "escalated_at",
+    "before": "2026-08-30T15:09:00",
+    "after": "2026-08-30T14:27:00",
+    "reason": "Synthetic correction: place escalation at case closure boundary."
+  },
+  {
+    "file": "gamma_bank/escalations.csv",
+    "id": "ESC-E003-030",
+    "field": "escalated_at",
+    "before": "2026-08-15T04:52:00",
+    "after": "2026-08-15T04:45:00",
+    "reason": "Synthetic correction: place escalation at case closure boundary."
+  },
+  {
+    "file": "gamma_bank/*.csv",
+    "reason": "Canonical schema conversion using documented adapter; original-only fields retained in backup; unavailable fields blank."
+  },
+  {
+    "file": "powergrid_utility/investigations.csv",
+    "id": "E005-INV0021",
+    "field": "started_at",
+    "before": "2026-08-03 02:30:00",
+    "after": "2026-08-03 02:10:40",
+    "reason": "Synthetic timing repair within existing fast-closure interval; closure duration unchanged."
+  },
+  {
+    "file": "powergrid_utility/investigations.csv",
+    "id": "E005-INV0021",
+    "field": "completed_at",
+    "before": "2026-08-03 03:32:00",
+    "after": "2026-08-03 02:11:20",
+    "reason": "Synthetic timing repair within existing fast-closure interval; closure duration unchanged."
+  },
+  {
+    "file": "powergrid_utility/investigations.csv",
+    "id": "E005-INV0041",
+    "field": "started_at",
+    "before": "2026-08-04 18:36:00",
+    "after": "2026-08-04 18:29:20",
+    "reason": "Synthetic timing repair within existing fast-closure interval; closure duration unchanged."
+  },
+  {
+    "file": "powergrid_utility/investigations.csv",
+    "id": "E005-INV0041",
+    "field": "completed_at",
+    "before": "2026-08-04 20:36:00",
+    "after": "2026-08-04 18:29:40",
+    "reason": "Synthetic timing repair within existing fast-closure interval; closure duration unchanged."
+  },
+  {
+    "file": "powergrid_utility/escalations.csv",
+    "id": "E005-ESC0021",
+    "field": "escalated_at",
+    "before": "2026-08-03 02:40:00",
+    "after": "2026-08-03 02:11:40",
+    "reason": "Synthetic timing repair within existing fast-closure interval; closure duration unchanged."
+  },
+  {
+    "file": "powergrid_utility/escalations.csv",
+    "id": "E005-ESC0041",
+    "field": "escalated_at",
+    "before": "2026-08-04 18:56:00",
+    "after": "2026-08-04 18:29:50",
+    "reason": "Synthetic timing repair within existing fast-closure interval; closure duration unchanged."
+  },
+  {
+    "file": "powergrid_utility/ground_truth.csv",
+    "id": "E005-C0032",
+    "field": "scenario_id",
+    "before": "S06",
+    "after": "S06-2",
+    "reason": "Distinct IDs for separate labelled case rows."
+  },
+  {
+    "file": "powergrid_utility/ground_truth.csv",
+    "id": "E005-C0033",
+    "field": "scenario_id",
+    "before": "S06",
+    "after": "S06-3",
+    "reason": "Distinct IDs for separate labelled case rows."
+  },
+  {
+    "file": "powergrid_utility/alerts.csv",
+    "id": "E005-A0021",
+    "field": "severity",
+    "before": "LOW",
+    "after": "CRITICAL",
+    "reason": "Correct synthetic FAST_CRITICAL_CLOSURE scenario severity."
+  }
+]

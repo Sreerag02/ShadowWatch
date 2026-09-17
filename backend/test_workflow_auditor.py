@@ -19,11 +19,18 @@ def print_assessment(result):
     print(f'\nClosure Time: {duration:.1f} minutes' if duration is not None else '\nClosure Time: Unknown')
     if result['closure_policy']:
         print(f"Prototype timing check: below {result['closure_policy']['minimum_minutes']} minutes triggers R004")
-    print('\nExecution Gaps:')
+    print('\nConfirmed Execution Gaps:')
     for gap in result['gaps']:
         print(f"- {gap['rule_id'] or 'Prototype'} {gap['reason']}")
     if not result['gaps']:
-        print('- None detected within evaluated expectations')
+        print('- None established from available records')
+    print('\nInsufficient Data:')
+    for issue in result['data_issues']:
+        print(f"- {issue['stage']} ({issue['source_id']}): {issue['reason']}")
+    if not result['data_issues']:
+        print('- No unresolved required checks')
+    print('\nRule-engine triggers (not all are confirmed gaps):', ', '.join(result['triggered_rules']) or 'None')
+    print('Required checks complete:', 'Yes' if result['assessment_complete'] else 'No')
     print('\nAssessment:', result['assessment'])
     print('\n' + result['explanation'])
     print('\nLimitations:')

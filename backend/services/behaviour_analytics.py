@@ -690,3 +690,253 @@ def detect_repeat_incidents(
             break
 
     return pd.DataFrame(findings)
+
+def detect_combined_suspicious_behaviour(
+    r006_findings,
+    r007_findings,
+    r008_findings,
+    minimum_rules=2
+):
+    """
+    R009 - Detect combined suspicious investigation behaviour.
+
+    A case is flagged when evidence from at least
+    `minimum_rules` different behavioural detectors is present.
+
+    The output preserves the evidence and explanation from
+    R006, R007 and R008 instead of creating an opaque score.
+    """
+
+    if minimum_rules < 2:
+        raise ValueError(
+            "minimum_rules must be at least 2"
+        )
+
+    if r006_findings is None:
+        r006_findings = pd.DataFrame()
+
+    if r007_findings is None:
+        r007_findings = pd.DataFrame()
+
+    if r008_findings is None:
+        r008_findings = pd.DataFrame()
+
+    case_evidence = {}
+
+    def add_case_evidence(
+        case_id,
+        rule_id,
+        finding
+    ):
+        """
+        Store detector evidence for a case.
+        """
+
+        if not case_id:
+            return
+
+        if case_id not in case_evidence:
+            case_evidence[case_id] = {}
+
+        if rule_id not in case_evidence[case_id]:
+            case_evidence[case_id][rule_id] = []
+
+        case_evidence[case_id][rule_id].append(
+            finding
+        )
+
+    # ---------------------------------------------------------
+    # R006 evidence
+    # ---------------------------------------------------------
+
+    if not r006_findings.empty:
+
+        for _, finding in r006_findings.iterrows():
+
+            case_ids = str(
+                finding.get("case_ids", "")
+            ).split(",")
+
+            for case_id in case_ids:
+
+                case_id = case_id.strip()
+
+                if case_id:
+                    add_case_evidence(
+                        case_id,
+                        "R006",
+                        finding.to_dict()
+                    )
+
+    # ---------------------------------------------------------
+    # R007 evidence
+    # ---------------------------------------------------------
+
+    if not r007_findings.empty:
+
+        for _, finding in r007_findings.iterrows():
+
+            case_id = str(
+                finding.get("case_id", "")
+            ).strip()
+
+            if case_id:
+                add_case_evidence(
+                    case_id,
+                    "R007",
+                    finding.to_dict()
+                )
+
+    # ---------------------------------------------------------
+    # R008 evidence
+    # ---------------------------------------------------------
+
+    if not r008_findings.empty:
+
+        for _, finding in r008_findings.iterrows():
+
+            case_ids = str(
+                finding.get("case_ids", "")
+            ).split(",")
+
+            for case_id in case_ids:
+
+                case_id = case_id.strip()
+
+                if case_id:
+                    add_case_evidence(
+                        case_id,
+                        "R008",
+                        finding.to_dict()
+                    )
+
+    # ---------------------------------------------------------
+    # Build combined findings
+    # ---------------------------------------------------------
+
+    findings = []
+
+    for case_id, rule_evidence in case_evidence.items():
+
+        triggered_rules = sorted(
+            rule_evidence.keys()
+        )
+
+        if len(triggered_rules) < minimum_rules:
+            continue
+
+        evidence_parts = []
+
+        # -----------------------------------------------------
+        # R006 explanation
+        # -----------------------------------------------------
+
+        if "R006" in rule_evidence:
+
+            for finding in rule_evidence["R006"]:
+
+                similarity = finding.get(
+                    "similarity_score"
+                )
+
+                repetition_count = finding.get(
+                    "repetition_count"
+                )
+
+                evidence_parts.append(
+                    "R006: Investigation notes showed "
+                    f"high similarity (score={similarity}) "
+                    f"across cases, with repeated investigation "
+                    f"text ({repetition_count} related records)."
+                )
+
+        # -----------------------------------------------------
+        # R007 explanation
+        # -----------------------------------------------------
+
+        if "R007" in rule_evidence:
+
+            for finding in rule_evidence["R007"]:
+
+                duration = finding.get(
+                    "duration_minutes"
+                )
+
+                baseline = finding.get(
+                    "baseline_duration_minutes"
+                )
+
+                ratio = finding.get(
+                    "duration_ratio"
+                )
+
+                evidence_parts.append(
+                    "R007: Investigation duration was "
+                    f"{duration} minutes compared with a "
+                    f"severity-specific baseline of "
+                    f"{baseline} minutes "
+                    f"(duration ratio={ratio}), with a "
+                    "closure reason indicating unusually "
+                    "fast closure."
+                )
+
+        # -----------------------------------------------------
+        # R008 explanation
+        # -----------------------------------------------------
+
+        if "R008" in rule_evidence:
+
+            for finding in rule_evidence["R008"]:
+
+                asset_id = finding.get(
+                    "asset_id"
+                )
+
+                category = finding.get(
+                    "category"
+                )
+
+                incident_count = finding.get(
+                    "incident_count"
+                )
+
+                time_span = finding.get(
+                    "time_span_days"
+                )
+
+                evidence_parts.append(
+                    "R008: The asset "
+                    f"{asset_id} experienced "
+                    f"{incident_count} investigated "
+                    f"'{category}' incidents within "
+                    f"{time_span} days."
+                )
+
+        reason = (
+            f"Case {case_id} triggered "
+            f"{len(triggered_rules)} behavioural rules "
+            f"({', '.join(triggered_rules)})."
+        )
+
+        findings.append({
+
+            "finding_type":
+                "COMBINED_SUSPICIOUS_INVESTIGATION_BEHAVIOUR",
+
+            "case_id":
+                case_id,
+
+            "triggered_rules":
+                ", ".join(triggered_rules),
+
+            "rule_count":
+                len(triggered_rules),
+
+            "evidence":
+                " ".join(evidence_parts),
+
+            "reason":
+                reason
+        })
+
+    return pd.DataFrame(findings)

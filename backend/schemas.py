@@ -76,3 +76,11 @@ class CaseResponse(BaseModel):
 
     class Config:
         from_attributes = True
+# appended by Deepa
+class EntitySummaryResponse(EntityBase):
+    asset_count: int
+    alert_count: int
+    case_count: int
+    
+    class Config:
+        from_attributes = True

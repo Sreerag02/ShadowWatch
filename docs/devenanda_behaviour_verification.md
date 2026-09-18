@@ -106,14 +106,14 @@ review and the requested team's Git branch handoff. No commit or push was made.
 From the repository root:
 
 ```bash
-python3 tests/validate_all_datasets.py
 cd backend
-venv/bin/python -m unittest test_behaviour_unit test_backend_api_unit test_multi_entity_unit test_contradiction_engine_unit test_workflow_auditor_unit test_negative_space_unit
-venv/bin/python verify_multi_entity_db.py
-venv/bin/python test_backend_integration.py
-venv/bin/python test_multi_entity_analytics.py
-venv/bin/python test_behaviour_analytics.py --summary
-venv/bin/python validate_behaviour_ground_truth.py --json
+venv/bin/python -m scripts.validate_all_datasets
+venv/bin/python -m unittest tests.unit.test_behaviour_analytics tests.integration.test_backend_api tests.integration.test_ingestion tests.unit.test_contradiction_engine tests.unit.test_workflow_auditor tests.unit.test_negative_space
+venv/bin/python -m scripts.verify_database
+venv/bin/python -m tests.integration.test_backend_live
+venv/bin/python -m tests.integration.test_analytics_live
+venv/bin/python -m scripts.report_behaviour --summary
+venv/bin/python -m scripts.validate_behaviour_ground_truth --json
 ```
 
 Database checks are read-only. Unit/contract tests use isolated SQLite. The JSON

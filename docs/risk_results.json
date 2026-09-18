@@ -1,0 +1,2196 @@
+{
+  "description": "Observed PostgreSQL prototype risk results, 2026-09-18; full source evidence available through risk API or report --json.",
+  "entities": [
+    {
+      "entity_id": "E001",
+      "entity_name": "Alpha Bank",
+      "sector": "Banking",
+      "peer_group": "Banking",
+      "overall_score": 14.62,
+      "overall_level": "LOW",
+      "score_status": "AVAILABLE",
+      "available_component_weight": 1.0,
+      "unavailable_component_upper_bound": 14.62,
+      "components": {
+        "EXECUTION_GAP_RISK": {
+          "score": 13.0597,
+          "weight": 0.3,
+          "contribution": 3.9179,
+          "exposure": "serious_cases",
+          "denominator": 67,
+          "affected_count": 10,
+          "weighted_affected_count": 8.75,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "MONITORING_VISIBILITY_RISK": {
+          "score": 5.3571,
+          "weight": 0.2,
+          "contribution": 1.0714,
+          "exposure": "monitored_assets",
+          "denominator": 28,
+          "affected_count": 2,
+          "weighted_affected_count": 1.5,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "INVESTIGATION_QUALITY_RISK": {
+          "score": 48.1383,
+          "weight": 0.2,
+          "contribution": 9.6277,
+          "exposure": "investigated_cases",
+          "denominator": 94,
+          "affected_count": 90,
+          "weighted_affected_count": 45.25,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "REPEAT_INCIDENT_RISK": {
+          "score": 0.0,
+          "weight": 0.15,
+          "contribution": 0.0,
+          "exposure": "cases",
+          "denominator": 97,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "RECORD_CONSISTENCY_RISK": {
+          "score": 0.0,
+          "weight": 0.15,
+          "contribution": 0.0,
+          "exposure": "cases",
+          "denominator": 97,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        }
+      },
+      "aggregation": {
+        "total_findings": 106,
+        "findings_by_rule": {
+          "R002": 2,
+          "R003": 4,
+          "R004": 1,
+          "R005": 2,
+          "R006": 90,
+          "R007": 1,
+          "R009": 1,
+          "WF_EVIDENCE": 2,
+          "WF_INVESTIGATION": 3
+        },
+        "findings_by_problem_type": {
+          "COMBINED_SUSPICIOUS_INVESTIGATION_BEHAVIOUR": 1,
+          "FAST_CRITICAL_CLOSURE": 1,
+          "INVESTIGATION_DURATION_ANOMALY": 1,
+          "MISSING_ESCALATION": 4,
+          "MISSING_EVIDENCE": 2,
+          "REPETITIVE_INVESTIGATION": 90,
+          "TELEMETRY_BLIND_SPOT": 2,
+          "WORKFLOW_EVIDENCE_GAP": 2,
+          "WORKFLOW_INVESTIGATION_GAP": 3
+        },
+        "findings_by_severity": {
+          "CRITICAL": 7,
+          "HIGH": 8,
+          "MEDIUM": 91
+        },
+        "findings_by_assessment": {
+          "CONFIRMED_GAP": 12,
+          "REVIEW_REQUIRED": 94
+        },
+        "affected_cases": 93,
+        "affected_assets": 27,
+        "execution_gap_count": 12,
+        "negative_space_count": 2,
+        "contradiction_count": 0,
+        "behaviour_analytics_count": 92
+      },
+      "metrics": {
+        "findings_per_100_cases": {
+          "numerator": 106,
+          "denominator": 97,
+          "value": 109.2784,
+          "unit": "findings per 100 cases",
+          "status": "AVAILABLE"
+        },
+        "execution_gap_rate": {
+          "numerator": 10,
+          "denominator": 67,
+          "value": 14.9254,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_escalation_rate": {
+          "numerator": 4,
+          "denominator": 17,
+          "value": 23.5294,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_evidence_rate": {
+          "numerator": 4,
+          "denominator": 64,
+          "value": 6.25,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "telemetry_blind_spot_rate": {
+          "numerator": 2,
+          "denominator": 28,
+          "value": 7.1429,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repetitive_investigation_rate": {
+          "numerator": 90,
+          "denominator": 94,
+          "value": 95.7447,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repeat_incident_rate": {
+          "numerator": 0,
+          "denominator": 97,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "contradiction_rate": {
+          "numerator": 0,
+          "denominator": 97,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "behaviour_findings_per_100_investigated_cases": {
+          "numerator": 92,
+          "denominator": 94,
+          "value": 97.8723,
+          "unit": "findings per 100 investigated cases",
+          "status": "AVAILABLE"
+        },
+        "median_investigation_minutes": {
+          "value": 47.0,
+          "unit": "minutes",
+          "sample_count": 91,
+          "status": "AVAILABLE"
+        }
+      },
+      "denominators": {
+        "monitored_assets": 28,
+        "cases": 97,
+        "investigated_cases": 94,
+        "critical_cases": 17,
+        "investigated_serious_cases": 64,
+        "serious_cases": 67
+      },
+      "data_coverage": {
+        "investigation_count": 94,
+        "notes_present": 94,
+        "valid_duration_count": 91,
+        "unknown_monitoring_assets": 0,
+        "monitored_assets_with_telemetry": 14,
+        "cases_with_unknown_severity": 0,
+        "workflow_data_issue_cases": 0
+      },
+      "peer_context": {
+        "entity_id": "E001",
+        "peer_group": "Banking",
+        "sector": "Banking",
+        "peer_group_source": "stored",
+        "stored_peer_group": "Banking",
+        "peer_entity_ids": [
+          "E002",
+          "E003"
+        ],
+        "peer_members": [
+          {
+            "entity_id": "E002",
+            "group": "Banking",
+            "sector": "Banking",
+            "source": "stored"
+          },
+          {
+            "entity_id": "E003",
+            "group": "Banking",
+            "sector": "Banking",
+            "source": "configured_sector_fallback"
+          }
+        ],
+        "status": "AVAILABLE",
+        "metrics": {
+          "findings_per_100_cases": {
+            "entity_value": 109.2784,
+            "peer_median": 62.6338,
+            "peer_mean": 62.6338,
+            "difference_from_peer_median": 46.6446,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "findings per 100 cases",
+            "status": "AVAILABLE"
+          },
+          "execution_gap_rate": {
+            "entity_value": 14.9254,
+            "peer_median": 13.3826,
+            "peer_mean": 13.3826,
+            "difference_from_peer_median": 1.5428,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "missing_escalation_rate": {
+            "entity_value": 23.5294,
+            "peer_median": 28.2828,
+            "peer_mean": 28.2828,
+            "difference_from_peer_median": -4.7534,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "missing_evidence_rate": {
+            "entity_value": 6.25,
+            "peer_median": 3.3635,
+            "peer_mean": 3.3635,
+            "difference_from_peer_median": 2.8865,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "telemetry_blind_spot_rate": {
+            "entity_value": 7.1429,
+            "peer_median": 6.25,
+            "peer_mean": 6.25,
+            "difference_from_peer_median": 0.8929,
+            "description": "above peer median",
+            "valid_peer_count": 1,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "repetitive_investigation_rate": {
+            "entity_value": 95.7447,
+            "peer_median": 40.9888,
+            "peer_mean": 40.9888,
+            "difference_from_peer_median": 54.7559,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "repeat_incident_rate": {
+            "entity_value": 0.0,
+            "peer_median": 2.4038,
+            "peer_mean": 2.4038,
+            "difference_from_peer_median": -2.4038,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "contradiction_rate": {
+            "entity_value": 0.0,
+            "peer_median": 0.0,
+            "peer_mean": 0.0,
+            "difference_from_peer_median": 0.0,
+            "description": "near peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "behaviour_findings_per_100_investigated_cases": {
+            "entity_value": 97.8723,
+            "peer_median": 48.3417,
+            "peer_mean": 48.3417,
+            "difference_from_peer_median": 49.5306,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "findings per 100 investigated cases",
+            "status": "AVAILABLE"
+          },
+          "median_investigation_minutes": {
+            "entity_value": 47.0,
+            "peer_median": 36.5083,
+            "peer_mean": 36.5083,
+            "difference_from_peer_median": 10.4917,
+            "description": "above peer median",
+            "valid_peer_count": 1,
+            "unit": "minutes",
+            "status": "AVAILABLE"
+          }
+        },
+        "explanation": "Peer statistics exclude the selected entity and unavailable metric values. Same group and sector required; no best/worst ranking. No time-window alignment is assumed."
+      },
+      "limitations": [
+        "Behaviour rules are prototype review signals; repetitive templates may create false positives.",
+        "Metrics describe all currently loaded records; organizations may cover different observation periods.",
+        "No finding does not prove normal behaviour: detectors can skip missing inputs or sparse baselines.",
+        "Some investigation durations are missing or invalid; R007 and duration benchmarks have limited coverage.",
+        "Some monitored assets have no telemetry records; zero blind-spot findings does not establish visibility."
+      ],
+      "config": {
+        "version": "prototype-v1",
+        "component_weights": {
+          "EXECUTION_GAP_RISK": 0.3,
+          "MONITORING_VISIBILITY_RISK": 0.2,
+          "INVESTIGATION_QUALITY_RISK": 0.2,
+          "REPEAT_INCIDENT_RISK": 0.15,
+          "RECORD_CONSISTENCY_RISK": 0.15
+        },
+        "severity_weights": {
+          "LOW": 0.25,
+          "MEDIUM": 0.5,
+          "HIGH": 0.75,
+          "CRITICAL": 1.0
+        },
+        "level_thresholds": {
+          "MODERATE": 25,
+          "HIGH": 50,
+          "CRITICAL": 75
+        },
+        "priority_alert_points": {
+          "LOW": 5,
+          "MEDIUM": 10,
+          "HIGH": 20,
+          "CRITICAL": 30
+        },
+        "priority_asset_points": {
+          "LOW": 0,
+          "MEDIUM": 3,
+          "HIGH": 6,
+          "CRITICAL": 10
+        },
+        "priority_component_points": {
+          "EXECUTION_GAP_RISK": 30,
+          "MONITORING_VISIBILITY_RISK": 0,
+          "INVESTIGATION_QUALITY_RISK": 15,
+          "REPEAT_INCIDENT_RISK": 10,
+          "RECORD_CONSISTENCY_RISK": 15
+        },
+        "small_sample_cases": 20,
+        "peer_near_tolerance": 0.01,
+        "peer_group_fallbacks": {
+          "Banking": "Banking"
+        }
+      },
+      "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
+      "top_priority_cases": [
+        {
+          "case_id": "E001-C0003",
+          "priority_score": 77.5,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R003",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "E001-C0025",
+          "priority_score": 77.5,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R002",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "E001-C0081",
+          "priority_score": 77.25,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R002",
+            "R003",
+            "R004",
+            "R006",
+            "R007",
+            "R009"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 6,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 11.25,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "entity_id": "E002",
+      "entity_name": "Beta Bank",
+      "sector": "Banking",
+      "peer_group": "Banking",
+      "overall_score": 6.12,
+      "overall_level": "LOW",
+      "score_status": "AVAILABLE",
+      "available_component_weight": 1.0,
+      "unavailable_component_upper_bound": 6.12,
+      "components": {
+        "EXECUTION_GAP_RISK": {
+          "score": 9.5238,
+          "weight": 0.3,
+          "contribution": 2.8571,
+          "exposure": "serious_cases",
+          "denominator": 63,
+          "affected_count": 6,
+          "weighted_affected_count": 6.0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "MONITORING_VISIBILITY_RISK": {
+          "score": 4.6875,
+          "weight": 0.2,
+          "contribution": 0.9375,
+          "exposure": "monitored_assets",
+          "denominator": 32,
+          "affected_count": 2,
+          "weighted_affected_count": 1.5,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "INVESTIGATION_QUALITY_RISK": {
+          "score": 9.8039,
+          "weight": 0.2,
+          "contribution": 1.9608,
+          "exposure": "investigated_cases",
+          "denominator": 102,
+          "affected_count": 18,
+          "weighted_affected_count": 10.0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "REPEAT_INCIDENT_RISK": {
+          "score": 2.4038,
+          "weight": 0.15,
+          "contribution": 0.3606,
+          "exposure": "cases",
+          "denominator": 104,
+          "affected_count": 5,
+          "weighted_affected_count": 2.5,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "RECORD_CONSISTENCY_RISK": {
+          "score": 0.0,
+          "weight": 0.15,
+          "contribution": 0.0,
+          "exposure": "cases",
+          "denominator": 104,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        }
+      },
+      "aggregation": {
+        "total_findings": 37,
+        "findings_by_rule": {
+          "R001": 2,
+          "R002": 2,
+          "R003": 2,
+          "R004": 2,
+          "R005": 2,
+          "R006": 12,
+          "R007": 6,
+          "R008": 5,
+          "R009": 4
+        },
+        "findings_by_problem_type": {
+          "COMBINED_SUSPICIOUS_INVESTIGATION_BEHAVIOUR": 4,
+          "FAST_CRITICAL_CLOSURE": 2,
+          "INVESTIGATION_DURATION_ANOMALY": 6,
+          "MISSING_ESCALATION": 2,
+          "MISSING_EVIDENCE": 2,
+          "MISSING_INVESTIGATION": 2,
+          "REPEAT_INCIDENT_PATTERN": 5,
+          "REPETITIVE_INVESTIGATION": 12,
+          "TELEMETRY_BLIND_SPOT": 2
+        },
+        "findings_by_severity": {
+          "CRITICAL": 8,
+          "HIGH": 6,
+          "MEDIUM": 23
+        },
+        "findings_by_assessment": {
+          "CONFIRMED_GAP": 8,
+          "REVIEW_REQUIRED": 29
+        },
+        "affected_cases": 25,
+        "affected_assets": 15,
+        "execution_gap_count": 8,
+        "negative_space_count": 2,
+        "contradiction_count": 0,
+        "behaviour_analytics_count": 27
+      },
+      "metrics": {
+        "findings_per_100_cases": {
+          "numerator": 37,
+          "denominator": 104,
+          "value": 35.5769,
+          "unit": "findings per 100 cases",
+          "status": "AVAILABLE"
+        },
+        "execution_gap_rate": {
+          "numerator": 6,
+          "denominator": 63,
+          "value": 9.5238,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_escalation_rate": {
+          "numerator": 2,
+          "denominator": 18,
+          "value": 11.1111,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_evidence_rate": {
+          "numerator": 2,
+          "denominator": 61,
+          "value": 3.2787,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "telemetry_blind_spot_rate": {
+          "numerator": 2,
+          "denominator": 32,
+          "value": 6.25,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repetitive_investigation_rate": {
+          "numerator": 12,
+          "denominator": 102,
+          "value": 11.7647,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repeat_incident_rate": {
+          "numerator": 5,
+          "denominator": 104,
+          "value": 4.8077,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "contradiction_rate": {
+          "numerator": 0,
+          "denominator": 104,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "behaviour_findings_per_100_investigated_cases": {
+          "numerator": 27,
+          "denominator": 102,
+          "value": 26.4706,
+          "unit": "findings per 100 investigated cases",
+          "status": "AVAILABLE"
+        },
+        "median_investigation_minutes": {
+          "value": 36.50833333333333,
+          "unit": "minutes",
+          "sample_count": 102,
+          "status": "AVAILABLE"
+        }
+      },
+      "denominators": {
+        "monitored_assets": 32,
+        "cases": 104,
+        "investigated_cases": 102,
+        "critical_cases": 18,
+        "investigated_serious_cases": 61,
+        "serious_cases": 63
+      },
+      "data_coverage": {
+        "investigation_count": 102,
+        "notes_present": 102,
+        "valid_duration_count": 102,
+        "unknown_monitoring_assets": 0,
+        "monitored_assets_with_telemetry": 32,
+        "cases_with_unknown_severity": 0,
+        "workflow_data_issue_cases": 0
+      },
+      "peer_context": {
+        "entity_id": "E002",
+        "peer_group": "Banking",
+        "sector": "Banking",
+        "peer_group_source": "stored",
+        "stored_peer_group": "Banking",
+        "peer_entity_ids": [
+          "E001",
+          "E003"
+        ],
+        "peer_members": [
+          {
+            "entity_id": "E001",
+            "group": "Banking",
+            "sector": "Banking",
+            "source": "stored"
+          },
+          {
+            "entity_id": "E003",
+            "group": "Banking",
+            "sector": "Banking",
+            "source": "configured_sector_fallback"
+          }
+        ],
+        "status": "AVAILABLE",
+        "metrics": {
+          "findings_per_100_cases": {
+            "entity_value": 35.5769,
+            "peer_median": 99.4846,
+            "peer_mean": 99.4846,
+            "difference_from_peer_median": -63.9077,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "findings per 100 cases",
+            "status": "AVAILABLE"
+          },
+          "execution_gap_rate": {
+            "entity_value": 9.5238,
+            "peer_median": 16.0834,
+            "peer_mean": 16.0834,
+            "difference_from_peer_median": -6.5596,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "missing_escalation_rate": {
+            "entity_value": 11.1111,
+            "peer_median": 34.492,
+            "peer_mean": 34.492,
+            "difference_from_peer_median": -23.3809,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "missing_evidence_rate": {
+            "entity_value": 3.2787,
+            "peer_median": 4.8491,
+            "peer_mean": 4.8491,
+            "difference_from_peer_median": -1.5704,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "telemetry_blind_spot_rate": {
+            "entity_value": 6.25,
+            "peer_median": 7.1429,
+            "peer_mean": 7.1429,
+            "difference_from_peer_median": -0.8929,
+            "description": "below peer median",
+            "valid_peer_count": 1,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "repetitive_investigation_rate": {
+            "entity_value": 11.7647,
+            "peer_median": 82.9787,
+            "peer_mean": 82.9787,
+            "difference_from_peer_median": -71.214,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "repeat_incident_rate": {
+            "entity_value": 4.8077,
+            "peer_median": 0.0,
+            "peer_mean": 0.0,
+            "difference_from_peer_median": 4.8077,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "contradiction_rate": {
+            "entity_value": 0.0,
+            "peer_median": 0.0,
+            "peer_mean": 0.0,
+            "difference_from_peer_median": 0.0,
+            "description": "near peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "behaviour_findings_per_100_investigated_cases": {
+            "entity_value": 26.4706,
+            "peer_median": 84.0426,
+            "peer_mean": 84.0426,
+            "difference_from_peer_median": -57.572,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "findings per 100 investigated cases",
+            "status": "AVAILABLE"
+          },
+          "median_investigation_minutes": {
+            "entity_value": 36.50833333333333,
+            "peer_median": 47.0,
+            "peer_mean": 47.0,
+            "difference_from_peer_median": -10.4917,
+            "description": "below peer median",
+            "valid_peer_count": 1,
+            "unit": "minutes",
+            "status": "AVAILABLE"
+          }
+        },
+        "explanation": "Peer statistics exclude the selected entity and unavailable metric values. Same group and sector required; no best/worst ranking. No time-window alignment is assumed."
+      },
+      "limitations": [
+        "Behaviour rules are prototype review signals; repetitive templates may create false positives.",
+        "Metrics describe all currently loaded records; organizations may cover different observation periods.",
+        "No finding does not prove normal behaviour: detectors can skip missing inputs or sparse baselines."
+      ],
+      "config": {
+        "version": "prototype-v1",
+        "component_weights": {
+          "EXECUTION_GAP_RISK": 0.3,
+          "MONITORING_VISIBILITY_RISK": 0.2,
+          "INVESTIGATION_QUALITY_RISK": 0.2,
+          "REPEAT_INCIDENT_RISK": 0.15,
+          "RECORD_CONSISTENCY_RISK": 0.15
+        },
+        "severity_weights": {
+          "LOW": 0.25,
+          "MEDIUM": 0.5,
+          "HIGH": 0.75,
+          "CRITICAL": 1.0
+        },
+        "level_thresholds": {
+          "MODERATE": 25,
+          "HIGH": 50,
+          "CRITICAL": 75
+        },
+        "priority_alert_points": {
+          "LOW": 5,
+          "MEDIUM": 10,
+          "HIGH": 20,
+          "CRITICAL": 30
+        },
+        "priority_asset_points": {
+          "LOW": 0,
+          "MEDIUM": 3,
+          "HIGH": 6,
+          "CRITICAL": 10
+        },
+        "priority_component_points": {
+          "EXECUTION_GAP_RISK": 30,
+          "MONITORING_VISIBILITY_RISK": 0,
+          "INVESTIGATION_QUALITY_RISK": 15,
+          "REPEAT_INCIDENT_RISK": 10,
+          "RECORD_CONSISTENCY_RISK": 15
+        },
+        "small_sample_cases": 20,
+        "peer_near_tolerance": 0.01,
+        "peer_group_fallbacks": {
+          "Banking": "Banking"
+        }
+      },
+      "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
+      "top_priority_cases": [
+        {
+          "case_id": "E002-C0001",
+          "priority_score": 70.0,
+          "priority_level": "HIGH",
+          "triggered_rules": [
+            "R001"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 0,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "E002-C0013",
+          "priority_score": 70.0,
+          "priority_level": "HIGH",
+          "triggered_rules": [
+            "R001"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 0,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "E002-C0016",
+          "priority_score": 70.0,
+          "priority_level": "HIGH",
+          "triggered_rules": [
+            "R002"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 0,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "entity_id": "E003",
+      "entity_name": "Gamma Bank",
+      "sector": "Banking",
+      "peer_group": null,
+      "overall_score": 12.19,
+      "overall_level": "LOW",
+      "score_status": "PARTIAL",
+      "available_component_weight": 0.8,
+      "unavailable_component_upper_bound": 32.19,
+      "components": {
+        "EXECUTION_GAP_RISK": {
+          "score": 17.2414,
+          "weight": 0.3,
+          "contribution": 5.1724,
+          "exposure": "serious_cases",
+          "denominator": 29,
+          "affected_count": 5,
+          "weighted_affected_count": 5.0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "MONITORING_VISIBILITY_RISK": {
+          "score": null,
+          "weight": 0.2,
+          "contribution": 0.0,
+          "exposure": "monitored_assets",
+          "denominator": 0,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "NO_DENOMINATOR",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "INVESTIGATION_QUALITY_RISK": {
+          "score": 35.1064,
+          "weight": 0.2,
+          "contribution": 7.0213,
+          "exposure": "investigated_cases",
+          "denominator": 94,
+          "affected_count": 66,
+          "weighted_affected_count": 33.0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "REPEAT_INCIDENT_RISK": {
+          "score": 0.0,
+          "weight": 0.15,
+          "contribution": 0.0,
+          "exposure": "cases",
+          "denominator": 97,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "RECORD_CONSISTENCY_RISK": {
+          "score": 0.0,
+          "weight": 0.15,
+          "contribution": 0.0,
+          "exposure": "cases",
+          "denominator": 97,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        }
+      },
+      "aggregation": {
+        "total_findings": 87,
+        "findings_by_rule": {
+          "R002": 11,
+          "R003": 5,
+          "R004": 5,
+          "R006": 66
+        },
+        "findings_by_problem_type": {
+          "FAST_CRITICAL_CLOSURE": 5,
+          "MISSING_ESCALATION": 5,
+          "MISSING_EVIDENCE": 11,
+          "REPETITIVE_INVESTIGATION": 66
+        },
+        "findings_by_severity": {
+          "CRITICAL": 21,
+          "MEDIUM": 66
+        },
+        "findings_by_assessment": {
+          "CONFIRMED_GAP": 11,
+          "INSUFFICIENT_DATA": 10,
+          "REVIEW_REQUIRED": 66
+        },
+        "affected_cases": 70,
+        "affected_assets": 15,
+        "execution_gap_count": 11,
+        "negative_space_count": 0,
+        "contradiction_count": 0,
+        "behaviour_analytics_count": 66
+      },
+      "metrics": {
+        "findings_per_100_cases": {
+          "numerator": 87,
+          "denominator": 97,
+          "value": 89.6907,
+          "unit": "findings per 100 cases",
+          "status": "AVAILABLE"
+        },
+        "execution_gap_rate": {
+          "numerator": 5,
+          "denominator": 29,
+          "value": 17.2414,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_escalation_rate": {
+          "numerator": 5,
+          "denominator": 11,
+          "value": 45.4545,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_evidence_rate": {
+          "numerator": 1,
+          "denominator": 29,
+          "value": 3.4483,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "telemetry_blind_spot_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null,
+          "unit": "percent",
+          "status": "NO_DENOMINATOR"
+        },
+        "repetitive_investigation_rate": {
+          "numerator": 66,
+          "denominator": 94,
+          "value": 70.2128,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repeat_incident_rate": {
+          "numerator": 0,
+          "denominator": 97,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "contradiction_rate": {
+          "numerator": 0,
+          "denominator": 97,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "behaviour_findings_per_100_investigated_cases": {
+          "numerator": 66,
+          "denominator": 94,
+          "value": 70.2128,
+          "unit": "findings per 100 investigated cases",
+          "status": "AVAILABLE"
+        },
+        "median_investigation_minutes": {
+          "value": null,
+          "unit": "minutes",
+          "sample_count": 0,
+          "status": "NO_OBSERVATIONS"
+        }
+      },
+      "denominators": {
+        "monitored_assets": 0,
+        "cases": 97,
+        "investigated_cases": 94,
+        "critical_cases": 11,
+        "investigated_serious_cases": 29,
+        "serious_cases": 29
+      },
+      "data_coverage": {
+        "investigation_count": 94,
+        "notes_present": 94,
+        "valid_duration_count": 0,
+        "unknown_monitoring_assets": 30,
+        "monitored_assets_with_telemetry": 0,
+        "cases_with_unknown_severity": 0,
+        "workflow_data_issue_cases": 28
+      },
+      "peer_context": {
+        "entity_id": "E003",
+        "peer_group": "Banking",
+        "sector": "Banking",
+        "peer_group_source": "configured_sector_fallback",
+        "stored_peer_group": null,
+        "peer_entity_ids": [
+          "E001",
+          "E002"
+        ],
+        "peer_members": [
+          {
+            "entity_id": "E001",
+            "group": "Banking",
+            "sector": "Banking",
+            "source": "stored"
+          },
+          {
+            "entity_id": "E002",
+            "group": "Banking",
+            "sector": "Banking",
+            "source": "stored"
+          }
+        ],
+        "status": "AVAILABLE",
+        "metrics": {
+          "findings_per_100_cases": {
+            "entity_value": 89.6907,
+            "peer_median": 72.4276,
+            "peer_mean": 72.4276,
+            "difference_from_peer_median": 17.2631,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "findings per 100 cases",
+            "status": "AVAILABLE"
+          },
+          "execution_gap_rate": {
+            "entity_value": 17.2414,
+            "peer_median": 12.2246,
+            "peer_mean": 12.2246,
+            "difference_from_peer_median": 5.0168,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "missing_escalation_rate": {
+            "entity_value": 45.4545,
+            "peer_median": 17.3203,
+            "peer_mean": 17.3203,
+            "difference_from_peer_median": 28.1343,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "missing_evidence_rate": {
+            "entity_value": 3.4483,
+            "peer_median": 4.7644,
+            "peer_mean": 4.7644,
+            "difference_from_peer_median": -1.3161,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "telemetry_blind_spot_rate": {
+            "entity_value": null,
+            "peer_median": 6.6965,
+            "peer_mean": 6.6965,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "ENTITY_METRIC_UNAVAILABLE"
+          },
+          "repetitive_investigation_rate": {
+            "entity_value": 70.2128,
+            "peer_median": 53.7547,
+            "peer_mean": 53.7547,
+            "difference_from_peer_median": 16.4581,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "repeat_incident_rate": {
+            "entity_value": 0.0,
+            "peer_median": 2.4038,
+            "peer_mean": 2.4038,
+            "difference_from_peer_median": -2.4038,
+            "description": "below peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "contradiction_rate": {
+            "entity_value": 0.0,
+            "peer_median": 0.0,
+            "peer_mean": 0.0,
+            "difference_from_peer_median": 0.0,
+            "description": "near peer median",
+            "valid_peer_count": 2,
+            "unit": "percent",
+            "status": "AVAILABLE"
+          },
+          "behaviour_findings_per_100_investigated_cases": {
+            "entity_value": 70.2128,
+            "peer_median": 62.1715,
+            "peer_mean": 62.1715,
+            "difference_from_peer_median": 8.0414,
+            "description": "above peer median",
+            "valid_peer_count": 2,
+            "unit": "findings per 100 investigated cases",
+            "status": "AVAILABLE"
+          },
+          "median_investigation_minutes": {
+            "entity_value": null,
+            "peer_median": 41.7542,
+            "peer_mean": 41.7542,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 2,
+            "unit": "minutes",
+            "status": "ENTITY_METRIC_UNAVAILABLE"
+          }
+        },
+        "explanation": "Peer statistics exclude the selected entity and unavailable metric values. Same group and sector required; no best/worst ranking. No time-window alignment is assumed."
+      },
+      "limitations": [
+        "10 insufficient-data findings retained but not scored as confirmed gaps.",
+        "Behaviour rules are prototype review signals; repetitive templates may create false positives.",
+        "MONITORING_VISIBILITY_RISK: NO_DENOMINATOR; contributes no observed points, not evidence of safety.",
+        "Metrics describe all currently loaded records; organizations may cover different observation periods.",
+        "No finding does not prove normal behaviour: detectors can skip missing inputs or sparse baselines.",
+        "Some investigation durations are missing or invalid; R007 and duration benchmarks have limited coverage.",
+        "Unknown monitoring expectations excluded from monitored-asset denominator.",
+        "Workflow Auditor reports incomplete or inconsistent evidence for some cases."
+      ],
+      "config": {
+        "version": "prototype-v1",
+        "component_weights": {
+          "EXECUTION_GAP_RISK": 0.3,
+          "MONITORING_VISIBILITY_RISK": 0.2,
+          "INVESTIGATION_QUALITY_RISK": 0.2,
+          "REPEAT_INCIDENT_RISK": 0.15,
+          "RECORD_CONSISTENCY_RISK": 0.15
+        },
+        "severity_weights": {
+          "LOW": 0.25,
+          "MEDIUM": 0.5,
+          "HIGH": 0.75,
+          "CRITICAL": 1.0
+        },
+        "level_thresholds": {
+          "MODERATE": 25,
+          "HIGH": 50,
+          "CRITICAL": 75
+        },
+        "priority_alert_points": {
+          "LOW": 5,
+          "MEDIUM": 10,
+          "HIGH": 20,
+          "CRITICAL": 30
+        },
+        "priority_asset_points": {
+          "LOW": 0,
+          "MEDIUM": 3,
+          "HIGH": 6,
+          "CRITICAL": 10
+        },
+        "priority_component_points": {
+          "EXECUTION_GAP_RISK": 30,
+          "MONITORING_VISIBILITY_RISK": 0,
+          "INVESTIGATION_QUALITY_RISK": 15,
+          "REPEAT_INCIDENT_RISK": 10,
+          "RECORD_CONSISTENCY_RISK": 15
+        },
+        "small_sample_cases": 20,
+        "peer_near_tolerance": 0.01,
+        "peer_group_fallbacks": {
+          "Banking": "Banking"
+        }
+      },
+      "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
+      "top_priority_cases": [
+        {
+          "case_id": "CASE-E003-045",
+          "priority_score": 77.5,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R002",
+            "R003",
+            "R004",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "CASE-E003-026",
+          "priority_score": 73.5,
+          "priority_level": "HIGH",
+          "triggered_rules": [
+            "R002",
+            "R003",
+            "R004",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 6,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "CASE-E003-062",
+          "priority_score": 73.5,
+          "priority_level": "HIGH",
+          "triggered_rules": [
+            "R002",
+            "R003",
+            "R004",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 6,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "entity_id": "E004",
+      "entity_name": "Metro Telecom",
+      "sector": "Telecom",
+      "peer_group": "Telecom",
+      "overall_score": 19.44,
+      "overall_level": "LOW",
+      "score_status": "AVAILABLE",
+      "available_component_weight": 1.0,
+      "unavailable_component_upper_bound": 19.44,
+      "components": {
+        "EXECUTION_GAP_RISK": {
+          "score": 28.8462,
+          "weight": 0.3,
+          "contribution": 8.6538,
+          "exposure": "serious_cases",
+          "denominator": 65,
+          "affected_count": 21,
+          "weighted_affected_count": 18.75,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "MONITORING_VISIBILITY_RISK": {
+          "score": 0.0,
+          "weight": 0.2,
+          "contribution": 0.0,
+          "exposure": "monitored_assets",
+          "denominator": 30,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "INVESTIGATION_QUALITY_RISK": {
+          "score": 51.3158,
+          "weight": 0.2,
+          "contribution": 10.2632,
+          "exposure": "investigated_cases",
+          "denominator": 95,
+          "affected_count": 95,
+          "weighted_affected_count": 48.75,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "REPEAT_INCIDENT_RISK": {
+          "score": 3.5,
+          "weight": 0.15,
+          "contribution": 0.525,
+          "exposure": "cases",
+          "denominator": 100,
+          "affected_count": 7,
+          "weighted_affected_count": 3.5,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "RECORD_CONSISTENCY_RISK": {
+          "score": 0.0,
+          "weight": 0.15,
+          "contribution": 0.0,
+          "exposure": "cases",
+          "denominator": 100,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        }
+      },
+      "aggregation": {
+        "total_findings": 153,
+        "findings_by_rule": {
+          "R001": 2,
+          "R002": 6,
+          "R003": 12,
+          "R004": 9,
+          "R006": 95,
+          "R008": 15,
+          "R009": 5,
+          "WF_EVIDENCE": 6,
+          "WF_INVESTIGATION": 3
+        },
+        "findings_by_problem_type": {
+          "COMBINED_SUSPICIOUS_INVESTIGATION_BEHAVIOUR": 5,
+          "FAST_CRITICAL_CLOSURE": 9,
+          "MISSING_ESCALATION": 12,
+          "MISSING_EVIDENCE": 6,
+          "MISSING_INVESTIGATION": 2,
+          "REPEAT_INCIDENT_PATTERN": 15,
+          "REPETITIVE_INVESTIGATION": 95,
+          "WORKFLOW_EVIDENCE_GAP": 6,
+          "WORKFLOW_INVESTIGATION_GAP": 3
+        },
+        "findings_by_severity": {
+          "CRITICAL": 29,
+          "HIGH": 14,
+          "MEDIUM": 110
+        },
+        "findings_by_assessment": {
+          "CONFIRMED_GAP": 38,
+          "REVIEW_REQUIRED": 115
+        },
+        "affected_cases": 100,
+        "affected_assets": 27,
+        "execution_gap_count": 38,
+        "negative_space_count": 0,
+        "contradiction_count": 0,
+        "behaviour_analytics_count": 115
+      },
+      "metrics": {
+        "findings_per_100_cases": {
+          "numerator": 153,
+          "denominator": 100,
+          "value": 153.0,
+          "unit": "findings per 100 cases",
+          "status": "AVAILABLE"
+        },
+        "execution_gap_rate": {
+          "numerator": 21,
+          "denominator": 65,
+          "value": 32.3077,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_escalation_rate": {
+          "numerator": 12,
+          "denominator": 19,
+          "value": 63.1579,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_evidence_rate": {
+          "numerator": 12,
+          "denominator": 60,
+          "value": 20.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "telemetry_blind_spot_rate": {
+          "numerator": 0,
+          "denominator": 30,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repetitive_investigation_rate": {
+          "numerator": 95,
+          "denominator": 95,
+          "value": 100.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repeat_incident_rate": {
+          "numerator": 7,
+          "denominator": 100,
+          "value": 7.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "contradiction_rate": {
+          "numerator": 0,
+          "denominator": 100,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "behaviour_findings_per_100_investigated_cases": {
+          "numerator": 115,
+          "denominator": 95,
+          "value": 121.0526,
+          "unit": "findings per 100 investigated cases",
+          "status": "AVAILABLE"
+        },
+        "median_investigation_minutes": {
+          "value": 34.0,
+          "unit": "minutes",
+          "sample_count": 95,
+          "status": "AVAILABLE"
+        }
+      },
+      "denominators": {
+        "monitored_assets": 30,
+        "cases": 100,
+        "investigated_cases": 95,
+        "critical_cases": 19,
+        "investigated_serious_cases": 60,
+        "serious_cases": 65
+      },
+      "data_coverage": {
+        "investigation_count": 95,
+        "notes_present": 95,
+        "valid_duration_count": 95,
+        "unknown_monitoring_assets": 0,
+        "monitored_assets_with_telemetry": 30,
+        "cases_with_unknown_severity": 0,
+        "workflow_data_issue_cases": 0
+      },
+      "peer_context": {
+        "entity_id": "E004",
+        "peer_group": "Telecom",
+        "sector": "Telecom",
+        "peer_group_source": "stored",
+        "stored_peer_group": "Telecom",
+        "peer_entity_ids": [],
+        "peer_members": [],
+        "status": "NO_VALID_PEERS",
+        "metrics": {
+          "findings_per_100_cases": {
+            "entity_value": 153.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "findings per 100 cases",
+            "status": "NO_VALID_PEERS"
+          },
+          "execution_gap_rate": {
+            "entity_value": 32.3077,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "missing_escalation_rate": {
+            "entity_value": 63.1579,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "missing_evidence_rate": {
+            "entity_value": 20.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "telemetry_blind_spot_rate": {
+            "entity_value": 0.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "repetitive_investigation_rate": {
+            "entity_value": 100.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "repeat_incident_rate": {
+            "entity_value": 7.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "contradiction_rate": {
+            "entity_value": 0.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "behaviour_findings_per_100_investigated_cases": {
+            "entity_value": 121.0526,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "findings per 100 investigated cases",
+            "status": "NO_VALID_PEERS"
+          },
+          "median_investigation_minutes": {
+            "entity_value": 34.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "minutes",
+            "status": "NO_VALID_PEERS"
+          }
+        },
+        "explanation": "Peer statistics exclude the selected entity and unavailable metric values. Same group and sector required; no best/worst ranking. No time-window alignment is assumed."
+      },
+      "limitations": [
+        "Behaviour rules are prototype review signals; repetitive templates may create false positives.",
+        "Metrics describe all currently loaded records; organizations may cover different observation periods.",
+        "No finding does not prove normal behaviour: detectors can skip missing inputs or sparse baselines."
+      ],
+      "config": {
+        "version": "prototype-v1",
+        "component_weights": {
+          "EXECUTION_GAP_RISK": 0.3,
+          "MONITORING_VISIBILITY_RISK": 0.2,
+          "INVESTIGATION_QUALITY_RISK": 0.2,
+          "REPEAT_INCIDENT_RISK": 0.15,
+          "RECORD_CONSISTENCY_RISK": 0.15
+        },
+        "severity_weights": {
+          "LOW": 0.25,
+          "MEDIUM": 0.5,
+          "HIGH": 0.75,
+          "CRITICAL": 1.0
+        },
+        "level_thresholds": {
+          "MODERATE": 25,
+          "HIGH": 50,
+          "CRITICAL": 75
+        },
+        "priority_alert_points": {
+          "LOW": 5,
+          "MEDIUM": 10,
+          "HIGH": 20,
+          "CRITICAL": 30
+        },
+        "priority_asset_points": {
+          "LOW": 0,
+          "MEDIUM": 3,
+          "HIGH": 6,
+          "CRITICAL": 10
+        },
+        "priority_component_points": {
+          "EXECUTION_GAP_RISK": 30,
+          "MONITORING_VISIBILITY_RISK": 0,
+          "INVESTIGATION_QUALITY_RISK": 15,
+          "REPEAT_INCIDENT_RISK": 10,
+          "RECORD_CONSISTENCY_RISK": 15
+        },
+        "small_sample_cases": 20,
+        "peer_near_tolerance": 0.01,
+        "peer_group_fallbacks": {
+          "Banking": "Banking"
+        }
+      },
+      "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
+      "top_priority_cases": [
+        {
+          "case_id": "E004-C0034",
+          "priority_score": 86.25,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R003",
+            "R006",
+            "R008",
+            "R009"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 11.25,
+              "REPEAT_INCIDENT_RISK": 5.0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "E004-C0035",
+          "priority_score": 86.25,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R003",
+            "R006",
+            "R008",
+            "R009"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 11.25,
+              "REPEAT_INCIDENT_RISK": 5.0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "E004-C0015",
+          "priority_score": 77.5,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R002",
+            "R003",
+            "R004",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "entity_id": "E005",
+      "entity_name": "PowerGrid Utility",
+      "sector": "Energy",
+      "peer_group": "Energy",
+      "overall_score": 16.0,
+      "overall_level": "LOW",
+      "score_status": "AVAILABLE",
+      "available_component_weight": 1.0,
+      "unavailable_component_upper_bound": 16.0,
+      "components": {
+        "EXECUTION_GAP_RISK": {
+          "score": 30.102,
+          "weight": 0.3,
+          "contribution": 9.0306,
+          "exposure": "serious_cases",
+          "denominator": 49,
+          "affected_count": 15,
+          "weighted_affected_count": 14.75,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "MONITORING_VISIBILITY_RISK": {
+          "score": 0.0,
+          "weight": 0.2,
+          "contribution": 0.0,
+          "exposure": "monitored_assets",
+          "denominator": 30,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "INVESTIGATION_QUALITY_RISK": {
+          "score": 34.8485,
+          "weight": 0.2,
+          "contribution": 6.9697,
+          "exposure": "investigated_cases",
+          "denominator": 99,
+          "affected_count": 68,
+          "weighted_affected_count": 34.5,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "REPEAT_INCIDENT_RISK": {
+          "score": 0.0,
+          "weight": 0.15,
+          "contribution": 0.0,
+          "exposure": "cases",
+          "denominator": 100,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        },
+        "RECORD_CONSISTENCY_RISK": {
+          "score": 0.0,
+          "weight": 0.15,
+          "contribution": 0.0,
+          "exposure": "cases",
+          "denominator": 100,
+          "affected_count": 0,
+          "weighted_affected_count": 0,
+          "status": "AVAILABLE",
+          "missing_engines": [],
+          "formula": "100 * sum(max severity weight per eligible case/asset) / eligible population"
+        }
+      },
+      "aggregation": {
+        "total_findings": 87,
+        "findings_by_rule": {
+          "R001": 1,
+          "R002": 1,
+          "R003": 11,
+          "R004": 1,
+          "R006": 66,
+          "R007": 4,
+          "R009": 2,
+          "WF_EVIDENCE": 1
+        },
+        "findings_by_problem_type": {
+          "COMBINED_SUSPICIOUS_INVESTIGATION_BEHAVIOUR": 2,
+          "FAST_CRITICAL_CLOSURE": 1,
+          "INVESTIGATION_DURATION_ANOMALY": 4,
+          "MISSING_ESCALATION": 11,
+          "MISSING_EVIDENCE": 1,
+          "MISSING_INVESTIGATION": 1,
+          "REPETITIVE_INVESTIGATION": 66,
+          "WORKFLOW_EVIDENCE_GAP": 1
+        },
+        "findings_by_severity": {
+          "CRITICAL": 14,
+          "HIGH": 3,
+          "MEDIUM": 70
+        },
+        "findings_by_assessment": {
+          "CONFIRMED_GAP": 15,
+          "REVIEW_REQUIRED": 72
+        },
+        "affected_cases": 74,
+        "affected_assets": 28,
+        "execution_gap_count": 15,
+        "negative_space_count": 0,
+        "contradiction_count": 0,
+        "behaviour_analytics_count": 72
+      },
+      "metrics": {
+        "findings_per_100_cases": {
+          "numerator": 87,
+          "denominator": 100,
+          "value": 87.0,
+          "unit": "findings per 100 cases",
+          "status": "AVAILABLE"
+        },
+        "execution_gap_rate": {
+          "numerator": 15,
+          "denominator": 49,
+          "value": 30.6122,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_escalation_rate": {
+          "numerator": 11,
+          "denominator": 26,
+          "value": 42.3077,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "missing_evidence_rate": {
+          "numerator": 2,
+          "denominator": 48,
+          "value": 4.1667,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "telemetry_blind_spot_rate": {
+          "numerator": 0,
+          "denominator": 30,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repetitive_investigation_rate": {
+          "numerator": 66,
+          "denominator": 99,
+          "value": 66.6667,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "repeat_incident_rate": {
+          "numerator": 0,
+          "denominator": 100,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "contradiction_rate": {
+          "numerator": 0,
+          "denominator": 100,
+          "value": 0.0,
+          "unit": "percent",
+          "status": "AVAILABLE"
+        },
+        "behaviour_findings_per_100_investigated_cases": {
+          "numerator": 72,
+          "denominator": 99,
+          "value": 72.7273,
+          "unit": "findings per 100 investigated cases",
+          "status": "AVAILABLE"
+        },
+        "median_investigation_minutes": {
+          "value": 91.0,
+          "unit": "minutes",
+          "sample_count": 99,
+          "status": "AVAILABLE"
+        }
+      },
+      "denominators": {
+        "monitored_assets": 30,
+        "cases": 100,
+        "investigated_cases": 99,
+        "critical_cases": 26,
+        "investigated_serious_cases": 48,
+        "serious_cases": 49
+      },
+      "data_coverage": {
+        "investigation_count": 99,
+        "notes_present": 99,
+        "valid_duration_count": 99,
+        "unknown_monitoring_assets": 0,
+        "monitored_assets_with_telemetry": 30,
+        "cases_with_unknown_severity": 0,
+        "workflow_data_issue_cases": 0
+      },
+      "peer_context": {
+        "entity_id": "E005",
+        "peer_group": "Energy",
+        "sector": "Energy",
+        "peer_group_source": "stored",
+        "stored_peer_group": "Energy",
+        "peer_entity_ids": [],
+        "peer_members": [],
+        "status": "NO_VALID_PEERS",
+        "metrics": {
+          "findings_per_100_cases": {
+            "entity_value": 87.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "findings per 100 cases",
+            "status": "NO_VALID_PEERS"
+          },
+          "execution_gap_rate": {
+            "entity_value": 30.6122,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "missing_escalation_rate": {
+            "entity_value": 42.3077,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "missing_evidence_rate": {
+            "entity_value": 4.1667,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "telemetry_blind_spot_rate": {
+            "entity_value": 0.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "repetitive_investigation_rate": {
+            "entity_value": 66.6667,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "repeat_incident_rate": {
+            "entity_value": 0.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "contradiction_rate": {
+            "entity_value": 0.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "percent",
+            "status": "NO_VALID_PEERS"
+          },
+          "behaviour_findings_per_100_investigated_cases": {
+            "entity_value": 72.7273,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "findings per 100 investigated cases",
+            "status": "NO_VALID_PEERS"
+          },
+          "median_investigation_minutes": {
+            "entity_value": 91.0,
+            "peer_median": null,
+            "peer_mean": null,
+            "difference_from_peer_median": null,
+            "description": "unavailable",
+            "valid_peer_count": 0,
+            "unit": "minutes",
+            "status": "NO_VALID_PEERS"
+          }
+        },
+        "explanation": "Peer statistics exclude the selected entity and unavailable metric values. Same group and sector required; no best/worst ranking. No time-window alignment is assumed."
+      },
+      "limitations": [
+        "Behaviour rules are prototype review signals; repetitive templates may create false positives.",
+        "Metrics describe all currently loaded records; organizations may cover different observation periods.",
+        "No finding does not prove normal behaviour: detectors can skip missing inputs or sparse baselines."
+      ],
+      "config": {
+        "version": "prototype-v1",
+        "component_weights": {
+          "EXECUTION_GAP_RISK": 0.3,
+          "MONITORING_VISIBILITY_RISK": 0.2,
+          "INVESTIGATION_QUALITY_RISK": 0.2,
+          "REPEAT_INCIDENT_RISK": 0.15,
+          "RECORD_CONSISTENCY_RISK": 0.15
+        },
+        "severity_weights": {
+          "LOW": 0.25,
+          "MEDIUM": 0.5,
+          "HIGH": 0.75,
+          "CRITICAL": 1.0
+        },
+        "level_thresholds": {
+          "MODERATE": 25,
+          "HIGH": 50,
+          "CRITICAL": 75
+        },
+        "priority_alert_points": {
+          "LOW": 5,
+          "MEDIUM": 10,
+          "HIGH": 20,
+          "CRITICAL": 30
+        },
+        "priority_asset_points": {
+          "LOW": 0,
+          "MEDIUM": 3,
+          "HIGH": 6,
+          "CRITICAL": 10
+        },
+        "priority_component_points": {
+          "EXECUTION_GAP_RISK": 30,
+          "MONITORING_VISIBILITY_RISK": 0,
+          "INVESTIGATION_QUALITY_RISK": 15,
+          "REPEAT_INCIDENT_RISK": 10,
+          "RECORD_CONSISTENCY_RISK": 15
+        },
+        "small_sample_cases": 20,
+        "peer_near_tolerance": 0.01,
+        "peer_group_fallbacks": {
+          "Banking": "Banking"
+        }
+      },
+      "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
+      "top_priority_cases": [
+        {
+          "case_id": "E005-C0011",
+          "priority_score": 77.5,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R002",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "E005-C0082",
+          "priority_score": 77.5,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R003",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        },
+        {
+          "case_id": "E005-C0086",
+          "priority_score": 77.5,
+          "priority_level": "CRITICAL",
+          "triggered_rules": [
+            "R003",
+            "R006"
+          ],
+          "score_breakdown": {
+            "alert": 30,
+            "asset": 10,
+            "components": {
+              "EXECUTION_GAP_RISK": 30.0,
+              "MONITORING_VISIBILITY_RISK": 0,
+              "INVESTIGATION_QUALITY_RISK": 7.5,
+              "REPEAT_INCIDENT_RISK": 0,
+              "RECORD_CONSISTENCY_RISK": 0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

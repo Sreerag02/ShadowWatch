@@ -9,7 +9,7 @@ conclusion that an analyst acted improperly.
 
 ## Prototype configuration
 
-The separate detector functions in `backend/services/behaviour_analytics.py`
+The separate detector functions in `backend/app/services/analytics/behaviour_analytics.py`
 accept threshold arguments. Module constants supply defaults for
 `analyze_behaviour(investigations, cases, alerts)` and the API.
 
@@ -53,20 +53,20 @@ caching/batching before deployment.
 
 ## Run and evaluate
 
-Install root `requirements.txt` in the backend environment (includes
+Install `backend/requirements.txt` in the backend environment (includes
 scikit-learn), then from `backend`:
 
 ```bash
-venv/bin/python test_behaviour_analytics.py --summary
-venv/bin/python test_behaviour_analytics.py --dataset metro_telecom --rule R007
-venv/bin/python -m unittest test_behaviour_unit test_backend_api_unit
-venv/bin/python validate_behaviour_ground_truth.py
-venv/bin/python validate_behaviour_ground_truth.py --json
+venv/bin/python -m scripts.report_behaviour --summary
+venv/bin/python -m scripts.report_behaviour --dataset metro_telecom --rule R007
+venv/bin/python -m unittest tests.unit.test_behaviour_analytics tests.integration.test_backend_api
+venv/bin/python -m scripts.validate_behaviour_ground_truth
+venv/bin/python -m scripts.validate_behaviour_ground_truth --json
 ```
 
 The old R007/R008 validation entry points delegate to the shared evaluator, and
 R007/R008/R009 demonstration scripts delegate to the all-organization reporter.
-`test_behaviour_edge_cases.py` now executes assertions and exits nonzero on failure.
+`backend/scripts/check_behaviour_edge_cases.py` now executes assertions and exits nonzero on failure.
 
 Evaluation detects first, then loads labels. It reports TP/FP/FN, precision,
 recall, F1 and explicit false-positive/false-negative identifiers per rule and

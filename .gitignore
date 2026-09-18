@@ -16,3 +16,10 @@ dist/
 .DS_Store
 
 backend/.env
+
+# Python packaging artifacts
+*.egg-info/
+build/
+
+# Keep the safe environment template
+!.env.example

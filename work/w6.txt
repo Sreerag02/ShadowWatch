@@ -1,0 +1,947 @@
+I need you to perform a controlled professional refactor and complete
+verification of my existing ShadowWatch project.
+
+PROJECT ROOT:
+
+~/Desktop/Project/ShadowWatch
+
+IMPORTANT:
+This is an EXISTING WORKING PROJECT.
+
+Do NOT rebuild it from scratch.
+Do NOT rewrite working analytics just to make the directory prettier.
+Do NOT delete functionality.
+
+First inspect everything.
+
+============================================================
+CURRENT PROJECT STATUS
+============================================================
+
+ShadowWatch currently contains completed work including:
+
+CORE SUPERVISORY ANALYTICS
+
+R001 - MISSING_INVESTIGATION
+R002 - MISSING_EVIDENCE
+R003 - MISSING_ESCALATION
+R004 - FAST_CRITICAL_CLOSURE
+R005 - TELEMETRY_BLIND_SPOT
+
+Expected-vs-Observed Workflow Auditor
+
+Cross-Source Contradiction Engine
+
+BEHAVIOUR ANALYTICS
+
+R006 - REPETITIVE_INVESTIGATION
+R007 - INVESTIGATION_DURATION_ANOMALY
+R008 - REPEAT_INCIDENT
+R009 - SUSPICIOUS_INVESTIGATION_BEHAVIOUR
+
+RISK INTELLIGENCE
+
+Finding aggregation
+Entity risk scoring
+Case prioritization
+Peer benchmarking
+Explainability
+
+MULTI-ENTITY DATA
+
+The project contains multiple organization datasets, expected to
+include entities such as:
+
+E001 Alpha Bank
+E002 Beta Bank
+E003 Gamma Bank
+E004 Metro Telecom
+E005 PowerGrid Utility
+
+The actual repository/database is authoritative.
+Inspect it rather than assuming.
+
+PostgreSQL database:
+
+shadowwatch_db
+
+The project uses:
+
+Python
+FastAPI
+SQLAlchemy
+PostgreSQL
+Pandas
+Scikit-learn
+React/Vite frontend
+
+============================================================
+PHASE 1
+FULL PROJECT AUDIT BEFORE MOVING ANYTHING
+============================================================
+
+Before modifying files, inspect the complete repository.
+
+Run/show:
+
+pwd
+
+find . -maxdepth 4 -type f \
+    -not -path "./.git/*" \
+    -not -path "./frontend/node_modules/*" \
+    -not -path "./backend/venv/*" \
+    | sort
+
+Also inspect:
+
+git status
+
+Identify:
+
+1. Python source files
+2. analytics modules
+3. risk modules
+4. API routes
+5. database files
+6. scripts
+7. tests
+8. data-validation scripts
+9. dataset importers
+10. duplicated files
+11. obsolete test files
+12. empty folders
+13. misplaced files
+14. hard-coded paths
+15. hard-coded E001 references
+16. imports that depend on running files from a specific directory
+17. files that are currently untracked
+
+DO NOT MOVE ANYTHING YET.
+
+First produce a short migration plan.
+
+============================================================
+PHASE 2
+PROFESSIONAL PROJECT STRUCTURE
+============================================================
+
+Refactor toward this architecture where appropriate:
+
+ShadowWatch/
+
+backend/
+    app/
+        __init__.py
+        main.py
+
+        core/
+            __init__.py
+            config.py
+            database.py
+
+        api/
+            __init__.py
+            routes/
+
+        services/
+            __init__.py
+
+            ingestion/
+                __init__.py
+                data_ingestion.py
+
+            analytics/
+                __init__.py
+                rule_engine.py
+                negative_space_engine.py
+                workflow_auditor.py
+                contradiction_engine.py
+                behaviour_analytics.py
+
+            risk/
+                __init__.py
+                finding_aggregator.py
+                risk_engine.py
+                benchmark_engine.py
+                prioritization.py
+                explainability.py
+
+        models/
+        schemas/
+        utils/
+
+    scripts/
+        import_all_entities.py
+        validate_all_datasets.py
+        verify_database.py
+
+    tests/
+        unit/
+        integration/
+
+    requirements.txt
+    .env.example
+
+frontend/
+
+data/
+    organization folders
+
+database/
+    schema.sql
+
+docs/
+
+.gitignore
+README.md
+
+============================================================
+IMPORTANT STRUCTURE RULE
+============================================================
+
+This is a TARGET architecture, not an instruction to create fake
+files.
+
+Only create directories/files that are useful.
+
+For example:
+
+If models.py currently works well as one file and splitting it into
+multiple model files creates unnecessary complexity, it may remain:
+
+backend/app/models.py
+
+Same for schemas.py.
+
+Professional structure is more important than blindly creating many
+files.
+
+============================================================
+PHASE 3
+MOVE FILES SAFELY
+============================================================
+
+Use:
+
+git mv
+
+where possible so Git history remains understandable.
+
+Example:
+
+git mv backend/services/rule_engine.py \
+       backend/app/services/analytics/rule_engine.py
+
+Do NOT:
+
+copy old files and leave duplicates behind.
+
+Do NOT:
+
+delete a file until all references to it have been identified.
+
+============================================================
+PHASE 4
+FIX PYTHON PACKAGE IMPORTS
+============================================================
+
+After moving files, convert fragile imports such as:
+
+from database import engine
+
+into package imports such as:
+
+from app.core.database import engine
+
+or the equivalent architecture actually implemented.
+
+Likewise update imports between:
+
+rule engine
+negative-space engine
+workflow auditor
+contradiction engine
+behaviour analytics
+risk engine
+benchmarking
+prioritization
+FastAPI routes
+
+Avoid sys.path hacks unless absolutely unavoidable.
+
+Do not insert code like:
+
+sys.path.append(...)
+
+throughout the project.
+
+The backend should behave as a proper Python package.
+
+============================================================
+PHASE 5
+CONFIGURATION
+============================================================
+
+Inspect current .env handling.
+
+Keep secrets in:
+
+backend/.env
+
+Ensure:
+
+.env
+
+is ignored by Git.
+
+Keep:
+
+.env.example
+
+tracked.
+
+DATABASE_URL should come through configuration/environment.
+
+Do NOT hard-code:
+
+database password
+localhost URLs throughout files
+secret keys
+
+If a small config module improves structure, use:
+
+backend/app/core/config.py
+
+But keep it simple.
+
+Do not add unnecessary dependencies.
+
+============================================================
+PHASE 6
+CLEAN UP FILE CLUTTER
+============================================================
+
+Find files such as:
+
+temporary tests
+duplicate scripts
+old importers
+__pycache__
+.pyc files
+generated logs
+unnecessary output files
+
+Never delete source code merely because it looks unused.
+
+First confirm references.
+
+If an old file is superseded by a newer generic implementation,
+report it before deleting it.
+
+For example:
+
+import_alpha_bank.py
+
+may now be obsolete if:
+
+import_all_entities.py
+
+fully replaces it.
+
+But confirm before removing.
+
+============================================================
+PHASE 7
+TEST ORGANIZATION
+============================================================
+
+Move backend tests into:
+
+backend/tests/unit/
+backend/tests/integration/
+
+Classification:
+
+UNIT:
+pure function/rule tests that do not require a real database
+
+INTEGRATION:
+tests that connect engines, PostgreSQL, multiple services, etc.
+
+Rename tests consistently:
+
+test_rule_engine.py
+test_negative_space.py
+test_workflow_auditor.py
+test_contradiction_engine.py
+test_behaviour_analytics.py
+test_risk_engine.py
+test_benchmark_engine.py
+
+Preserve test logic.
+
+Do not delete useful tests.
+
+============================================================
+PHASE 8
+DATA AND SCRIPT ORGANIZATION
+============================================================
+
+Organization datasets must stay under:
+
+data/
+
+Example:
+
+data/alpha_bank/
+data/beta_bank/
+data/gamma_bank/
+data/metro_telecom/
+data/powergrid_utility/
+
+Each should contain operational CSV files and ground_truth.csv.
+
+ground_truth.csv must NOT be imported into PostgreSQL.
+
+Operational imports:
+
+entities.csv
+assets.csv
+alerts.csv
+cases.csv
+investigations.csv
+escalations.csv
+telemetry.csv
+
+Ground truth remains evaluation-only.
+
+Dataset validation/import scripts belong under:
+
+backend/scripts/
+
+or another single clearly documented scripts directory.
+
+Do not scatter runnable scripts across backend root and tests.
+
+============================================================
+PHASE 9
+VERIFY MULTI-ENTITY DATABASE
+============================================================
+
+Connect through the project's existing SQLAlchemy configuration.
+
+Verify PostgreSQL contains all currently imported entities.
+
+Print:
+
+entity_id
+entity_name
+sector
+peer_group
+
+Then print counts per entity for:
+
+assets
+alerts
+cases
+investigations
+escalations
+telemetry
+
+Verify:
+
+alerts never reference assets owned by another entity
+
+cases never reference alerts owned by another entity
+
+investigations reference valid cases
+
+escalations reference valid cases
+
+telemetry assets belong to matching entities
+
+============================================================
+PHASE 10
+VERIFY R001-R005
+============================================================
+
+Run the existing core rule engines.
+
+Verify:
+
+R001 Missing Investigation
+R002 Missing Evidence
+R003 Missing Escalation
+R004 Fast Critical Closure
+R005 Telemetry Blind Spot
+
+Tests must verify both:
+
+positive detection cases
+normal cases that should not be flagged
+
+Check NULL handling.
+
+Check that no engine is hard-coded to:
+
+E001
+alpha_bank
+
+unless used only inside a specific test fixture.
+
+============================================================
+PHASE 11
+VERIFY WORKFLOW AUDITOR
+============================================================
+
+Verify Expected-vs-Observed output.
+
+Test at least:
+
+normal workflow
+missing investigation
+missing evidence
+missing escalation
+fast closure
+multiple simultaneous gaps
+
+Output must contain actual evidence and human-readable explanations.
+
+============================================================
+PHASE 12
+VERIFY CONTRADICTION ENGINE
+============================================================
+
+Verify supported cross-source contradiction rules.
+
+Ensure chronological and cross-record contradictions are detected
+only when actual evidence supports them.
+
+A dataset containing zero real contradictions is acceptable.
+
+Unit tests should prove supported rules independently.
+
+Do not weaken contradiction rules simply to create findings.
+
+============================================================
+PHASE 13
+VERIFY BEHAVIOUR ANALYTICS
+============================================================
+
+Verify:
+
+R006 repetitive/copy-paste investigations
+
+R007 investigation-duration anomaly
+
+R008 repeat incidents
+
+R009 suspicious investigation behaviour
+
+Check:
+
+TF-IDF/cosine similarity if used
+duration calculations
+baselines
+repeat grouping
+duplicate handling
+missing notes
+missing timestamps
+
+Everything must remain offline.
+
+============================================================
+PHASE 14
+VERIFY FINDING AGGREGATION
+============================================================
+
+Check whether outputs from:
+
+R001-R005
+Workflow Auditor
+Contradiction Engine
+R006-R009
+
+can be normalized into the common finding representation used by
+Risk Intelligence.
+
+A finding should preserve enough data for:
+
+rule ID
+problem type
+entity
+case where applicable
+asset where applicable
+severity
+reason
+evidence
+source engine
+
+Do not lose supporting evidence during normalization.
+
+============================================================
+PHASE 15
+VERIFY RISK INTELLIGENCE
+============================================================
+
+Verify Rajeesh's modules:
+
+finding aggregation
+risk engine
+case prioritization
+peer benchmarking
+explainability
+
+Risk engine requirements:
+
+score bounded 0-100
+
+no NaN
+
+no divide-by-zero
+
+duplicates do not inflate score
+
+different organization sizes are normalized
+
+weights are configurable
+
+risk explanations show contributors
+
+ground truth is NEVER used as risk input
+
+============================================================
+PHASE 16
+VERIFY CASE PRIORITIZATION
+============================================================
+
+Verify each priority result contains:
+
+case_id
+entity_id
+priority score
+priority level
+triggered findings
+human-readable reason
+
+Priority ranking must be based on observable evidence.
+
+Do not create unexplained ranking scores.
+
+============================================================
+PHASE 17
+VERIFY PEER BENCHMARKING
+============================================================
+
+Use peer_group.
+
+Banking organizations should be compared with Banking peers.
+
+Do not directly compare:
+
+Banking
+Telecom
+Energy
+
+as equivalent peers.
+
+Verify normalized metrics such as:
+
+findings per 100 cases
+missing escalation rate
+missing evidence rate
+blind spots per monitored asset
+behaviour findings per investigated cases
+
+Where peer data is insufficient, return an appropriate unavailable /
+insufficient-peer result rather than fabricating metrics.
+
+============================================================
+PHASE 18
+RUN ALL TESTS
+============================================================
+
+After restructuring, discover tests using the project's actual
+framework.
+
+If tests remain unittest-based, support a command such as:
+
+cd backend
+python3 -m unittest discover -s tests -p "test_*.py"
+
+If pytest is already installed/used, pytest may be used instead.
+
+Do NOT introduce pytest solely for style if unittest already works.
+
+Run every available relevant test.
+
+Report:
+
+tests discovered
+tests passed
+tests failed
+tests skipped
+
+ZERO failed tests is required before considering the refactor complete.
+
+============================================================
+PHASE 19
+FASTAPI SMOKE TEST
+============================================================
+
+Verify the FastAPI application imports after refactoring.
+
+The expected modern command should be similar to:
+
+cd backend
+
+uvicorn app.main:app --reload
+
+Use the actual app path resulting from the refactor.
+
+Verify:
+
+application starts
+/docs loads
+health/root route responds
+database connection works
+
+Do not leave stale documentation telling users to run:
+
+uvicorn main:app
+
+if main.py has moved.
+
+============================================================
+PHASE 20
+CREATE MASTER SYSTEM VERIFICATION
+============================================================
+
+Create a useful script:
+
+backend/scripts/verify_system.py
+
+It should NOT duplicate unit tests.
+
+It should perform a high-level integration health check such as:
+
+1. database connection
+2. entity count
+3. table counts
+4. cross-entity integrity
+5. core engine callable
+6. negative-space engine callable
+7. workflow auditor callable
+8. contradiction engine callable
+9. behaviour engine callable
+10. risk engine callable
+11. benchmark engine callable
+
+Print:
+
+==============================================
+ SHADOWWATCH SYSTEM VERIFICATION
+==============================================
+
+Database Connection ............... PASS
+Organizations ..................... PASS
+Entity Relationships .............. PASS
+R001-R004 Rule Engine ............. PASS
+R005 Negative Space ............... PASS
+Workflow Auditor .................. PASS
+Contradiction Engine .............. PASS
+Behaviour Analytics R006-R009 ..... PASS
+Finding Aggregation ............... PASS
+Risk Intelligence ................. PASS
+Peer Benchmarking ................. PASS
+
+----------------------------------------------
+FINAL STATUS: PASS
+==============================================
+
+If anything fails:
+
+FINAL STATUS: FAIL
+
+and print the actual reason.
+
+Do not hide exceptions.
+
+============================================================
+PHASE 21
+README
+============================================================
+
+Update/create a concise professional README.md containing:
+
+ShadowWatch description
+architecture
+project structure
+setup
+Python environment
+PostgreSQL setup
+.env configuration
+database schema creation
+dataset validation
+multi-entity import
+backend run command
+tests
+system verification
+frontend start command if appropriate
+
+Do not include passwords or secret .env values.
+
+============================================================
+PHASE 22
+.gitignore
+============================================================
+
+Ensure at least appropriate entries exist for:
+
+backend/venv/
+venv/
+__pycache__/
+*.pyc
+.env
+backend/.env
+frontend/node_modules/
+frontend/dist/
+.DS_Store
+.vscode/ only if the project does not intentionally track useful
+workspace settings
+
+Do NOT ignore:
+
+.env.example
+source datasets that the project intentionally commits
+schema.sql
+tests
+documentation
+
+============================================================
+PHASE 23
+FINAL DIRECTORY AUDIT
+============================================================
+
+After all work, show:
+
+tree -L 5
+
+while excluding:
+
+.git
+node_modules
+venv
+__pycache__
+
+Show the final professional directory structure.
+
+Check there are no duplicate source files remaining in old and new
+locations.
+
+============================================================
+STRICT RULES
+============================================================
+
+DO NOT:
+
+delete working functionality
+
+rewrite algorithms unnecessarily
+
+alter detection thresholds merely to make tests pass
+
+change ground truth to make analytics look accurate
+
+use ground truth as analytics input
+
+hard-code E001
+
+hard-code Alpha Bank
+
+introduce cloud services
+
+introduce LLM APIs
+
+change PostgreSQL data unnecessarily
+
+change dataset values silently
+
+start Adarsh's frontend work
+
+perform large unrelated refactors
+
+hide failing tests
+
+silently ignore exceptions
+
+============================================================
+FINAL REPORT
+============================================================
+
+When finished, provide:
+
+A. BEFORE structure summary
+
+B. Files moved
+
+C. Files renamed
+
+D. Files deleted and exact justification
+
+E. Files created
+
+F. Imports changed
+
+G. Final project structure
+
+H. Database verification results
+
+I. Organization counts
+
+J. R001-R005 verification
+
+K. Workflow Auditor verification
+
+L. Contradiction Engine verification
+
+M. R006-R009 verification
+
+N. Risk Intelligence verification
+
+O. Peer Benchmark verification
+
+P. Unit test summary
+
+Q. Integration test summary
+
+R. FastAPI smoke-test result
+
+S. verify_system.py result
+
+T. Any remaining warnings/TODOs
+
+U. Exact commands I should use from now on
+
+============================================================
+STOP CONDITION
+============================================================
+
+If restructuring causes a test that previously passed to fail:
+
+STOP.
+
+Diagnose and fix the refactor/import issue.
+
+Do NOT alter detection logic or expected test values just to make it
+pass.
+
+At the end, do NOT start a new ShadowWatch feature.
+
+The goal is only:
+
+PROFESSIONAL STRUCTURE
++
+FULL VERIFICATION
++
+ZERO REGRESSION.

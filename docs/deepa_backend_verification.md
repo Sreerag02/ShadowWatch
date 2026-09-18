@@ -9,7 +9,7 @@ and integration. Existing detection logic, datasets and schema were preserved.
 | Workplan requirement | Evidence / status |
 | --- | --- |
 | 1. Preserve Alpha import and rules | Safe compatibility import command; original unit tests and Alpha regression checks pass |
-| 2. Generic multi-organization importer | `import_data.py FOLDER`, `import_all_entities.py`; tested new-folder import and repeat skip |
+| 2. Generic multi-organization importer | `import_data.py FOLDER`, `backend/scripts/import_all_entities.py`; tested new-folder import and repeat skip |
 | 3. Reject invalid data clearly | Tests reject missing/empty files, bad values, duplicate IDs, cross-entity relationships; failure exits nonzero |
 | 4. Integrity and duplicate safety | Transaction rollback and no-overwrite tests; all five PostgreSQL sources verified |
 | 5. Real entity/case/telemetry APIs | Actual PostgreSQL HTTP checks cover five entities, 498 cases and 152 assets |

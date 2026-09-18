@@ -9,13 +9,13 @@ and PowerGrid Utility (E005). No exception flags are needed.
 From the repository root:
 
 ```bash
-python3 tests/validate_all_datasets.py
 cd backend
 source venv/bin/activate
-python3 import_all_entities.py
-python3 verify_multi_entity_db.py
-python3 -m unittest test_multi_entity_unit test_contradiction_engine_unit test_workflow_auditor_unit test_negative_space_unit
-python3 test_multi_entity_analytics.py
+python3 -m scripts.validate_all_datasets
+python3 -m scripts.import_all_entities
+python3 -m scripts.verify_database
+python3 -m unittest tests.integration.test_ingestion tests.unit.test_contradiction_engine tests.unit.test_workflow_auditor tests.unit.test_negative_space
+python3 -m tests.integration.test_analytics_live
 ```
 
 The importer discovers folders, validates each source and cross-organization
@@ -42,7 +42,7 @@ issues. Original files are backed up in:
 `work/dataset_backups/before_gamma_powergrid_repair/`
 
 `docs/dataset_repairs.json` records field-level before/after values and reasons.
-`tests/repair_organization_datasets.py` records the one-shot repair procedure;
+`backend/scripts/maintenance/repair_organization_datasets.py` records the one-shot repair procedure;
 it refuses to rerun while its backup exists. Do not rerun it during normal setup.
 
 Gamma's eight CSVs were converted to canonical headers. Severity, criticality,

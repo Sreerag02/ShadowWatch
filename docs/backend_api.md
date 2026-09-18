@@ -5,7 +5,7 @@ Run from the repository root:
 ```bash
 cd backend
 source venv/bin/activate
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 Configure the existing local PostgreSQL connection in `backend/.env`. Open
@@ -28,6 +28,17 @@ No cloud service is used to process data.
 | `/findings` | Unified findings, optionally filtered by `entity_id` |
 | `/entities/{entity_id}/findings` | Same findings scoped to one organization |
 | `/analytics/summary` | Operational counts and finding counts by rule/assessment |
+| `/risk/entities` | Risk intelligence for all organizations |
+| `/entities/{entity_id}/risk` | Component scores, aggregation, evidence, priorities and peers |
+| `/entities/{entity_id}/priority-cases` | Review order; limit 1–1000 (default 20), offset >= 0 |
+| `/entities/{entity_id}/peer-benchmark` | Same-sector/group rate comparisons excluding the selected entity |
+| `/entities/{entity_id}/supervisory-summary` | Deterministic risk explanation, peer context and top five cases |
+
+Risk outputs are prototype supervisory indicators, not official NCIIPC thresholds.
+They consume existing findings and auditor results. Unknown denominators remain
+unavailable; duplicate findings cannot inflate exposure scores. See
+[Risk Intelligence](risk_intelligence.md) for formulas, configuration, Gamma's
+explicit Banking fallback, evidence coverage and new response contracts.
 
 Telemetry accepts inclusive `start_time` and `end_time` ISO timestamps and an
 optional `entity_id` ownership filter. Use naive timestamps to match the schema;
@@ -94,15 +105,15 @@ nonnegative integers and confidence must be finite and within [0,1].
 
 ```bash
 # From the repository root:
-python3 tests/validate_all_datasets.py
 cd backend
 source venv/bin/activate
-python3 import_data.py ../data/beta_bank
-python3 import_all_entities.py
-python3 verify_multi_entity_db.py
-python3 -m unittest test_behaviour_unit test_backend_api_unit test_multi_entity_unit test_contradiction_engine_unit test_workflow_auditor_unit test_negative_space_unit
-python3 test_backend_integration.py
-python3 test_multi_entity_analytics.py
+python3 -m scripts.validate_all_datasets
+python3 -m scripts.import_data ../data/beta_bank
+python3 -m scripts.import_all_entities
+python3 -m scripts.verify_database
+python3 -m unittest tests.unit.test_behaviour_analytics tests.integration.test_backend_api tests.integration.test_ingestion tests.unit.test_contradiction_engine tests.unit.test_workflow_auditor tests.unit.test_negative_space
+python3 -m tests.integration.test_backend_live
+python3 -m tests.integration.test_analytics_live
 ```
 
 Both import entry points validate before insertion and use the same transactional

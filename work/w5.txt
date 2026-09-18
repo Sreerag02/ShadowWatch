@@ -1,0 +1,684 @@
+Continue my existing ShadowWatch project.
+
+IMPORTANT:
+Inspect the repository before changing anything.
+
+CURRENT STATUS
+==============
+
+The following parts are already completed:
+
+CORE SUPERVISORY ENGINE
+- R001 MISSING_INVESTIGATION
+- R002 MISSING_EVIDENCE
+- R003 MISSING_ESCALATION
+- R004 FAST_CRITICAL_CLOSURE
+- R005 TELEMETRY_BLIND_SPOT
+- Expected-vs-Observed Workflow Auditor
+- Cross-Source Contradiction Engine
+
+BEHAVIOUR ANALYTICS
+- R006 REPETITIVE_INVESTIGATION
+- R007 INVESTIGATION_DURATION_ANOMALY
+- R008 REPEAT_INCIDENT
+- R009 SUSPICIOUS_INVESTIGATION_BEHAVIOUR
+
+MULTI-ENTITY DATA
+Multiple organizations are now available in PostgreSQL.
+
+Expected entities include:
+E001 Alpha Bank
+E002 Beta Bank
+E003 Gamma Bank
+E004 Metro Telecom
+E005 PowerGrid Utility
+
+Do not assume exact contents.
+Inspect the actual database/repository.
+
+==================================================
+NEXT MODULE
+RISK INTELLIGENCE ENGINE
+==================================================
+
+This work belongs to Rajeesh's module.
+
+The Risk Intelligence Engine must take findings produced by the
+existing ShadowWatch engines and convert them into:
+
+1. Entity-level supervisory risk indicators
+2. Risk-component breakdowns
+3. Finding aggregation
+4. Case prioritization
+5. Peer benchmarking
+6. Explainable supervisory summaries
+
+IMPORTANT:
+
+Do NOT rewrite R001-R009.
+
+Do NOT re-detect anomalies inside the risk engine.
+
+The risk engine consumes existing findings.
+
+==================================================
+STEP 1 - INSPECT EXISTING PROJECT
+==================================================
+
+Inspect:
+
+backend/services/rule_engine.py
+backend/services/negative_space_engine.py
+backend/services/workflow_auditor.py
+backend/services/contradiction_engine.py
+
+Also inspect Devenanda's behaviour analytics files.
+
+Find:
+- R006 implementation
+- R007 implementation
+- R008 implementation
+- R009 implementation
+
+Inspect:
+
+backend/models.py
+backend/schemas.py
+backend/database.py
+database/schema.sql
+
+Inspect any existing:
+- findings table
+- common finding model
+- finding service
+- API endpoints
+- risk-related files
+
+Also inspect PostgreSQL entity data.
+
+Do not invent field names.
+
+==================================================
+STEP 2 - COMMON FINDING NORMALIZATION
+==================================================
+
+Different engines may currently return slightly different dictionaries.
+
+Create a clean normalization layer if one does not already exist.
+
+Suggested file:
+
+backend/services/finding_aggregator.py
+
+The goal is to convert findings into a common internal structure.
+
+Conceptual format:
+
+{
+    "rule_id": "R003",
+    "problem_type": "MISSING_ESCALATION",
+    "entity_id": "E001",
+    "case_id": "E001-C0003",
+    "asset_id": "E001-AS010",
+    "severity": "HIGH",
+    "reason": "Critical alert was not escalated",
+    "evidence": {...},
+    "source_engine": "rule_engine"
+}
+
+Use actual available fields.
+
+Do not break working engines just to force this structure.
+
+Adapters/normalizers are preferred.
+
+==================================================
+STEP 3 - ENTITY FINDING AGGREGATION
+==================================================
+
+For each entity calculate:
+
+- total findings
+- findings by rule
+- findings by problem type
+- findings by severity
+- affected cases
+- affected assets
+- execution-gap count
+- negative-space count
+- contradiction count
+- behaviour-analytics count
+
+Where possible also calculate normalized rates.
+
+Examples:
+
+missing escalation rate =
+missing escalation findings /
+relevant high/critical cases
+
+missing evidence rate =
+missing evidence findings /
+investigated serious cases
+
+telemetry blind-spot rate =
+affected monitored assets /
+total monitored assets
+
+behaviour finding rate =
+behaviour findings /
+total investigated cases
+
+Do not compare only raw counts because organizations have different
+numbers of alerts, cases and assets.
+
+==================================================
+STEP 4 - RISK COMPONENTS
+==================================================
+
+Create:
+
+backend/services/risk_engine.py
+
+The risk engine should calculate understandable component indicators.
+
+Suggested components:
+
+1. EXECUTION_GAP_RISK
+   - R001
+   - R002
+   - R003
+   - R004
+   - Workflow Auditor execution gaps
+
+2. MONITORING_VISIBILITY_RISK
+   - R005 telemetry blind spots
+
+3. INVESTIGATION_QUALITY_RISK
+   - R006
+   - R007
+   - R009
+
+4. REPEAT_INCIDENT_RISK
+   - R008
+
+5. RECORD_CONSISTENCY_RISK
+   - Cross-source contradiction findings
+
+Do NOT create opaque machine-learning risk.
+
+Use transparent weighted/normalized calculations.
+
+==================================================
+STEP 5 - PROTOTYPE RISK SCALE
+==================================================
+
+Create a bounded prototype score from:
+
+0 to 100
+
+Example interpretation:
+
+0-24   LOW
+25-49  MODERATE
+50-74  HIGH
+75-100 CRITICAL
+
+IMPORTANT:
+
+These are prototype ShadowWatch supervisory indicators.
+
+They are NOT official NCIIPC thresholds.
+
+Document that clearly in code/comments/output.
+
+Keep all weights configurable.
+
+Do NOT scatter magic numbers throughout the code.
+
+For example:
+
+backend/config/risk_config.py
+
+or equivalent.
+
+Example conceptual weights:
+
+Execution Gap            30%
+Monitoring Visibility    20%
+Investigation Quality    20%
+Repeat Incidents         15%
+Record Consistency       15%
+
+These are starting prototype weights only.
+
+Before using them:
+inspect available findings and make sure every component can actually
+be calculated.
+
+==================================================
+STEP 6 - PREVENT SCORE DISTORTION
+==================================================
+
+The scoring system must handle:
+
+- different organization sizes
+- duplicate findings
+- zero denominators
+- missing optional data
+- one category producing many repeated findings
+- entities with very few cases
+- entities with no findings
+
+Use caps/normalization where necessary.
+
+One duplicated finding must not inflate risk repeatedly.
+
+If an entity has no findings, risk should not crash or produce NaN.
+
+==================================================
+STEP 7 - EXPLAINABILITY
+==================================================
+
+Every risk result must include:
+
+overall score
+overall level
+
+component scores
+
+top contributors
+
+human-readable explanation
+
+Example:
+
+Entity: E001
+Overall Risk: 68.4
+Risk Level: HIGH
+
+Components:
+
+Execution Gap Risk: 82
+Monitoring Visibility Risk: 55
+Investigation Quality Risk: 61
+Repeat Incident Risk: 48
+Record Consistency Risk: 35
+
+Top Contributors:
+
+- 3 critical cases lacked escalation.
+- 2 telemetry blind spots affected critical assets.
+- Repetitive investigation notes were detected in 4 cases.
+- Multiple serious incidents recurred on the same asset.
+
+Explanation:
+
+E001 receives elevated supervisory attention primarily because of
+execution gaps and monitoring-visibility weaknesses.
+
+Do not generate explanation using an LLM.
+
+Use deterministic templates from actual evidence.
+
+==================================================
+STEP 8 - CASE PRIORITIZATION
+==================================================
+
+Create:
+
+backend/services/prioritization.py
+
+The goal is to rank cases for manual supervisor review.
+
+This is NOT the final organization risk score.
+
+Case priority should consider observable evidence such as:
+
+- alert severity
+- number of findings
+- types of findings
+- missing investigation
+- missing evidence
+- missing escalation
+- fast critical closure
+- behavioural anomalies
+- repeat incidents
+- contradictions
+- asset criticality if supported
+
+Return:
+
+case_id
+entity_id
+priority_score
+priority_level
+triggered_findings
+reason
+
+Example:
+
+Case: E001-C0081
+
+Priority Score: 92
+
+Reasons:
+- CRITICAL ransomware alert
+- Missing evidence
+- Missing escalation
+- Closed in 1.3 minutes
+
+Do not create unexplained ranking.
+
+Every priority score must have a reason.
+
+==================================================
+STEP 9 - PEER BENCHMARKING
+==================================================
+
+Create:
+
+backend/services/benchmark_engine.py
+
+Inspect entity.peer_group.
+
+Only compare entities in the same peer group.
+
+Important:
+
+E001 Alpha Bank
+E002 Beta Bank
+E003 Gamma Bank
+
+should be comparable as Banking peers.
+
+Do NOT automatically compare:
+
+Banking
+Telecom
+Energy
+
+as if they are equivalent.
+
+Possible peer metrics:
+
+- findings per 100 cases
+- critical/high execution gaps per 100 serious cases
+- missing escalation rate
+- missing evidence rate
+- telemetry blind spots per 100 monitored assets
+- repetitive investigation rate
+- repeat incident rate
+- median investigation duration
+- contradiction rate
+
+Use rates rather than raw counts.
+
+==================================================
+PEER OUTPUT
+==================================================
+
+Example:
+
+Peer Group: Banking
+
+Metric: Missing Escalation Rate
+
+E001 Alpha Bank    8.2%
+E002 Beta Bank     3.1%
+E003 Gamma Bank    6.4%
+
+For the selected entity return:
+
+entity value
+peer median
+peer mean where useful
+difference from peer median
+
+Do NOT label an organization as "best" or "worst."
+
+Use neutral descriptions such as:
+
+"above peer median"
+"below peer median"
+"near peer median"
+
+==================================================
+STEP 10 - SUPERVISORY SUMMARY
+==================================================
+
+Create:
+
+backend/services/explainability.py
+
+Generate structured summaries.
+
+Example:
+
+{
+    "entity_id": "E002",
+    "overall_score": 54.8,
+    "risk_level": "HIGH",
+    "top_contributors": [
+        "...",
+        "..."
+    ],
+    "peer_context": {
+        ...
+    },
+    "priority_cases": [...]
+}
+
+Do not use external AI.
+
+Everything must remain offline.
+
+==================================================
+STEP 11 - TEST SCRIPT
+==================================================
+
+Create:
+
+backend/test_risk_engine.py
+
+Running:
+
+python3 test_risk_engine.py
+
+should print a readable summary for every entity.
+
+Example:
+
+=========================================
+ SHADOWWATCH RISK INTELLIGENCE ENGINE
+=========================================
+
+Entity: E001
+Name: Alpha Bank
+
+Overall Risk: XX.XX
+Level: HIGH
+
+Components:
+
+Execution Gap: XX
+Monitoring Visibility: XX
+Investigation Quality: XX
+Repeat Incidents: XX
+Record Consistency: XX
+
+Top Contributors:
+- ...
+- ...
+
+Priority Cases:
+1. E001-Cxxxx
+2. E001-Cxxxx
+3. E001-Cxxxx
+
+-----------------------------------------
+
+Entity: E002
+...
+
+=========================================
+ ANALYSIS COMPLETE
+=========================================
+
+==================================================
+STEP 12 - PEER BENCHMARK TEST
+==================================================
+
+Create:
+
+backend/test_peer_benchmark.py
+
+Print:
+
+=========================================
+ SHADOWWATCH PEER BENCHMARK
+=========================================
+
+Peer Group: Banking
+
+Entity        Cases   Findings/100 Cases
+E001          ...
+E002          ...
+E003          ...
+
+Missing Escalation Rate:
+E001 ...
+E002 ...
+E003 ...
+
+Evidence Quality Rate:
+...
+
+=========================================
+
+Do not fabricate metrics.
+
+Use PostgreSQL and existing findings.
+
+==================================================
+STEP 13 - UNIT TESTS
+==================================================
+
+Add unit tests.
+
+Test:
+
+1. Entity with no findings.
+2. Entity with one finding.
+3. Multiple finding categories.
+4. Duplicate findings.
+5. Zero denominator.
+6. Missing optional values.
+7. Score cannot exceed 100.
+8. Score cannot go below 0.
+9. Risk level mapping.
+10. Case priority explanation.
+11. Multiple cases.
+12. Banking peer group comparison.
+13. Entity with no valid peers.
+14. Different-sector entities are not mixed.
+15. Peer metric zero denominator.
+16. Missing findings from one engine.
+
+==================================================
+IMPORTANT ARCHITECTURE
+==================================================
+
+Operational Data
+      ↓
+
+Core Analytics
+R001-R005
+Workflow Auditor
+Contradictions
+
+      +
+
+Behaviour Analytics
+R006-R009
+
+      ↓
+
+Finding Aggregator
+
+      ↓
+
+Risk Intelligence
+├── Entity Risk
+├── Case Prioritization
+├── Peer Benchmarking
+└── Explainability
+
+      ↓
+
+FastAPI
+
+      ↓
+
+Adarsh Supervisor Application
+
+==================================================
+IMPORTANT RULES
+==================================================
+
+Do NOT:
+
+- rewrite R001-R009
+- modify detection thresholds just to improve risk output
+- use ground_truth.csv to calculate risk
+- use ground truth as an input feature
+- use LLM APIs
+- use cloud services
+- compare unrelated sectors as direct peers
+- hard-code E001
+- calculate risk in frontend
+- implement Adarsh's React frontend
+- fabricate peer metrics
+- silently drop errors
+
+Ground truth remains evaluation-only.
+
+==================================================
+POSTGRESQL
+==================================================
+
+Use data already imported into PostgreSQL.
+
+The Risk Intelligence module must work for every entity in the
+database.
+
+Do not read only:
+
+data/alpha_bank/
+
+Do not hard-code organization folders.
+
+==================================================
+WHEN FINISHED
+==================================================
+
+Show me:
+
+1. Files inspected.
+2. Existing finding formats discovered.
+3. Files created.
+4. Files modified.
+5. Finding normalization design.
+6. Risk component formula.
+7. Exact configurable weights.
+8. Case-priority formula.
+9. Peer metrics implemented.
+10. Results for each entity.
+11. Banking peer benchmark output.
+12. Unit test results.
+13. Existing tests rerun.
+14. Exact terminal commands.
+
+STOP after Risk Intelligence is complete.
+
+Do not start the frontend.

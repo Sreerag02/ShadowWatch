@@ -61,12 +61,12 @@ Run from the repository root with the existing local PostgreSQL configuration:
 ```bash
 cd backend
 source venv/bin/activate
-python3 test_workflow_auditor.py
-python3 test_workflow_auditor.py --case E001-C0081
-python3 test_workflow_auditor.py --entity E001
-python3 -m unittest test_workflow_auditor_unit test_negative_space_unit
-python3 test_rule_engine.py
-python3 validate_negative_space.py
+python3 -m scripts.report_workflow
+python3 -m scripts.report_workflow --case E001-C0081
+python3 -m scripts.report_workflow --entity E001
+python3 -m unittest tests.unit.test_workflow_auditor tests.unit.test_negative_space
+python3 -m scripts.report_rules
+python3 -m scripts.validate_negative_space
 ```
 
 The default report shows E001-C0081: investigation present, evidence absent,

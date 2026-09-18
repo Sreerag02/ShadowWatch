@@ -1,7 +1,7 @@
 # Cross-Source Contradiction Engine
 
-Inspected sources: `database/schema.sql`, `backend/models.py` and
-`backend/schemas.py` (both empty), `backend/database.py`, the rule engine,
+Inspected sources: `database/schema.sql`, `backend/app/models.py` and
+`backend/app/schemas.py` (now populated; they were empty at the original review), `backend/app/core/database.py`, the rule engine,
 negative-space engine, workflow auditor, and Alpha Bank's alerts, cases,
 investigations, escalations, and telemetry CSVs.
 
@@ -54,13 +54,13 @@ From the repository root:
 ```bash
 cd backend
 source venv/bin/activate
-python3 test_contradiction_engine.py
-python3 test_contradiction_engine.py --entity E001
-python3 test_contradiction_engine.py --csv --check-ground-truth
-python3 -m unittest test_contradiction_engine_unit test_workflow_auditor_unit test_negative_space_unit
-python3 test_rule_engine.py
-python3 validate_negative_space.py
-python3 test_workflow_auditor.py
+python3 -m scripts.report_contradictions
+python3 -m scripts.report_contradictions --entity E001
+python3 -m scripts.report_contradictions --csv --check-ground-truth
+python3 -m unittest tests.unit.test_contradiction_engine tests.unit.test_workflow_auditor tests.unit.test_negative_space
+python3 -m scripts.report_rules
+python3 -m scripts.validate_negative_space
+python3 -m scripts.report_workflow
 ```
 
 CSV mode reads unmodified operational files. The optional ground-truth check

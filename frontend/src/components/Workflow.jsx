@@ -3,7 +3,7 @@ import { Badge, Empty, Info, Panel } from './Common'
 import { human } from '../utils/format'
 export default function Workflow({ workflow }) {
   if (!workflow) return <Empty title="Workflow assessment unavailable" />
-  return <Panel title="Expected vs observed" subtitle="Recorded workflow compared with the backend’s scoped prototype expectations" action={<Badge value={workflow.assessment} />}>
+  return <Panel title="Expected vs observed" subtitle="Control matrix · Scoped workflow expectations" action={<Badge value={workflow.assessment} />}>
     {!workflow.assessment_in_scope && <Info>This alert severity is outside the HIGH/CRITICAL workflow policy. No missing-stage requirement is inferred.</Info>}
     <div className="workflow-grid"><div className="workflow-head">WORKFLOW STAGE</div><div className="workflow-head">EXPECTED</div><div className="workflow-head">OBSERVED</div>
       {Object.entries(workflow.expected || {}).map(([stage, expected]) => {

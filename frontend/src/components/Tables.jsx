@@ -7,12 +7,12 @@ import { human, isHigh, number } from '../utils/format'
 
 export function OrganizationTable({ reports }) {
   return <DataGrid caption="Organizations" rows={reports} rowKey="entity_id" columns={[
-    { key: 'entity_name', label: 'Organization', render: r => <Link className="organization-cell" to={`/entities/${r.entity_id}`}><span className="entity-monogram">{r.entity_name.split(' ').map(w => w[0]).slice(0, 2).join('')}</span><span><strong>{r.entity_name}</strong><small>{r.entity_id}</small></span></Link> },
+    { key: 'entity_name', label: 'Organization', render: r => <Link className="organization-cell" to={`/entities/${r.entity_id}`}><span><strong>{r.entity_name}</strong><small>{r.entity_id}</small></span></Link> },
     { key: 'sector', label: 'Sector / peer group', render: r => <><span>{r.sector || 'Unknown'}</span><small>{r.peer_group || 'No stored peer group'}</small></> },
-    { key: 'overall_score', label: 'Risk score', render: r => <span className="score-number">{number(r.overall_score, 2)}<small>/ 100</small></span> },
+    { key: 'overall_score', label: 'Risk score', className: 'numeric', render: r => <span className="score-number">{number(r.overall_score, 2)}<small>/ 100</small></span> },
     { key: 'overall_level', label: 'Risk level', render: r => <Badge value={r.overall_level} /> },
-    { key: 'findings', label: 'Findings', render: r => number(r.aggregation.total_findings) },
-    { key: 'priority', label: 'High / critical cases', render: r => number(r.priority_cases.filter(p => isHigh(p.priority_level)).length) },
+    { key: 'findings', label: 'Findings', className: 'numeric', render: r => number(r.aggregation.total_findings) },
+    { key: 'priority', label: 'High / critical cases', className: 'numeric', render: r => number(r.priority_cases.filter(p => isHigh(p.priority_level)).length) },
     { key: 'status', label: 'Score coverage', render: r => <Badge value={r.score_status}>{r.score_status === 'PARTIAL' ? 'Partial' : 'Available'}</Badge> },
     { key: 'open', label: '', render: r => <TextLink to={`/entities/${r.entity_id}`}>View</TextLink> },
   ]} />
@@ -42,8 +42,8 @@ export function PriorityTable({ cases, compact = false }) {
     { key: 'priority', label: 'Priority', render: c => <Badge value={c.priority_level} /> },
     { key: 'case', label: 'Case', render: c => <><Link className="mono strong" to={`/cases/${c.case_id}`}>{c.case_id}</Link><small>{entityName(c.entity_id)}</small></> },
     ...(!compact ? [{ key: 'alert', label: 'Alert severity / category', render: c => <AlertContext caseId={c.case_id} /> }] : []),
-    { key: 'findings', label: 'Findings', render: c => c.triggered_findings.length },
-    { key: 'score', label: 'Score', render: c => <strong className="score-number">{number(c.priority_score, 2)}</strong> },
+    { key: 'findings', label: 'Findings', className: 'numeric', render: c => c.triggered_findings.length },
+    { key: 'score', label: 'Score', className: 'numeric', render: c => <strong className="score-number">{number(c.priority_score, 2)}</strong> },
     { key: 'reason', label: 'Review rationale', className: 'reason-cell', render: c => <span className="clamp" title={c.reason}>{c.reason}</span> },
     { key: 'open', label: '', render: c => <TextLink to={`/cases/${c.case_id}`}>Review case</TextLink> },
   ]} />

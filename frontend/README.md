@@ -65,3 +65,5 @@ server CORS configuration; the existing backend does not configure it.
 See [API inventory](../docs/frontend_api_inventory.md) and
 [delivery/verification report](../docs/frontend_verification.md).
 Human review controls are disabled until backend persistence is implemented.
+
+Visual design tokens, screen changes and verification: [w8 refinement](../docs/frontend_visual_redesign.md).

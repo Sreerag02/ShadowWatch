@@ -1,0 +1,13 @@
+import { Link } from 'react-router-dom'
+import { componentColors, componentNames, number } from '../utils/format'
+import { Empty, Badge } from './Common'
+export function RiskChart({ reports }) {
+  if (!reports.length) return <Empty title="No organization assessments" />
+  return <div className="risk-chart" role="group" aria-label="Observed supervisory risk by organization on a zero to one hundred scale"><div className="chart-axis"><span>OBSERVED SCORE / 100</span><span>0</span><span>50</span><span>100</span></div>{reports.map((r, i) => <div className="risk-row" key={r.entity_id}><Link to={`/entities/${r.entity_id}`}><span className="chart-dot" style={{ background: componentColors[i % componentColors.length] }} />{r.entity_name}<small>{r.score_status === 'PARTIAL' ? 'Partial coverage' : r.sector}</small></Link><div className="track"><div style={{ width: `${r.overall_score}%`, background: componentColors[i % componentColors.length] }} /></div><strong>{number(r.overall_score, 2)}</strong></div>)}<p className="chart-footnote">Observed backend scores, not a compliance rating. Unavailable inputs can limit coverage.</p></div>
+}
+export function Components({ components }) { return <div className="component-list">{Object.entries(components).map(([key, c], i) => <div className="component-row" key={key}><div><span className="chart-dot" style={{ background: componentColors[i] }} /><span>{componentNames[key] || key}</span><strong>{c.score == null ? 'Unavailable' : `${number(c.score, 2)} / 100`}</strong></div><div className="track"><div style={{ width: `${c.score || 0}%`, background: componentColors[i] }} /></div><small>{c.score == null ? c.status.replaceAll('_', ' ') : `${c.affected_count} affected / ${c.denominator} eligible · ${number(c.weight * 100)}% weight · ${number(c.contribution, 2)} points`}</small></div>)}</div> }
+export function SeverityChart({ findings }) {
+  if (!findings.length) return <Empty title="No findings in the assessment" />
+  const counts = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'].map(level => ({ level, count: findings.filter(f => f.severity === level).length }))
+  return <div className="severity-chart"><div className="severity-total"><strong>{number(findings.length)}</strong><span>supervisory findings</span></div><div className="severity-bar" aria-label="Findings by severity">{counts.map(r => <div key={r.level} className={`severity-${r.level.toLowerCase()}`} style={{ width: `${r.count / findings.length * 100}%` }} title={`${r.level}: ${r.count} findings`} />)}</div><div className="severity-legend">{counts.map(r => <div key={r.level}><Badge value={r.level} /><strong>{number(r.count)}</strong><span>{number(r.count / findings.length * 100, 1)}%</span></div>)}</div></div>
+}

@@ -38,7 +38,7 @@ Risk outputs are prototype supervisory indicators, not official NCIIPC threshold
 They consume existing findings and auditor results. Unknown denominators remain
 unavailable; duplicate findings cannot inflate exposure scores. See
 [Risk Intelligence](risk_intelligence.md) for formulas, configuration, Gamma's
-explicit Banking fallback, evidence coverage and new response contracts.
+stored Banking peer group, evidence coverage and new response contracts.
 
 Telemetry accepts inclusive `start_time` and `end_time` ISO timestamps and an
 optional `entity_id` ownership filter. Use naive timestamps to match the schema;

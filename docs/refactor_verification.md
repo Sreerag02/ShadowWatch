@@ -64,7 +64,9 @@ execution outside the sandbox; they were not treated as code/test failures.
 ## Database and organization verification
 
 SQLAlchemy uses the existing `backend/.env` connection. All five organizations
-and source values/counts match the datasets. Relationships were checked for
+and source values/counts match the datasets. After this refactor, the separately
+authorized Gamma metadata cleanup set its peer group to Banking; the table below
+reflects that correction. See `database/migrations/001_gamma_peer_group.sql`. Relationships were checked for
 asset/entity ownership, case/alert ownership, investigation and escalation parents,
 and telemetry/asset ownership. Ground truth is not a database table.
 
@@ -72,7 +74,7 @@ and telemetry/asset ownership. Ground truth is not a database table.
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | E001 Alpha Bank | Banking | Banking | 30 | 204 | 97 | 94 | 71 | 2016 |
 | E002 Beta Bank | Banking | Banking | 32 | 210 | 104 | 102 | 62 | 2304 |
-| E003 Gamma Bank | Banking | NULL | 30 | 204 | 97 | 94 | 66 | 2016 |
+| E003 Gamma Bank | Banking | Banking | 30 | 204 | 97 | 94 | 66 | 2016 |
 | E004 Metro Telecom | Telecom | Telecom | 30 | 204 | 100 | 95 | 100 | 2016 |
 | E005 PowerGrid Utility | Energy | Energy | 30 | 200 | 100 | 99 | 59 | 1440 |
 
@@ -98,8 +100,8 @@ and telemetry/asset ownership. Ground truth is not a database table.
 - Risk: all bound/zero-denominator/duplicate/size-normalization/configuration tests
   pass. Observed scores are unchanged: E001 14.62, E002 6.12, E003 12.19 (PARTIAL),
   E004 19.44, E005 16.00. All 498 priorities retain IDs, scores, findings and reasons.
-- Peers: Banking comparison still uses the explicit, labelled Gamma fallback;
-  stored metadata is not changed. Unrelated sectors are excluded. Telecom/Energy
+- Peers: the later metadata cleanup stores Banking for Gamma in PostgreSQL and
+  its source CSV; all three banks now use stored groups with default fallback disabled. Unrelated sectors are excluded. Telecom/Energy
   still return NO_VALID_PEERS. Zero-denominator metrics remain unavailable.
 - Existing API regression: every one of 498 case responses and 152 asset telemetry
   responses passes, including global/entity/case finding parity.

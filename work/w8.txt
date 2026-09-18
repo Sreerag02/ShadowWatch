@@ -1,0 +1,1013 @@
+I want to perform the FINAL visual redesign of the ShadowWatch frontend.
+
+PROJECT:
+~/Desktop/Project/ShadowWatch
+
+IMPORTANT:
+The application is already functionally complete and working.
+
+THIS TASK IS UI/UX REDESIGN ONLY.
+
+============================================================
+ABSOLUTE RULE
+============================================================
+
+DO NOT CHANGE:
+
+- FastAPI backend
+- PostgreSQL
+- API contracts
+- API endpoint paths
+- analytics
+- R001-R009
+- risk calculations
+- case priority calculations
+- peer benchmarking logic
+- Expected-vs-Observed logic
+- authentication/review logic if already implemented
+- routing behaviour
+- existing functional data flow
+- datasets
+- business logic
+
+Do not rewrite working frontend functionality unnecessarily.
+
+Preserve all existing features.
+
+Only redesign/refine the frontend presentation, layout,
+components and visual system.
+
+============================================================
+MAIN DESIGN GOAL
+============================================================
+
+ShadowWatch must NOT look like an AI-generated dashboard template.
+
+I want it to look like a frontend that was deliberately designed and
+hand-coded by a skilled developer for a real cybersecurity supervisory
+application.
+
+It should feel:
+
+professional
+technical
+controlled
+dense
+serious
+institutional
+purpose-built
+human-designed
+
+It should NOT feel:
+
+AI generated
+generic SaaS
+generic admin template
+crypto dashboard
+gaming interface
+futuristic hacker UI
+Dribbble concept
+ChatGPT-generated React dashboard
+
+============================================================
+FIRST — AUDIT THE CURRENT UI
+============================================================
+
+Before changing code, inspect the complete frontend.
+
+Identify visual patterns that make it look generic or AI-generated.
+
+Specifically look for:
+
+- excessive rounded cards
+- cards inside cards
+- unnecessary gradients
+- blue/purple gradients
+- glowing elements
+- glassmorphism
+- excessive shadows
+- excessive border radius
+- gradient text
+- huge KPI numbers
+- oversized headings
+- excessive whitespace
+- pill-shaped everything
+- decorative badges everywhere
+- unnecessary icons
+- repetitive icon + title + description cards
+- identical dashboard cards
+- fake decorative charts
+- unnecessary animations
+- overly smooth floating UI
+- random colored backgrounds
+- excessive status chips
+- generic sidebar template appearance
+- generic hero/dashboard introduction text
+- emojis
+- AI-generated marketing copy
+- excessive explanatory text
+- unnecessary "Welcome back" UI
+- decorative visual elements with no operational purpose
+
+Make a short internal audit first.
+
+Then redesign.
+
+============================================================
+DESIGN DIRECTION
+============================================================
+
+Think:
+
+"Cybersecurity supervisory operations workstation"
+
+rather than:
+
+"Modern AI SaaS dashboard"
+
+Possible visual references in spirit:
+
+enterprise security consoles
+network operations software
+financial trading terminals
+government monitoring software
+developer tools
+professional observability platforms
+
+Do NOT directly copy any existing product.
+
+ShadowWatch should have its own visual identity.
+
+============================================================
+COLOR SYSTEM
+============================================================
+
+Remove the typical AI purple/blue gradient aesthetic.
+
+Use a restrained dark neutral palette.
+
+Suggested starting palette:
+
+Application background:
+#0B0E11
+
+Primary surface:
+#11151A
+
+Secondary surface:
+#151A20
+
+Elevated/selected surface:
+#1A2027
+
+Primary border:
+#262D35
+
+Subtle border:
+#1E252C
+
+Primary text:
+#E7EAEE
+
+Secondary text:
+#9AA4AF
+
+Muted text:
+#66717D
+
+Primary ShadowWatch accent:
+#4E8FA8
+
+Accent hover:
+#65A5BC
+
+The accent should be muted/desaturated.
+
+DO NOT flood the interface with blue.
+
+Use accent primarily for:
+
+selected navigation
+links
+active controls
+important chart series
+focus states
+
+============================================================
+SEMANTIC COLORS
+============================================================
+
+Severity colors must have meaning.
+
+Suggested:
+
+Critical:
+#D65A5A
+
+High:
+#C9824A
+
+Medium:
+#C1A452
+
+Low:
+#648B72
+
+Informational:
+#6689A3
+
+Do not create huge bright colored backgrounds.
+
+Prefer:
+
+small indicator
+left border
+text label
+subtle tinted background
+
+Example:
+
+● CRITICAL
+
+instead of a giant glowing red card.
+
+============================================================
+NO GRADIENT POLICY
+============================================================
+
+Remove decorative gradients unless there is an extremely strong
+functional reason.
+
+Especially remove:
+
+purple gradients
+blue-purple gradients
+gradient text
+gradient buttons
+gradient card borders
+glowing gradient backgrounds
+
+Flat colors should dominate.
+
+============================================================
+BORDER RADIUS
+============================================================
+
+Reduce border radius significantly.
+
+Avoid:
+
+border-radius: 20px
+24px
+30px
+9999px everywhere
+
+Use approximately:
+
+main panels: 4-6px
+buttons: 3-5px
+inputs: 3-5px
+small tags: 2-4px
+
+Pills are acceptable only where semantically appropriate.
+
+For example:
+
+status
+severity
+small filter state
+
+Do not make every button a capsule.
+
+============================================================
+SHADOWS
+============================================================
+
+Remove large soft shadows.
+
+Most hierarchy should come from:
+
+background differences
+borders
+spacing
+typography
+
+Use shadows rarely.
+
+No glowing shadows.
+
+============================================================
+TYPOGRAPHY
+============================================================
+
+Use a clean professional sans-serif for normal interface text.
+
+Prefer the existing locally available/system font stack rather than
+adding an unnecessary web dependency.
+
+Example:
+
+Inter,
+IBM Plex Sans,
+system-ui,
+sans-serif
+
+If Inter is not already locally available, use a good system stack.
+
+For technical values use a monospace font:
+
+"IBM Plex Mono"
+"JetBrains Mono"
+"SFMono-Regular"
+"Roboto Mono"
+monospace
+
+Use monospace selectively for:
+
+case IDs
+entity IDs
+rule IDs
+timestamps
+scores where appropriate
+technical identifiers
+
+This will help ShadowWatch feel purpose-built.
+
+============================================================
+TYPOGRAPHIC HIERARCHY
+============================================================
+
+Avoid giant text.
+
+Suggested:
+
+Page title:
+24-28px
+
+Section heading:
+15-18px
+
+Body:
+13-14px
+
+Table:
+12-13px
+
+Metadata:
+11-12px
+
+Large operational metric:
+24-32px maximum
+
+Use weight and spacing rather than giant font sizes.
+
+============================================================
+LAYOUT
+============================================================
+
+Increase information density.
+
+Reduce excessive whitespace.
+
+Use a consistent spacing system such as:
+
+4
+8
+12
+16
+24
+32
+
+Avoid random values throughout CSS.
+
+Main content should use screen width efficiently.
+
+Do not put every piece of information inside an isolated card.
+
+Use:
+
+sections
+panels
+tables
+dividers
+split views
+
+============================================================
+SIDEBAR
+============================================================
+
+Redesign the sidebar to look custom.
+
+Avoid the generic:
+
+icon
+label
+rounded hover rectangle
+
+repeated identically.
+
+Make it narrow, precise and structured.
+
+Top:
+
+ShadowWatch mark
+SHADOWWATCH
+
+Small descriptor:
+
+SUPERVISORY ANALYTICS
+
+Navigation grouped logically:
+
+MONITOR
+
+Overview
+Organizations
+
+ANALYZE
+
+Findings
+Priority Cases
+Peer Benchmarking
+
+REVIEW
+
+Reports
+Audit Trail
+
+Bottom:
+
+System status
+
+Use subtle uppercase group labels.
+
+Active item can use:
+
+thin accent line
+slightly lighter background
+stronger text
+
+Do not use glowing active navigation.
+
+============================================================
+HEADER
+============================================================
+
+Keep header compact.
+
+Do NOT make a huge top bar.
+
+Example:
+
+Organizations / Alpha Bank
+
+Alpha Bank
+Banking · E001
+
+                              System ● Online
+
+Use breadcrumbs where useful.
+
+============================================================
+OVERVIEW PAGE
+============================================================
+
+Do not create six identical giant KPI cards.
+
+Instead create a compact supervisory summary strip.
+
+Example:
+
+ORGANIZATIONS       OPEN FINDINGS       PRIORITY CASES       BLIND SPOTS
+5                   72                  18                   4
+
+Separated by vertical rules.
+
+Then use the majority of the screen for useful information.
+
+Possible layout:
+
+------------------------------------------------------------
+SUPERVISORY OVERVIEW
+Last analysis ...
+------------------------------------------------------------
+
+Organizations | Findings | Priority Cases | Blind Spots
+------------------------------------------------------------
+
+ENTITY RISK                              FINDING DISTRIBUTION
+[useful visualization]                  [useful visualization]
+
+------------------------------------------------------------
+
+ORGANIZATIONS REQUIRING ATTENTION
+[dense table]
+
+------------------------------------------------------------
+
+RECENT / IMPORTANT FINDINGS
+[dense table]
+------------------------------------------------------------
+
+============================================================
+TABLES
+============================================================
+
+Tables are important in ShadowWatch.
+
+Make them excellent.
+
+Use:
+
+compact rows
+clear column alignment
+subtle row separators
+sticky headers where appropriate
+hover highlight
+monospace IDs
+right-aligned numeric values
+
+Avoid wrapping every table inside a huge rounded card.
+
+Table header:
+
+small uppercase or medium-weight labels
+muted color
+
+Rows should look like an operational tool.
+
+============================================================
+ENTITY PAGE
+============================================================
+
+Organization details should feel like an assessment workspace.
+
+Example:
+
+ALPHA BANK                                      E001
+Banking / Banking Peer Group
+
+RISK 14.62 · LOW
+
+------------------------------------------------------------
+
+EXECUTION GAP       VISIBILITY      INVESTIGATION     REPEAT
+18.2                11.5            16.0              8.4
+
+------------------------------------------------------------
+
+TOP CONTRIBUTORS
+...
+
+------------------------------------------------------------
+
+FINDINGS
+...
+
+Use thin separators and structured sections instead of card grids.
+
+============================================================
+FINDINGS
+============================================================
+
+Findings should look like evidence records.
+
+Example row:
+
+HIGH   R003   MISSING_ESCALATION
+E001-C0081    Alpha Bank
+Critical case did not contain expected escalation evidence.
+                                                        REVIEW >
+
+Use severity as a small visual indicator.
+
+Do not turn every finding into a colorful giant card.
+
+============================================================
+FINDING DETAIL
+============================================================
+
+Use a two-column evidence layout where screen size permits.
+
+LEFT:
+
+finding information
+reason
+rule
+severity
+source
+
+RIGHT:
+
+evidence
+timestamps
+asset
+case
+technical metadata
+
+Use monospace formatting for structured evidence.
+
+============================================================
+PRIORITY CASES
+============================================================
+
+This should feel like an analyst work queue.
+
+Use a dense ranked table/list.
+
+Example:
+
+#    CASE          ENTITY       SEV       SCORE     FINDINGS
+01   E001-C0081    Alpha Bank   CRITICAL  92.0      3
+02   E003-C...     Gamma Bank   HIGH      87.5      4
+
+Do not make every priority case a separate large card.
+
+============================================================
+CASE INVESTIGATION
+============================================================
+
+This should be one of the most technical screens.
+
+Use a structured workspace.
+
+Header:
+
+CASE E001-C0081
+
+CRITICAL
+RANSOMWARE
+Priority 92
+
+Then:
+
+SUMMARY | WORKFLOW | FINDINGS | EVIDENCE | TELEMETRY
+
+Use compact tabs.
+
+Timeline should be simple and technical.
+
+Avoid decorative curved timelines.
+
+============================================================
+EXPECTED VS OBSERVED
+============================================================
+
+This is ShadowWatch's signature visualization.
+
+Make it visually unique but restrained.
+
+Consider two aligned vertical columns:
+
+EXPECTED                    OBSERVED
+
+Investigation     ●──────── ● Investigation
+Evidence          ●──────── ○ Missing
+Escalation        ●──────── ○ Missing
+Closure           ●──────── ● Closure
+
+Or a matrix:
+
+CONTROL              EXPECTED       OBSERVED
+Investigation           YES            YES
+Evidence                YES            NO
+Escalation              YES            NO
+Closure                 YES            YES
+
+Missing evidence should stand out immediately.
+
+Do not make this a generic set of four cards.
+
+============================================================
+NEGATIVE SPACE
+============================================================
+
+Telemetry blind spots should use a technical chart.
+
+Avoid glowing lines.
+
+Use thin grid lines.
+
+Show:
+
+baseline
+actual
+blind-spot interval
+
+Label the blind-spot region clearly.
+
+The graph should look analytical rather than decorative.
+
+============================================================
+BEHAVIOUR ANALYTICS
+============================================================
+
+For repetitive investigations:
+
+show evidence comparison.
+
+For duration anomalies:
+
+Observed       4m
+Peer/Baseline  47m
+Deviation      -91%
+
+For repeat incidents:
+
+show chronological occurrences.
+
+Avoid generic "AI detected anomaly" language.
+
+Use:
+
+"ShadowWatch finding"
+"Behavioural indicator"
+"Observed deviation"
+"Evidence"
+
+============================================================
+PEER BENCHMARKING
+============================================================
+
+Avoid generic colorful bar charts.
+
+Use restrained comparison visualizations.
+
+Example:
+
+MISSING ESCALATION RATE
+
+Alpha Bank       8.2%  ━━━━━━━━━━━
+Peer median      4.7%  ━━━━━━
+
+Difference       +3.5 pp
+
+Clearly distinguish:
+
+ENTITY
+PEER MEDIAN
+
+Use real backend values only.
+
+============================================================
+BUTTONS
+============================================================
+
+Remove generic gradient buttons.
+
+Primary button:
+
+solid muted accent
+
+Secondary:
+
+transparent/dark with border
+
+Danger:
+
+restrained red
+
+Buttons should be compact.
+
+No giant CTAs.
+
+============================================================
+ICONS
+============================================================
+
+Use icons sparingly.
+
+Do not put an icon inside every heading/card.
+
+Use one consistent icon library if one already exists.
+
+Icons should aid navigation/recognition.
+
+No emojis.
+
+============================================================
+ANIMATION
+============================================================
+
+Minimize animation.
+
+Allowed:
+
+100-180ms hover transition
+sidebar state transition
+small dropdown/focus transitions
+
+Remove:
+
+floating animations
+continuous pulses
+decorative motion
+staggered dashboard entrance animations
+cards flying into view
+
+The interface is an operational tool.
+
+============================================================
+COPY / TEXT
+============================================================
+
+Audit UI copy.
+
+Remove generic AI-generated wording such as:
+
+"Welcome back"
+"Here's what's happening"
+"Unlock powerful insights"
+"AI-powered intelligence"
+"Stay ahead of threats"
+"Your security at a glance"
+
+Use concise operational language.
+
+Examples:
+
+Supervisory Overview
+Entity Assessment
+Findings
+Evidence
+Priority Cases
+Peer Comparison
+Investigation Quality
+Monitoring Visibility
+Review Status
+
+============================================================
+CSS ARCHITECTURE
+============================================================
+
+Create a small intentional design system.
+
+Use CSS variables.
+
+Example:
+
+:root {
+  --bg: ...;
+  --surface-1: ...;
+  --surface-2: ...;
+
+  --border: ...;
+  --border-subtle: ...;
+
+  --text: ...;
+  --text-secondary: ...;
+  --text-muted: ...;
+
+  --accent: ...;
+
+  --critical: ...;
+  --high: ...;
+  --medium: ...;
+  --low: ...;
+
+  --radius-sm: ...;
+  --radius-md: ...;
+
+  --space-1: ...;
+  ...
+}
+
+Avoid hundreds of random hex values across components.
+
+============================================================
+CONSISTENCY PASS
+============================================================
+
+After redesigning every page, inspect the whole frontend again.
+
+Check:
+
+same spacing system
+same typography
+same border treatment
+same table styling
+same severity treatment
+same buttons
+same inputs
+same headings
+same chart treatment
+
+Remove one-off styling unless necessary.
+
+============================================================
+DO NOT REMOVE FUNCTIONALITY
+============================================================
+
+Every currently working page must continue to work.
+
+Preserve:
+
+API integration
+navigation
+filters
+search
+case navigation
+finding navigation
+risk data
+peer benchmarking
+Expected vs Observed
+telemetry
+review workflow
+reports
+audit functionality
+
+if currently implemented.
+
+============================================================
+DO NOT FAKE DATA
+============================================================
+
+Do not add fake numbers to improve screenshots.
+
+Do not hard-code:
+
+risk values
+findings
+organizations
+case counts
+chart data
+
+Use existing API responses.
+
+============================================================
+RESPONSIVENESS
+============================================================
+
+Optimize primarily for:
+
+1366x768
+1440x900
+1920x1080
+
+This is a supervisor workstation application.
+
+Still provide reasonable tablet/narrow-screen behaviour.
+
+============================================================
+FINAL QUALITY PASS
+============================================================
+
+When you think the redesign is finished:
+
+1. Start the real backend.
+2. Start the frontend.
+3. Navigate through every page.
+4. Look for visual inconsistency.
+5. Look for overflowing text.
+6. Look for unnecessary empty space.
+7. Look for excessive cards.
+8. Look for excessive rounding.
+9. Look for remaining gradients.
+10. Look for fake-looking UI elements.
+11. Check loading states.
+12. Check empty states.
+13. Check error states.
+14. Check tables with long values.
+15. Check 1366x768 layout.
+
+Then run:
+
+npm run lint
+npm run build
+
+Both must pass.
+
+============================================================
+FINAL REPORT
+============================================================
+
+When finished, report:
+
+1. What made the previous UI look generic/AI-generated.
+2. Overall visual direction selected.
+3. Final color palette.
+4. Typography system.
+5. Spacing system.
+6. Components redesigned.
+7. Pages redesigned.
+8. AI-looking elements removed.
+9. Gradients removed.
+10. Border-radius changes.
+11. Table improvements.
+12. Expected-vs-Observed redesign.
+13. Negative-Space redesign.
+14. Behaviour Analytics redesign.
+15. Peer Benchmark redesign.
+16. Responsive improvements.
+17. npm lint result.
+18. npm build result.
+19. Any remaining visual issues.
+
+DO NOT modify backend functionality.
+
+DO NOT add new features.
+
+DO NOT start desktop packaging.
+
+This is strictly the final frontend visual-design and UX refinement
+pass.

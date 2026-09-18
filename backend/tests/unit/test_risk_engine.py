@@ -134,12 +134,12 @@ class RiskTests(unittest.TestCase):
     def test_banking_peers_and_leave_one_out(self):
         a=calculate_risk(ENTITY,[finding()],exposure(10))
         b=calculate_risk(dict(ENTITY,entity_id='Y'),[],exposure(10))
-        c=calculate_risk(dict(ENTITY,entity_id='Z',peer_group=None),[],exposure(10))
+        c=calculate_risk(dict(ENTITY,entity_id='Z'),[],exposure(10))
         result=benchmark_entity(a,[a,b,c])
         self.assertEqual(result['peer_entity_ids'],['Y','Z'])
         self.assertEqual(result['metrics']['missing_escalation_rate']['peer_median'],0)
         self.assertEqual(result['metrics']['missing_escalation_rate']['description'],'above peer median')
-        self.assertEqual(benchmark_entity(c,[a,b,c])['peer_group_source'],'configured_sector_fallback')
+        self.assertEqual(benchmark_entity(c,[a,b,c])['peer_group_source'],'stored')
 
     def test_different_sector_or_group_excluded(self):
         a=calculate_risk(ENTITY,[],exposure())
@@ -155,11 +155,15 @@ class RiskTests(unittest.TestCase):
         self.assertEqual(value['status'],'NO_VALID_PEERS')
         self.assertIsNone(value['peer_median'])
 
-    def test_fallback_can_be_disabled(self):
+    def test_missing_group_requires_explicit_fallback(self):
         a=calculate_risk(dict(ENTITY,peer_group=None),[],exposure())
         b=calculate_risk(dict(ENTITY,entity_id='Y'),[],exposure())
-        config=copy.deepcopy(DEFAULT_CONFIG);config['peer_group_fallbacks']={}
-        self.assertEqual(benchmark_entity(a,[a,b],config)['status'],'NO_VALID_PEERS')
+        self.assertEqual(benchmark_entity(a,[a,b])['status'],'NO_VALID_PEERS')
+        self.assertEqual(benchmark_entity(b,[a,b])['peer_entity_ids'],[])
+        config=copy.deepcopy(DEFAULT_CONFIG);config['peer_group_fallbacks']={'Banking':'Banking'}
+        result=benchmark_entity(a,[a,b],config)
+        self.assertEqual(result['peer_entity_ids'],['Y'])
+        self.assertEqual(result['peer_group_source'],'configured_sector_fallback')
 
     def test_determinism(self):
         rows=[finding(),finding('R006',source='behaviour_analytics')]

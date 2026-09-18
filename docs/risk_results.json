@@ -1,5 +1,5 @@
 {
-  "description": "Observed PostgreSQL prototype risk results, 2026-09-18; full source evidence available through risk API or report --json.",
+  "description": "Observed PostgreSQL prototype risk results after Gamma peer-group correction; all Banking peers use stored metadata. Full source evidence is available through the risk API or report --json.",
   "entities": [
     {
       "entity_id": "E001",
@@ -187,10 +187,10 @@
       "denominators": {
         "monitored_assets": 28,
         "cases": 97,
-        "investigated_cases": 94,
-        "critical_cases": 17,
+        "serious_cases": 67,
         "investigated_serious_cases": 64,
-        "serious_cases": 67
+        "critical_cases": 17,
+        "investigated_cases": 94
       },
       "data_coverage": {
         "investigation_count": 94,
@@ -222,7 +222,7 @@
             "entity_id": "E003",
             "group": "Banking",
             "sector": "Banking",
-            "source": "configured_sector_fallback"
+            "source": "stored"
           }
         ],
         "status": "AVAILABLE",
@@ -378,9 +378,7 @@
         },
         "small_sample_cases": 20,
         "peer_near_tolerance": 0.01,
-        "peer_group_fallbacks": {
-          "Banking": "Banking"
-        }
+        "peer_group_fallbacks": {}
       },
       "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
       "top_priority_cases": [
@@ -636,10 +634,10 @@
       "denominators": {
         "monitored_assets": 32,
         "cases": 104,
-        "investigated_cases": 102,
-        "critical_cases": 18,
+        "serious_cases": 63,
         "investigated_serious_cases": 61,
-        "serious_cases": 63
+        "critical_cases": 18,
+        "investigated_cases": 102
       },
       "data_coverage": {
         "investigation_count": 102,
@@ -671,7 +669,7 @@
             "entity_id": "E003",
             "group": "Banking",
             "sector": "Banking",
-            "source": "configured_sector_fallback"
+            "source": "stored"
           }
         ],
         "status": "AVAILABLE",
@@ -825,9 +823,7 @@
         },
         "small_sample_cases": 20,
         "peer_near_tolerance": 0.01,
-        "peer_group_fallbacks": {
-          "Banking": "Banking"
-        }
+        "peer_group_fallbacks": {}
       },
       "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
       "top_priority_cases": [
@@ -894,7 +890,7 @@
       "entity_id": "E003",
       "entity_name": "Gamma Bank",
       "sector": "Banking",
-      "peer_group": null,
+      "peer_group": "Banking",
       "overall_score": 12.19,
       "overall_level": "LOW",
       "score_status": "PARTIAL",
@@ -1066,10 +1062,10 @@
       "denominators": {
         "monitored_assets": 0,
         "cases": 97,
-        "investigated_cases": 94,
-        "critical_cases": 11,
+        "serious_cases": 29,
         "investigated_serious_cases": 29,
-        "serious_cases": 29
+        "critical_cases": 11,
+        "investigated_cases": 94
       },
       "data_coverage": {
         "investigation_count": 94,
@@ -1084,8 +1080,8 @@
         "entity_id": "E003",
         "peer_group": "Banking",
         "sector": "Banking",
-        "peer_group_source": "configured_sector_fallback",
-        "stored_peer_group": null,
+        "peer_group_source": "stored",
+        "stored_peer_group": "Banking",
         "peer_entity_ids": [
           "E001",
           "E002"
@@ -1260,9 +1256,7 @@
         },
         "small_sample_cases": 20,
         "peer_near_tolerance": 0.01,
-        "peer_group_fallbacks": {
-          "Banking": "Banking"
-        }
+        "peer_group_fallbacks": {}
       },
       "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
       "top_priority_cases": [
@@ -1520,10 +1514,10 @@
       "denominators": {
         "monitored_assets": 30,
         "cases": 100,
-        "investigated_cases": 95,
-        "critical_cases": 19,
+        "serious_cases": 65,
         "investigated_serious_cases": 60,
-        "serious_cases": 65
+        "critical_cases": 19,
+        "investigated_cases": 95
       },
       "data_coverage": {
         "investigation_count": 95,
@@ -1693,9 +1687,7 @@
         },
         "small_sample_cases": 20,
         "peer_near_tolerance": 0.01,
-        "peer_group_fallbacks": {
-          "Banking": "Banking"
-        }
+        "peer_group_fallbacks": {}
       },
       "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
       "top_priority_cases": [
@@ -1951,10 +1943,10 @@
       "denominators": {
         "monitored_assets": 30,
         "cases": 100,
-        "investigated_cases": 99,
-        "critical_cases": 26,
+        "serious_cases": 49,
         "investigated_serious_cases": 48,
-        "serious_cases": 49
+        "critical_cases": 26,
+        "investigated_cases": 99
       },
       "data_coverage": {
         "investigation_count": 99,
@@ -2124,9 +2116,7 @@
         },
         "small_sample_cases": 20,
         "peer_near_tolerance": 0.01,
-        "peer_group_fallbacks": {
-          "Banking": "Banking"
-        }
+        "peer_group_fallbacks": {}
       },
       "disclaimer": "Prototype ShadowWatch supervisory indicator; not official NCIIPC thresholds or a compliance certification.",
       "top_priority_cases": [

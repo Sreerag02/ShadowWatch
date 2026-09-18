@@ -150,11 +150,14 @@ each metric reports its valid peer count and difference from median. Description
 are neutral: above/below/near peer median. Near tolerance is **0.01 in the metric's
 native units**, configurable. No best/worst ranking is produced.
 
-The live database stores Alpha/Beta as Banking peers but Gamma's `peer_group` is
-NULL while its sector is Banking. To satisfy the requested three-bank comparison,
-the explicit default fallback mapping is `{'Banking': 'Banking'}`. It applies only
-when the stored group is absent, is labelled `configured_sector_fallback`, and
-does not update PostgreSQL. Set this mapping to `{}` to require stored groups.
+Alpha, Beta and Gamma now all store `peer_group = Banking` in PostgreSQL and
+in their source entity CSVs. Gamma's former NULL was corrected by the guarded,
+idempotent `database/migrations/001_gamma_peer_group.sql` migration. API peer
+identity is `stored` for all three banks.
+
+The default `peer_group_fallbacks` is now `{}`: an absent stored group is
+unavailable, not inferred from sector. Explicit custom fallback mappings remain
+supported and labelled `configured_sector_fallback` for callers who opt in.
 Telecom and Energy each currently have no other peer and return NO_VALID_PEERS.
 No unrelated sector is substituted.
 

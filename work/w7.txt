@@ -1,0 +1,946 @@
+Continue my existing ShadowWatch project.
+
+PROJECT ROOT:
+
+~/Desktop/Project/ShadowWatch
+
+============================================================
+IMPORTANT
+============================================================
+
+The backend has just undergone a complete professional refactor and
+verification.
+
+DO NOT restructure the backend again.
+
+DO NOT rewrite analytics.
+
+DO NOT change R001-R009.
+
+DO NOT change risk calculations.
+
+DO NOT modify datasets.
+
+DO NOT use ground truth in the application.
+
+The next task is:
+
+============================================================
+SHADOWWATCH SUPERVISOR APPLICATION
+============================================================
+
+Build the professional React frontend that allows a cybersecurity
+supervisor/auditor to use the existing ShadowWatch backend.
+
+This is NOT a generic SOC dashboard.
+
+ShadowWatch is a supervisory analytics application.
+
+It helps a supervisor answer:
+
+1. Which organizations require attention?
+2. Why does an organization require attention?
+3. What operational weaknesses were detected?
+4. Which cases should be manually reviewed first?
+5. What evidence supports each finding?
+6. What should have happened versus what actually happened?
+7. How does an organization compare with valid peers?
+8. What has a human reviewer confirmed or dismissed?
+
+============================================================
+STEP 1 — INSPECT BEFORE CODING
+============================================================
+
+Inspect the existing frontend:
+
+frontend/
+
+Inspect:
+
+package.json
+src/
+App.jsx
+App.css
+index.css
+main.jsx
+public/
+
+Then inspect the ACTUAL FastAPI application:
+
+backend/app/main.py
+
+backend/app/api/routes/
+
+especially:
+
+entities.py
+cases.py
+findings.py
+risk.py
+system.py
+telemetry.py
+
+Inspect backend schemas and response structures.
+
+Do not invent endpoints if equivalent endpoints already exist.
+
+Create an endpoint inventory containing:
+
+HTTP method
+path
+purpose
+request parameters
+response structure
+
+Then design the frontend around the real backend.
+
+============================================================
+STEP 2 — APPLICATION INFORMATION ARCHITECTURE
+============================================================
+
+Build these main sections:
+
+1. Supervisory Overview
+2. Organizations
+3. Organization Details
+4. Findings
+5. Priority Cases
+6. Case Investigation View
+7. Expected vs Observed
+8. Peer Benchmarking
+9. Reports
+10. Audit / Review Activity
+
+Use professional routing.
+
+Suggested routes:
+
+/
+or
+/overview
+
+/entities
+
+/entities/:entityId
+
+/findings
+
+/findings/:findingId
+
+/priority-cases
+
+/cases/:caseId
+
+/benchmarking
+
+/reports
+
+/audit
+
+Adapt routes to actual API capabilities.
+
+============================================================
+STEP 3 — DESIGN LANGUAGE
+============================================================
+
+Create a serious cybersecurity supervisory interface.
+
+Visual direction:
+
+dark professional interface
+
+NOT:
+- gaming UI
+- excessive neon
+- hacker movie interface
+- huge glowing effects
+- random animations
+- generic admin template
+
+Use:
+
+deep charcoal/navy surfaces
+subtle borders
+clear typography
+high information density
+controlled severity indicators
+professional charts
+good spacing
+
+The interface should feel appropriate for:
+
+NCIIPC / government cyber supervision / enterprise security review.
+
+============================================================
+STEP 4 — APPLICATION SHELL
+============================================================
+
+Create a reusable application shell.
+
+Desktop:
+
+left sidebar
+top header
+main content area
+
+Sidebar:
+
+ShadowWatch logo/name
+
+Overview
+Organizations
+Findings
+Priority Cases
+Peer Benchmarking
+Reports
+Audit Trail
+
+Bottom:
+
+System Status
+User/Profile
+Logout later
+
+Top header:
+
+current page title
+entity context when applicable
+backend/system status
+refresh control
+
+Responsive behaviour should be reasonable.
+
+============================================================
+STEP 5 — API CLIENT
+============================================================
+
+Create a centralized API layer.
+
+Example structure:
+
+frontend/src/
+    api/
+        client.js
+        entities.js
+        findings.js
+        cases.js
+        risk.js
+        system.js
+
+Use the actual backend API.
+
+Configure base URL through environment:
+
+VITE_API_BASE_URL
+
+Example development value:
+
+http://127.0.0.1:8000
+
+Do not scatter URLs throughout components.
+
+Provide:
+
+loading states
+error states
+empty states
+
+Do not silently swallow API errors.
+
+============================================================
+STEP 6 — SUPERVISORY OVERVIEW
+============================================================
+
+This is the main landing dashboard.
+
+Display high-level supervisory information such as:
+
+Organizations monitored
+
+Organizations requiring attention
+
+Total active findings
+
+High/Critical findings
+
+Priority cases
+
+Monitoring blind spots
+
+Behaviour anomalies
+
+Use real backend data.
+
+Create organization risk cards/table showing:
+
+organization
+sector
+peer group
+risk score
+risk level
+finding count
+priority cases
+
+Clicking an organization opens its details.
+
+Add useful charts based on available API data.
+
+Possible charts:
+
+risk by organization
+findings by category
+findings by severity
+risk-component comparison
+
+Do NOT invent historical trend charts unless historical data exists.
+
+============================================================
+STEP 7 — ORGANIZATIONS PAGE
+============================================================
+
+Display every organization.
+
+Expected current entities include:
+
+E001 Alpha Bank
+E002 Beta Bank
+E003 Gamma Bank
+E004 Metro Telecom
+E005 PowerGrid Utility
+
+But retrieve them from API.
+
+Columns:
+
+Organization
+Sector
+Peer Group
+Risk Score
+Risk Level
+Findings
+Priority Cases
+Status
+
+Support:
+
+search
+sector filtering
+risk filtering
+
+Click row → organization details.
+
+============================================================
+STEP 8 — ORGANIZATION DETAILS
+============================================================
+
+This should be one of the strongest pages.
+
+Header:
+
+Organization name
+Entity ID
+Sector
+Peer group
+Overall supervisory risk
+Risk level
+
+Show component risk:
+
+Execution Gap
+Monitoring Visibility
+Investigation Quality
+Repeat Incidents
+Record Consistency
+
+Then show:
+
+Top Contributors
+
+Example:
+
+Missing escalation
+Telemetry blind spots
+Repetitive investigations
+Repeat incidents
+
+Use actual risk explanation returned by backend.
+
+Add tabs/sections:
+
+Overview
+Findings
+Priority Cases
+Assets
+Benchmark
+Evidence
+
+============================================================
+STEP 9 — FINDINGS PAGE
+============================================================
+
+Create a professional finding table.
+
+Columns:
+
+Severity
+Rule
+Problem Type
+Organization
+Case
+Asset
+Reason
+Source
+Review Status
+
+Filters:
+
+organization
+severity
+rule
+problem type
+review status
+
+Search where useful.
+
+Click finding → finding detail.
+
+Finding detail must show:
+
+rule
+problem type
+severity
+reason
+organization
+case
+asset
+source engine
+structured evidence
+
+Do not reduce the evidence to only a sentence.
+
+============================================================
+STEP 10 — PRIORITY CASES
+============================================================
+
+Display cases ordered by the existing backend priority score.
+
+Columns:
+
+Priority
+Case ID
+Organization
+Alert Severity
+Category
+Number of Findings
+Priority Score
+Reason
+
+Do not calculate priority in React.
+
+Use backend result.
+
+Click case → Case Investigation View.
+
+============================================================
+STEP 11 — CASE INVESTIGATION VIEW
+============================================================
+
+This is a major demonstration page.
+
+Display:
+
+Case information
+
+Alert information
+
+Asset information
+
+Investigation information
+
+Escalation information
+
+Triggered ShadowWatch findings
+
+Priority score
+
+Supervisor explanation
+
+Create a timeline where actual timestamps exist:
+
+Alert
+Case Opened
+Investigation Started
+Investigation Completed
+Escalated
+Case Closed
+
+Missing stages should be visibly represented as missing rather than
+inventing timestamps.
+
+============================================================
+STEP 12 — EXPECTED VS OBSERVED
+============================================================
+
+Create a strong visual component.
+
+For serious cases display:
+
+EXPECTED WORKFLOW
+
+Alert
+  ↓
+Investigation
+  ↓
+Evidence
+  ↓
+Escalation
+  ↓
+Closure
+
+beside:
+
+OBSERVED WORKFLOW
+
+Use actual Workflow Auditor data.
+
+Example:
+
+Investigation       Expected ✓  Observed ✓
+Evidence            Expected ✓  Observed ✕
+Escalation          Expected ✓  Observed ✕
+Closure             Expected ✓  Observed ✓
+
+Highlight missing expected stages.
+
+This is one of ShadowWatch's primary differentiators.
+
+Make it visually prominent.
+
+============================================================
+STEP 13 — NEGATIVE SPACE VISUALIZATION
+============================================================
+
+For R005 TELEMETRY_BLIND_SPOT findings:
+
+show:
+
+Asset
+Historical baseline
+Observed activity
+Drop percentage
+Start
+End
+Explanation
+
+Where API provides enough telemetry, create a simple chart showing:
+
+normal activity
+→ sudden activity collapse
+→ recovery if present
+
+Do not fabricate missing time-series points.
+
+============================================================
+STEP 14 — BEHAVIOUR ANALYTICS UI
+============================================================
+
+Represent:
+
+R006 Repetitive Investigation
+R007 Duration Anomaly
+R008 Repeat Incident
+R009 Suspicious Investigation Behaviour
+
+Examples:
+
+For R006:
+show compared cases/notes and similarity score where available.
+
+For R007:
+show observed investigation duration versus relevant baseline.
+
+For R008:
+show recurring asset/category/cases.
+
+For R009:
+show the contributing behavioural indicators.
+
+Always use actual backend evidence.
+
+============================================================
+STEP 15 — PEER BENCHMARKING
+============================================================
+
+Create Peer Benchmarking page.
+
+IMPORTANT:
+
+Only compare valid peer groups.
+
+Banking organizations can be compared with Banking peers.
+
+Do not mix Banking, Telecom and Energy as direct peers.
+
+Display metrics such as those returned by backend:
+
+Findings per 100 cases
+
+Missing escalation rate
+
+Missing evidence rate
+
+Blind spots per monitored assets
+
+Behaviour finding rate
+
+Repeat incident rate
+
+Display:
+
+selected entity
+entity value
+peer median
+peer context
+
+Use neutral language:
+
+Above peer median
+Near peer median
+Below peer median
+
+If there are insufficient peers:
+
+display:
+
+"Insufficient comparable peer data"
+
+Do not fabricate comparison.
+
+============================================================
+STEP 16 — HUMAN REVIEW WORKFLOW
+============================================================
+
+Inspect whether backend already supports review persistence.
+
+If backend support exists, integrate it.
+
+Desired finding states:
+
+NEW
+UNDER_REVIEW
+CONFIRMED
+DISMISSED
+
+Supervisor should be able to:
+
+open finding
+review evidence
+mark under review
+confirm finding
+dismiss finding
+add comment
+
+Store:
+
+reviewer
+timestamp
+comment
+status
+
+IMPORTANT:
+
+If backend persistence for this does NOT exist:
+
+do NOT fake it with frontend-only local state.
+
+Document the missing backend capability.
+
+Implement the frontend structure cleanly, then identify the minimal
+backend endpoints/schema required.
+
+Do not make large backend changes without reporting them.
+
+============================================================
+STEP 17 — AUDIT TRAIL
+============================================================
+
+If backend audit support exists, display:
+
+timestamp
+reviewer
+action
+finding/case
+comment
+
+Example actions:
+
+OPENED_FINDING
+STARTED_REVIEW
+CONFIRMED_FINDING
+DISMISSED_FINDING
+ADDED_COMMENT
+
+If backend support is missing, do not fabricate audit history.
+
+============================================================
+STEP 18 — REPORTS
+============================================================
+
+Create Reports page.
+
+Allow supervisor to select an organization.
+
+Display a report preview containing:
+
+Organization
+Overall Risk
+Risk Components
+Top Findings
+Execution Gaps
+Negative-Space Findings
+Investigation Quality
+Telemetry Visibility
+Peer Context
+Priority Cases
+
+If backend PDF export does not exist yet:
+
+build report preview first.
+
+Do not implement fragile client-side fake PDF generation unless
+explicitly needed later.
+
+============================================================
+STEP 19 — SYSTEM STATUS
+============================================================
+
+Use existing health/system API.
+
+Show:
+
+Backend
+Database
+Analytics availability where supported
+
+Use simple status indicators.
+
+Do not simulate statuses.
+
+============================================================
+STEP 20 — COMPONENT ARCHITECTURE
+============================================================
+
+Create reusable components.
+
+Suggested structure:
+
+src/
+    api/
+
+    components/
+        layout/
+        cards/
+        charts/
+        findings/
+        cases/
+        workflow/
+        common/
+
+    pages/
+        Overview/
+        Entities/
+        EntityDetails/
+        Findings/
+        PriorityCases/
+        CaseDetails/
+        Benchmarking/
+        Reports/
+        Audit/
+
+    hooks/
+
+    utils/
+
+    styles/
+
+Do not create excessive abstraction.
+
+============================================================
+STEP 21 — CHARTS
+============================================================
+
+Use an appropriate React chart library if already installed.
+
+If none exists, Recharts is acceptable.
+
+Use charts only where they improve understanding.
+
+Do not make every metric a chart.
+
+Every chart must have:
+
+title
+labels
+units
+tooltips where useful
+empty state
+
+============================================================
+STEP 22 — RESPONSIVENESS
+============================================================
+
+Primary target:
+
+desktop/laptop supervisor workstation.
+
+Also ensure the application remains usable on tablets and narrower
+screens.
+
+Desktop quality has priority over mobile-first design.
+
+============================================================
+STEP 23 — ACCESSIBILITY / UX
+============================================================
+
+Ensure:
+
+keyboard-usable controls
+clear focus states
+reasonable contrast
+tooltips where abbreviations need explanation
+loading indicators
+empty states
+error states
+
+Do not encode severity only by colour.
+
+Also show text/icons.
+
+============================================================
+STEP 24 — DATA INTEGRITY
+============================================================
+
+VERY IMPORTANT:
+
+Frontend must NEVER:
+
+calculate its own risk score
+
+calculate its own priority score
+
+change analytics findings
+
+use ground_truth.csv
+
+hard-code detection results
+
+hard-code entity counts
+
+hard-code risk scores
+
+hard-code fake findings
+
+All supervisory analytics must come from FastAPI.
+
+============================================================
+STEP 25 — TESTING
+============================================================
+
+Run:
+
+npm run lint
+npm run build
+
+Fix all errors.
+
+Test important pages with real backend responses.
+
+Verify:
+
+navigation
+entity loading
+finding loading
+risk loading
+priority cases
+case details
+peer benchmarking
+API error states
+empty states
+
+Do not modify backend analytics to make frontend tests pass.
+
+============================================================
+STEP 26 — FINAL VERIFICATION
+============================================================
+
+Run backend:
+
+cd backend
+source venv/bin/activate
+uvicorn app.main:app --reload
+
+Run frontend separately:
+
+cd frontend
+npm run dev
+
+Verify frontend talks to real FastAPI/PostgreSQL.
+
+============================================================
+STOP CONDITION
+============================================================
+
+Do NOT:
+
+implement desktop packaging yet
+
+add cloud authentication
+
+add an AI chatbot
+
+add external LLM APIs
+
+add new analytics
+
+change risk weights
+
+change R001-R009
+
+change datasets
+
+change ground truth
+
+Start with the supervisor web application.
+
+Desktop packaging comes only after application functionality is
+stable.
+
+============================================================
+FINAL REPORT
+============================================================
+
+When complete show:
+
+1. API endpoints discovered
+2. Frontend files created
+3. Frontend files modified
+4. Pages implemented
+5. Reusable components
+6. API integration architecture
+7. Screens using real data
+8. Expected-vs-Observed implementation
+9. Negative-space visualization
+10. Behaviour analytics visualization
+11. Risk visualization
+12. Priority-case implementation
+13. Peer benchmarking implementation
+14. Review workflow status
+15. Audit trail status
+16. Reports status
+17. Missing backend capabilities, if any
+18. npm lint result
+19. npm build result
+20. End-to-end verification result
+21. Remaining TODOs
+
+Do not start desktop packaging after completing this task.

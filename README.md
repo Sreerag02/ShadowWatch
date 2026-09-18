@@ -5,8 +5,8 @@ operational records into explainable execution gaps, monitoring blind spots,
 behaviour indicators and prototype risk summaries for human review.
 
 The backend uses Python 3.12+, FastAPI, SQLAlchemy, PostgreSQL, Pandas and
-scikit-learn. The React/Vite frontend currently contains the starter application;
-a supervisor dashboard has not been implemented.
+scikit-learn. The React/Vite frontend provides a supervisor workspace for organizations,
+evidence, case review priorities, workflow gaps and peer comparisons.
 
 ## Architecture
 
@@ -52,7 +52,7 @@ backend/
   requirements.txt
   pyproject.toml
   .env.example
-frontend/                  # existing React/Vite starter
+frontend/                  # React supervisor application and browser tests
 data/                      # committed organization CSVs (see below)
 database/schema.sql
 docs/                      # design, API, migration and verification reports
@@ -170,14 +170,18 @@ npm run lint
 npm run build
 ```
 
-This starts the existing starter only. No dashboard feature was added during
-reorganization.
+Start FastAPI in a separate terminal first. The frontend proxies `/api` to
+`http://127.0.0.1:8000`. See [frontend setup](frontend/README.md) for configuration,
+production routing and real PostgreSQL browser tests. Human review persistence
+and audit history remain pending backend capabilities.
 
 ## Documentation
 
 - [Refactor verification and remaining limitations](docs/refactor_verification.md)
 - [Directory tree and complete migration manifest](docs/project_structure.md)
 - [Backend API](docs/backend_api.md)
+- [Supervisor frontend verification](docs/frontend_verification.md)
+- [Frontend endpoint inventory](docs/frontend_api_inventory.md)
 - [Multi-organization ingestion](docs/multi_entity_import.md)
 - [Behaviour analytics](docs/behaviour_analytics.md)
 - [Risk formulas, configuration and benchmarking](docs/risk_intelligence.md)

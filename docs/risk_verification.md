@@ -63,11 +63,13 @@ reasons for each case, including timing details where present in findings.
 
 ## Banking benchmark
 
-Gamma uses the explicit configurable Banking sector fallback because its stored
-peer group is NULL. Alpha and Beta use their stored Banking group. All three
-also have Banking sector. No database metadata was changed. Other-peer medians
-exclude the selected entity; an unavailable metric is excluded from that metric's
-peer sample. Telecom and Energy each return NO_VALID_PEERS.
+Alpha, Beta and Gamma now all use stored Banking peer groups. Gamma's previous
+NULL was corrected in its source CSV and PostgreSQL using
+`database/migrations/001_gamma_peer_group.sql`. The default sector fallback is
+disabled. Other-peer medians exclude the selected entity; unavailable metrics
+are excluded from that metric's peer sample. Telecom and Energy each return
+NO_VALID_PEERS. This metadata correction leaves risk scores and peer metric
+values unchanged.
 
 | Entity | Findings / 100 cases | Missing escalation % | Missing evidence % | Blind-spot assets % | Repetitive investigations % |
 | --- | ---: | ---: | ---: | ---: | ---: |

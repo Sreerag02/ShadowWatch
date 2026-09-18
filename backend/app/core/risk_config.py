@@ -21,8 +21,8 @@ DEFAULT_CONFIG = {
     },
     'small_sample_cases': 20,
     'peer_near_tolerance': .01,
-    # Explicit project policy: missing group can use this sector mapping. No DB mutation.
-    'peer_group_fallbacks': {'Banking': 'Banking'},
+    # Stored metadata is authoritative. Sector fallbacks require explicit opt-in.
+    'peer_group_fallbacks': {},
 }
 
 def risk_config(config=None):
